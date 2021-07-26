@@ -1,0 +1,93 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Inventario LACA-AUTO</mat-card-title>
+        <mat-card-subtitle>Fecha registro</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="row">
+            <div class="col">
+                <mat-list>
+                    <mat-list-item>
+                        Contrato
+                    </mat-list-item>
+                    <mat-list-item>
+                        Descripción
+                    </mat-list-item>
+                </mat-list>
+            </div>
+            <div class="col">
+                <mat-list>
+                    <mat-list-item>
+                        Ubicación
+                    </mat-list-item>
+                    <mat-list-item>
+                        Fecha registro
+                    </mat-list-item>
+                </mat-list>
+            </div>
+        </div>
+    </mat-card-content>
+    <mat-card-actions class="text-end">
+        <a role="button" [routerLink]="['/inventario/partidas/agregar/1']" mat-button color="primary"><mat-icon>add</mat-icon> Añadir Partida</a>
+    </mat-card-actions>
+</mat-card>
+
+<mat-card class="mt-2">
+    <mat-card-header>
+        <mat-card-title>Partidas</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="row">
+            <div class="col">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">POS</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Cantidad Existencia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>101</td>
+                            <td>Patch Cord F.O LC-LC (Multi Modo 1 m)</td>
+                            <td>50</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>105</td>
+                            <td>Patch Cord F.O  LC-LC (Multi Modo 2 m)</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>107</td>
+                            <td>Patch Cord F.O LC-LC (Multi Modo 3 m)</td>
+                            <td>59</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4</th>
+                            <td>108</td>
+                            <td>Patch Cord F.O LC-LC (Mono Modo 2 m) </td>
+                            <td>74</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5</th>
+                            <td>109</td>
+                            <td>Patch Cord F.O LC-LC (Mono Modo 3 m)</td>
+                            <td>96</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">6</th>
+                            <td>110</td>
+                            <td>Patch Cord F.O LC-LC (Mono Modo 50 ft)</td>
+                            <td>85</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

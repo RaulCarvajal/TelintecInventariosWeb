@@ -1,0 +1,48 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Contratos</mat-card-title>
+        <mat-card-subtitle>Administración de contratos</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="row text-center">
+            <div class="col">
+                <p class="lead">Activos</p>
+                <p class="display-4">10</p>
+            </div>
+            <div class="col">
+                <p class="lead">Vencidos</p>
+                <p class="display-4">3</p>
+            </div>
+            <div class="col">
+                <p class="lead">Total</p>
+                <p class="display-4">13</p>
+            </div>
+        </div>
+    </mat-card-content>
+    <mat-card-actions class="text-end">
+        <a role="button" [routerLink]="['nuevo']" mat-button color="primary"><mat-icon>add</mat-icon> Nuevo contrato</a>
+    </mat-card-actions>
+</mat-card>
+
+<div class="row">
+    <div class="col-sm-12 col-md-4 col-lg-4  mt-3">
+        <mat-card>
+            <mat-card-header>
+                <div mat-card-avatar><mat-icon>folder</mat-icon></div>
+                <mat-card-title>Contrato LACA-AUTO</mat-card-title>
+                <mat-card-subtitle>Contrato guardado el {{ hoy | date}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src="assets/contrato.jpg" alt="Contrato imagen">
+            <mat-card-content>
+                <p class="text-break">
+                    Lorem ipsum dolor sit amet consectetur adipiscing elit rhoncus cursus commodo, hendrerit sodales metus massa egestas aenean maecenas faucibus. Nostra aliquam quisque cursus metus potenti montes, ut tempus diam quam class accumsan, cras tempor sodales placerat nulla.
+                </p>
+            </mat-card-content>
+            <mat-card-actions>
+                <a role="button" mat-button [routerLink]="['/contrato/1']"><mat-icon>preview</mat-icon> Detalle</a>
+                <a role="button" mat-button [routerLink]="['/inventario/1']"><mat-icon>inventory</mat-icon> Inventario</a>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    
+</div>

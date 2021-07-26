@@ -1,0 +1,78 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Nuevo contrato</mat-card-title>
+        <mat-card-subtitle>Agregar contrato a la colección de contratos.</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <form>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="w-100">
+                        <mat-label>Nombre del contrato</mat-label>
+                        <input matInput placeholder="Ej. LACA-AUTO">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="w-100">
+                        <mat-label>Nombre del proyecto</mat-label>
+                        <input matInput placeholder="Ej. GC-0094">
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field class="w-100">
+                        <mat-label>Número de contrato</mat-label>
+                        <input matInput placeholder="">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="w-100">
+                        <mat-label>Planta a la que pertenece</mat-label>
+                        <mat-select>
+                            <mat-option *ngFor="let planta of plantas">
+                                {{planta}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="w-100">
+                        <mat-label>Descripción del contrato</mat-label>
+                        <textarea matInput placeholder=""></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="w-100">
+                        <mat-label>Rango de fechas que cumple el contrato</mat-label>
+                        <mat-date-range-input [rangePicker]="inifinpicker">
+                            <input matStartDate placeholder="Fecha inicio">
+                            <input matEndDate placeholder="Fecha fin">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="inifinpicker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #inifinpicker></mat-date-range-picker>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button class="w-100" mat-flat-button color="primary">Guardar</button>
+                </div>
+            </div>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+    
+    </mat-card-actions>
+</mat-card>
+
+
+<div class="container">
+
+</div>

@@ -1,0 +1,96 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Agregar partida a &lt;nombre inventario&gt;</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="row">
+            <div class="col">
+                <form>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="w-100">
+                                <mat-label>POS</mat-label>
+                                <input matInput placeholder="Ej. 101, 525, etc.">
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field class="w-100">
+                                <mat-label>Nombre</mat-label>
+                                <input matInput placeholder="Ej. Patchcord, Jack RJ45, PatchPanel, ..., etc.">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="w-100">
+                                <mat-label>Descripción</mat-label>
+                                <input matInput placeholder="Ej. PatchPanel IndustrialNet Cobre 8 Puertos en riel DIN">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="w-100">
+                                <mat-label>Proveedor</mat-label>
+                                <mat-select>
+                                    <mat-option>Ejemplo 01</mat-option>
+                                    <mat-option>Ejemplo 02</mat-option>
+                                    <mat-option>Ejemplo 03</mat-option>
+                                    <mat-option>Ejemplo 04</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field class="w-100">
+                                <mat-label>Marca</mat-label>
+                                <mat-select>
+                                    <mat-option>Ejemplo 01</mat-option>
+                                    <mat-option>Ejemplo 02</mat-option>
+                                    <mat-option>Ejemplo 03</mat-option>
+                                    <mat-option>Ejemplo 04</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field class="w-100">
+                                <mat-label>Número de parte</mat-label>
+                                <input matInput placeholder="Modelo del componente">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="w-100">
+                                <mat-label>Precio unitario</mat-label>
+                                <input matInput placeholder="$XXX.XX MXN/USD">
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field class="w-100">
+                                <mat-label>Unidad</mat-label>
+                                <mat-select>
+                                    <mat-option>Pieza</mat-option>
+                                    <mat-option>Metro</mat-option>
+                                    <mat-option>Pie</mat-option>
+                                    <mat-option>Pulgada</mat-option>
+                                    <mat-option>Unidad DIN</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field class="w-100">
+                                <mat-label>Cantidad existente</mat-label>
+                                <input matInput placeholder="Cantidad existente">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button class="w-100" mat-flat-button color="primary">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>{{title}}</span>
+    <span class="toolbar-spacer"></span>
+    <a role="button" [routerLink]="['contratos']" mat-icon-button matTooltip="Contratos">
+        <mat-icon>folder</mat-icon>
+    </a>
+    <a role="button" [routerLink]="['inventarios']" mat-icon-button matTooltip="Inventarios">
+        <mat-icon>inventory</mat-icon>
+    </a>
+    <a role="button" href="" mat-icon-button matTooltip="Catálogos">
+        <mat-icon>auto_stories</mat-icon>
+    </a>
+    <a role="button" [routerLink]="['micuenta']" mat-icon-button matTooltip="Mi cuenta">
+        <mat-icon>person</mat-icon>
+    </a>
+    
+</mat-toolbar>

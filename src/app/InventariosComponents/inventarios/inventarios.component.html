@@ -1,0 +1,25 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Inventarios</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Contrato</th>
+                    <th scope="col">Proyecto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr (click)="gotoDetail()">
+                    <th scope="row">1</th>
+                    <td>Inventario LACA-AUTO</td>
+                    <td>123456789</td>
+                    <td>50</td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-card-content>
+</mat-card>
