@@ -5,8 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
+import { FormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 import localeEsMX from '@angular/common/locales/es-MX';
 registerLocaleData(localeEsMX, 'es-MX');
+import { ChartsModule } from 'ng2-charts';
 
 //Imports Angular Material
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -19,6 +23,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatListModule} from '@angular/material/list';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 //Imports Angular Material
 
 //Componentes de la app
@@ -35,6 +42,7 @@ import { CrearInventarioComponent } from './InventariosComponents/crear-inventar
 import { ReportesmaterialComponent } from './ReportesMaterialComponents/reportesmaterial/reportesmaterial.component';
 import { NuevoReportematerialComponent } from './ReportesMaterialComponents/nuevo-reportematerial/nuevo-reportematerial.component';
 import { ReportematerialComponent } from './ReportesMaterialComponents/reportematerial/reportematerial.component';
+import { InventariokpiComponent } from './inventariokpi/inventariokpi.component';
 //Componentes de la app
 @NgModule({
   declarations: [
@@ -51,7 +59,8 @@ import { ReportematerialComponent } from './ReportesMaterialComponents/reportema
     CrearInventarioComponent,
     ReportesmaterialComponent,
     NuevoReportematerialComponent,
-    ReportematerialComponent
+    ReportematerialComponent,
+    InventariokpiComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +75,14 @@ import { ReportematerialComponent } from './ReportesMaterialComponents/reportema
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatListModule
+    MatListModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatProgressBarModule,
+    MatSnackBarModule,
+    ChartsModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es-MX' },

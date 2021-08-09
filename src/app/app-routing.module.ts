@@ -12,8 +12,10 @@ import { AgregarPartidaComponent } from './PartidasComponents/agregar-partida/ag
 import { ReportesmaterialComponent } from './ReportesMaterialComponents/reportesmaterial/reportesmaterial.component';
 import { NuevoReportematerialComponent } from './ReportesMaterialComponents/nuevo-reportematerial/nuevo-reportematerial.component';
 import { ReportematerialComponent } from './ReportesMaterialComponents/reportematerial/reportematerial.component';
+import { InventariokpiComponent } from "./inventariokpi/inventariokpi.component";
 
 const routes: Routes = [
+  {path : "", component : InventariokpiComponent},
   {path : "contratos", component : ContratosComponent},
   {path : "contratos/nuevo", component : NuevoContratoComponent},
   {path : "contrato/:id", component : ContratoComponent},
@@ -21,7 +23,8 @@ const routes: Routes = [
   {path : "contrato/reportematerial/:id", component : ReportematerialComponent},
   {path : "contrato/reportesmaterial/nuevo/:id", component : NuevoReportematerialComponent},
   {path : "inventarios", component : InventariosComponent},
-  {path : "inventario/:id", component : InventarioComponent},
+  {path : "inventario/partidas/:id", component : PartidasComponent},
+  {path : "inventario/:origin/:id", component : InventarioComponent},
   {path : "inventario/partidas/agregar/:id", component : AgregarPartidaComponent},
   {path : "micuenta", component : MicuentaComponent}
 ];

@@ -1,7 +1,7 @@
-<mat-card>
+<mat-card *ngIf="!cargando">
     <mat-card-header>
-        <mat-card-title>Contrato Auto Laca</mat-card-title>
-        <mat-card-subtitle>Descripción</mat-card-subtitle>
+        <mat-card-title>Contrato {{contrato.nombre}}</mat-card-title>
+        <mat-card-subtitle>{{contrato.descripcion}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
         <div class="row">
@@ -11,50 +11,50 @@
                     <mat-list-item>
                         <mat-icon mat-list-icon>folder</mat-icon>
                         <div mat-line>Nombre del contrato</div>
-                        <div mat-line> LACA-AUTO </div>
+                        <div mat-line> {{contrato.nombre}} </div>
                     </mat-list-item>
                     <mat-list-item>
                         <mat-icon mat-list-icon>design_services</mat-icon>
                         <div mat-line>Nombre del proyecto</div>
-                        <div mat-line> GC-0094 </div>
+                        <div mat-line> {{contrato.nompre_proyecto}} </div>
                     </mat-list-item>
                     <mat-list-item>
                         <mat-icon mat-list-icon>tag</mat-icon>
                         <div mat-line>Número de contrato</div>
-                        <div mat-line> 6700259094 </div>
+                        <div mat-line> {{contrato.numero_contrato}} </div>
                     </mat-list-item>
                     <mat-list-item>
                         <mat-icon mat-list-icon>villa</mat-icon>
-                        <div mat-line>Planta</div>
-                        <div mat-line> Guerrero </div>
+                        <div mat-line>Planta/s</div>
+                        <div mat-line> {{plantas}} </div>
                     </mat-list-item>
                     <mat-list-item>
                         <mat-icon mat-list-icon>view_headline</mat-icon>
                         <div mat-line>Descripción</div>
-                        <div mat-line> Servicio de suministro e instalación de redes en area de atomaticación contrato marco bi anual </div>
+                        <div mat-line> {{contrato.descripcion}} </div>
                     </mat-list-item>
                     <mat-list-item>
                         <mat-icon mat-list-icon>calendar_today</mat-icon>
                         <div mat-line>Rango de fechas del periodo del contrato</div>
-                        <div mat-line> xyz </div>
+                        <div mat-line> {{contrato.fecha_inicio | date}} al {{contrato.fecha_final | date}} </div>
                     </mat-list-item>
-                </mat-list>
-                <mat-divider></mat-divider>
-                <mat-list>
-                    <div mat-subheader>Áreas</div>
-                    <mat-list-item>
-                        <mat-icon mat-list-icon>folder</mat-icon>
-                        <div mat-line>Nombre del contrato</div>
-                        <div mat-line> LACA-AUTO </div>
+                    <mat-list-item *ngIf="divisa">
+                        <mat-icon mat-list-icon>paid</mat-icon>
+                        <div mat-line>Montos del contrato y divisa</div>
+                        <div mat-line> Total - {{contrato.monto_total | currency: divisa.divisa_iso}}, Actual - {{contrato.monto_actual | currency: divisa.divisa_iso}} en {{divisa.divisa_nombre}}</div>
                     </mat-list-item>
                 </mat-list>
             </div>
         </div>
     </mat-card-content>
     <mat-card-actions>
-        <a role="button" mat-button [routerLink]="['/inventario/1']"><mat-icon>inventory</mat-icon> Inventario</a>
+        <a role="button" mat-button><mat-icon>location_on</mat-icon> Áreas</a>
+        <a role="button" mat-button [routerLink]="['/inventario/con/'+contrato.id_contrato]"><mat-icon>inventory</mat-icon> Inventario</a>
         <a role="button" mat-button [routerLink]="['/contrato/reportesmaterial/1']"><mat-icon>assignment</mat-icon> Reportes de material</a>
         <a role="button" mat-button><mat-icon>list</mat-icon> Pedidos</a>
         <a role="button" mat-button><mat-icon>receipt</mat-icon> Remitos</a>
     </mat-card-actions>
+</mat-card>
+<mat-card *ngIf="cargando">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </mat-card>

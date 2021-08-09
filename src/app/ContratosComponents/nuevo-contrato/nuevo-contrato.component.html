@@ -4,12 +4,15 @@
         <mat-card-subtitle>Agregar contrato a la colección de contratos.</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        <form>
+        <form [formGroup]="formContrato" (ngSubmit)="trySave()">
             <div class="row">
-                <div class="col">
+                <div class="col"> 
                     <mat-form-field class="w-100">
                         <mat-label>Nombre del contrato</mat-label>
-                        <input matInput placeholder="Ej. LACA-AUTO">
+                        <input matInput placeholder="Ej. LACA-AUTO" formControlName="nombre">
+                        <mat-error *ngIf="formContrato.get('nombre')!.hasError('required')">Campo requerido</mat-error>
+                        <mat-error *ngIf="formContrato.get('nombre')!.hasError('maxlength')">Máximo 150 carácteres</mat-error>
+                        <mat-error *ngIf="formContrato.get('nombre')!.hasError('pattern')">Inválido</mat-error>
                     </mat-form-field>
                 </div>
             </div>
@@ -17,25 +20,32 @@
                 <div class="col">
                     <mat-form-field class="w-100">
                         <mat-label>Nombre del proyecto</mat-label>
-                        <input matInput placeholder="Ej. GC-0094">
+                        <input matInput placeholder="Ej. GC-0094" formControlName="nompre_proyecto">
+                        <mat-error *ngIf="formContrato.get('nompre_proyecto')!.hasError('required')">Campo requerido</mat-error>
+                        <mat-error *ngIf="formContrato.get('nompre_proyecto')!.hasError('maxlength')">Máximo 150 carácteres</mat-error>
+                        <mat-error *ngIf="formContrato.get('nompre_proyecto')!.hasError('pattern')">Inválido</mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col">
                     <mat-form-field class="w-100">
                         <mat-label>Número de contrato</mat-label>
-                        <input matInput placeholder="">
+                        <input matInput placeholder="" formControlName="numero_contrato">
+                        <mat-error *ngIf="formContrato.get('numero_contrato')!.hasError('required')">Campo requerido</mat-error>
+                        <mat-error *ngIf="formContrato.get('numero_contrato')!.hasError('maxlength')">Máximo 50 carácteres</mat-error>
+                        <mat-error *ngIf="formContrato.get('numero_contrato')!.hasError('pattern')">Inválido</mat-error>
                     </mat-form-field>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <mat-form-field class="w-100">
-                        <mat-label>Planta a la que pertenece</mat-label>
-                        <mat-select>
-                            <mat-option *ngFor="let planta of plantas">
-                                {{planta}}
+                        <mat-label>Planta/s a la que pertenece</mat-label>
+                        <mat-select formControlName="fk_id_planta" multiple>
+                            <mat-option *ngFor="let planta of plantas" [value]="planta.id_planta">
+                                {{planta.nombre}}
                             </mat-option>
                         </mat-select>
+                        <mat-error *ngIf="formContrato.get('fk_id_planta')!.hasError('required')">Campo requerido</mat-error>
                     </mat-form-field>
                 </div>
             </div>
@@ -43,7 +53,10 @@
                 <div class="col">
                     <mat-form-field class="w-100">
                         <mat-label>Descripción del contrato</mat-label>
-                        <textarea matInput placeholder=""></textarea>
+                        <textarea matInput placeholder="" formControlName="descripcion"></textarea>
+                        <mat-error *ngIf="formContrato.get('descripcion')!.hasError('required')">Campo requerido</mat-error>
+                        <mat-error *ngIf="formContrato.get('descripcion')!.hasError('maxlength')">Máximo 150 carácteres</mat-error>
+                        <mat-error *ngIf="formContrato.get('descripcion')!.hasError('pattern')">Inválido</mat-error>
                     </mat-form-field>
                 </div>
             </div>
@@ -52,20 +65,50 @@
                     <mat-form-field class="w-100">
                         <mat-label>Rango de fechas que cumple el contrato</mat-label>
                         <mat-date-range-input [rangePicker]="inifinpicker">
-                            <input matStartDate placeholder="Fecha inicio">
-                            <input matEndDate placeholder="Fecha fin">
+                            <input matStartDate placeholder="Fecha inicio" formControlName="fecha_inicio">
+                            <input matEndDate placeholder="Fecha fin" formControlName="fecha_final">
                         </mat-date-range-input>
                         <mat-datepicker-toggle matSuffix [for]="inifinpicker"></mat-datepicker-toggle>
                         <mat-date-range-picker #inifinpicker></mat-date-range-picker>
+                        <mat-error *ngIf="formContrato.get('fecha_inicio')!.hasError('required')">Campo requerido</mat-error>
+                        <mat-error *ngIf="formContrato.get('fecha_final')!.hasError('required')">Campo requerido</mat-error>
                     </mat-form-field>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <button class="w-100" mat-flat-button color="primary">Guardar</button>
+                    <mat-form-field class="w-100">
+                        <mat-label>Monto total del contrato</mat-label>
+                        <input matInput placeholder="500,000.00" formControlName="monto_total" type="number">
+                        <mat-error *ngIf="formContrato.get('monto_total')!.hasError('required')">Campo requerido</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field class="w-100">
+                        <mat-label>Monto actual del contrato</mat-label>
+                        <input matInput placeholder="10,000.00" formControlName="monto_actual" type="number">
+                        <mat-error *ngIf="formContrato.get('monto_actual')!.hasError('required')">Campo requerido</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field class="w-100">
+                        <mat-label>Divisas</mat-label>
+                        <mat-select formControlName="fk_id_divisa">
+                            <mat-option *ngFor="let divisa of divisas" [value]="divisa.id_divisa">
+                                {{divisa.divisa_iso}} - {{divisa.divisa_nombre}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formContrato.get('fk_id_divisa')!.hasError('required')">Campo requerido</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <button type="submit" class="w-100" mat-flat-button color="primary" [disabled]="formContrato.invalid" *ngIf="!cargando">Guardar</button>
                 </div>
             </div>
         </form>
+        <mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
     </mat-card-content>
     <mat-card-actions>
     
