@@ -10,7 +10,6 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import localeEsMX from '@angular/common/locales/es-MX';
 registerLocaleData(localeEsMX, 'es-MX');
-import { ChartsModule } from 'ng2-charts';
 
 //Imports Angular Material
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -81,7 +80,6 @@ import { InventariokpiComponent } from './inventariokpi/inventariokpi.component'
     HttpClientModule,
     MatProgressBarModule,
     MatSnackBarModule,
-    ChartsModule,
     MatProgressSpinnerModule
   ],
   providers: [
