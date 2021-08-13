@@ -48,11 +48,11 @@
         </div>
     </mat-card-content>
     <mat-card-actions>
-        <a role="button" mat-button><mat-icon>location_on</mat-icon> Áreas</a>
-        <a role="button" mat-button [routerLink]="['/inventario/con/'+contrato.id_contrato]"><mat-icon>inventory</mat-icon> Inventario</a>
-        <a role="button" mat-button [routerLink]="['/contrato/reportesmaterial/1']"><mat-icon>assignment</mat-icon> Reportes de material</a>
-        <a role="button" mat-button><mat-icon>list</mat-icon> Pedidos</a>
-        <a role="button" mat-button><mat-icon>receipt</mat-icon> Remitos</a>
+        <a role="button" mat-button [routerLink]="['/contrato/areas/'+contrato.id_contrato]" *ngIf="contrato.estatus"><mat-icon>location_on</mat-icon> Áreas</a>
+        <a role="button" mat-button [routerLink]="['/inventario/con/'+contrato.id_contrato]" *ngIf="contrato.estatus"><mat-icon>inventory</mat-icon> Inventario</a>
+        <a role="button" mat-button [routerLink]="['/contrato/reportesmaterial/'+contrato.id_contrato]" *ngIf="contrato.estatus"><mat-icon>assignment</mat-icon> Reportes de material/Pedidos</a>
+        <a role="button" mat-button *ngIf="contrato.estatus"><mat-icon>receipt</mat-icon> Remitos</a>
+        <a role="button" mat-button color="warn" (click)="updateContrato()"><mat-icon>power_settings_new</mat-icon> {{contrato.estatus?"Marcar como vencido":"Marcar como activo"}}</a>
     </mat-card-actions>
 </mat-card>
 <mat-card *ngIf="cargando">

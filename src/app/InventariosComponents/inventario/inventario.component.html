@@ -34,6 +34,14 @@
             <mat-card-subtitle>Click en la partida para ver detalle</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="w-100">
+                        <mat-label>Buscar</mat-label>
+                        <input matInput placeholder="Buscar" (keyup)="search()" [(ngModel)]="searchString">
+                    </mat-form-field>
+                </div>
+            </div>
             <div class="row" *ngIf="!partidas.length">
                 <div class="col text-center">
                     <p class="lead">Sin partidas guardadas en el inventario.</p>
@@ -53,7 +61,7 @@
                         <tbody>
                             <tr *ngFor="let partida of partidas;let i = index" (click)="gotoPartida(partida.id_partida)">
                                 <th scope="row">{{i+1}}</th>
-                                <td>{{partida.POS}}</td>
+                                <td>{{partida.POS | pos}}</td>
                                 <td>{{partida.descripcion}}</td>
                                 <td>{{partida.cantidad}}</td>
                             </tr>

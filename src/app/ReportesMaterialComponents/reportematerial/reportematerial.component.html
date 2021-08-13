@@ -1,26 +1,44 @@
-<mat-card>
+<mat-card *ngIf="reporte">
     <mat-card-header>
-        <mat-card-title>Reporte de Material</mat-card-title>
-        <mat-card-title>Folio </mat-card-title>
+        <mat-card-title>Reporte de Material de {{reporte.contrato}}</mat-card-title>
+        <mat-card-subtitle>Folio {{reporte.folio | folio}} - {{reporte.fecha | date}}</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content class="container">
         <mat-divider></mat-divider>
         <br>
         <div class="row">
             <div class="col">
                 <strong>Empresa:</strong>
                 <br>
-                Ternium MX.
+                {{reporte.empresa}}
             </div>
             <div class="col">
                 <strong>Número contrato marco:</strong>
                 <br>
-                1234567890
+                {{reporte.numero_contrato}}
             </div>
             <div class="col">
                 <strong>Número de pedido Ternium:</strong>
                 <br>
-                X
+                {{reporte.numero_pedido}}
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+                <strong>Planta:</strong>
+                <br>
+                {{reporte.planta}}
+            </div>
+            <div class="col">
+                <strong>Área:</strong>
+                <br>
+                {{reporte.area}}
+            </div>
+            <div class="col">
+                <strong>Ubicación:</strong>
+                <br>
+                {{reporte.ubicacion}}
             </div>
         </div>
         <br>
@@ -28,17 +46,17 @@
             <div class="col">
                 <strong>Nombre:</strong>
                 <br>
-                "Nombre de persona"
+                {{reporte.nombre}}
             </div>
             <div class="col">
                 <strong>Tel.:</strong>
                 <br>
-                1234567890
+                {{reporte.telefono}}
             </div>
             <div class="col">
                 <strong>Email:</strong>
                 <br>
-                xyz@ternium.com.mx
+                {{reporte.email}}
             </div>
         </div>
         <br>
@@ -46,12 +64,12 @@
             <div class="col">
                 <strong>Responsable de CC:</strong>
                 <br>
-                "Nombre de persona responsable centro de costos"
+                {{reporte.responsable_cc}}
             </div>
             <div class="col">
                 <strong>Centro de costos:</strong>
                 <br>
-                1234567890
+                {{reporte.centro_costos}}
             </div>
         </div>
         <br>
@@ -74,47 +92,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>154</td>
-                            <td>Lorem Ipsum 15ft</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>001</td>
-                            <td>Lorem Ipsum 15ft</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>075</td>
-                            <td>Lorem Ipsum 15ft</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>525</td>
-                            <td>Lorem Ipsum 15ft</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">5</th>
-                            <td>454</td>
-                            <td>Lorem Ipsum 15ft</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">6</th>
-                            <td>104</td>
-                            <td>Lorem Ipsum 15ft</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">7</th>
-                            <td>106</td>
-                            <td>Lorem Ipsum 15ft</td>
-                            <td>5</td>
+                        <tr *ngFor="let partida of partidas; let pind = index">
+                            <th scope="row">{{pind}}</th>
+                            <td>{{partida.POS | pos}}</td>
+                            <td>{{partida.descripcion}}</td>
+                            <td>{{partida.cantidad}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -125,18 +107,18 @@
         <br>
         <div class="row">
             <div class="col">
-                <strong>Estatus de la actividad:</strong>
-                <br>
-                ("Finalizada" o "Avance parcial de la actividad")
-            </div>
-            <div class="col">
                 <strong>Fecha y hora de inicio:</strong>
                 <br>
-                fecha_ini
+                {{reporte.fecha_inicio | date : 'medium'}}
             </div><div class="col">
                 <strong>Fecha y hora de fin:</strong> 
                 <br>
-                fecha_fin
+                {{reporte.fecha_fin | date : 'medium'}}
+            </div>
+            <div class="col">
+                <strong>Actividad finalizada:</strong>
+                <br>
+                {{reporte.actividad_finalizada ? "Si":"No"}}
             </div>
         </div>
         <br>
@@ -145,9 +127,16 @@
                 <strong>Comentarios/Observaciones</strong>
                 <br>
                <p class="text-bold">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, saepe impedit dolor dicta culpa sit dolores praesentium? Quis maxime omnis voluptatem, sit, voluptatum at doloremque aliquid consequatur repellat beatae necessitatibus.
+                    {{reporte.comentarios}}
                </p>
             </div>
         </div>
     </mat-card-content>
+</mat-card>
+<mat-card *ngIf="!reporte">
+    <div class="row">
+        <div class="col">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+    </div>
 </mat-card>

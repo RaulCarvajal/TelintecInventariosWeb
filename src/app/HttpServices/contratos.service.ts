@@ -23,4 +23,7 @@ export class ContratosService {
     return this.http.get<contrato>(`${api.url}contrato/${id}`);
   }
 
+  updateContrato(data:contrato){
+    return this.http.put<contrato>(`${api.url}contrato/${data.id_contrato}`,data);
+  }
 }

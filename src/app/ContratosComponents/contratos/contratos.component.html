@@ -43,7 +43,7 @@
             </mat-card-content>
             <mat-card-actions>
                 <a role="button" mat-button [routerLink]="['/contrato/'+contrato.id_contrato]"><mat-icon>preview</mat-icon> Detalle</a>
-                <a role="button" mat-button [routerLink]="['/inventario/con/'+contrato.id_contrato]"><mat-icon>inventory</mat-icon> Inventario</a>
+                <a role="button" mat-button [routerLink]="['/inventario/con/'+contrato.id_contrato]" *ngIf="contrato.estatus"><mat-icon>inventory</mat-icon> Inventario</a>
             </mat-card-actions>
         </mat-card>
     </div>

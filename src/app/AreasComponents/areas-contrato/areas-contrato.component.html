@@ -1,0 +1,36 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Areas del contrato</mat-card-title>
+        <mat-card-subtitle>Si su contrato no tiene áreas, entonces no podrá generar pedidos y tampoco reportes</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="row">
+            <div class="col text-end">
+                <a role="button" mat-button color="primary" [routerLink]="['/contrato/areas/nueva/'+idc]"><mat-icon>add</mat-icon> Agregar</a>  
+            </div>
+        </div>
+        <table class="table table-hover mt-3">
+            <thead>
+                <tr>
+                    <th scope="col">No. Pedido</th>
+                    <th scope="col">Solicitante</th>
+                    <th scope="col">Usuarios</th>
+                    <th scope="col">Coordinador</th>
+                    <th scope="col">Área</th>
+                    <th scope="col">Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let area of areas">
+                    <th scope="row">{{area.numero_pedido}}</th>
+                    <td>{{area.solicitante}}</td>
+                    <td>{{area.usuarios}}</td>
+                    <td>{{area.coordinador}}</td>
+                    <td>{{area.area}}</td>
+                    <td>{{area.descripcion}}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </mat-card-content>
+</mat-card>

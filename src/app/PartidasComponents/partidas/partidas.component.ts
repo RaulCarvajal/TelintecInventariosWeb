@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CatalogosService } from 'src/app/HttpServices/catalogos.service';
+import { MovimientosService } from 'src/app/HttpServices/movimientos.service';
 import { PartidasService } from 'src/app/HttpServices/partidas.service';
 import { marca, proveedor, um } from 'src/app/Interfaces/catalogos.interface';
+import { movimiento_partida } from 'src/app/Interfaces/movimientos.interface';
 import { partida } from 'src/app/Interfaces/partida.interface';
 
 @Component({
@@ -20,10 +22,13 @@ export class PartidasComponent implements OnInit {
   proveedor:proveedor|undefined;
   unidad:um|undefined;
   
+  movimientos:movimiento_partida[] = [];
+
   constructor(
     private ar:ActivatedRoute,
     private ps:PartidasService,
-    private cs:CatalogosService
+    private cs:CatalogosService,
+    private ms:MovimientosService
   ) { 
     this.id = +this.ar.snapshot.paramMap.get("id")!;
   }
@@ -40,6 +45,7 @@ export class PartidasComponent implements OnInit {
         this.getMarca(this.partida.fk_id_marca)
         this.getProveedor(this.partida.fk_id_proveedor)
         this.getUnidad(this.partida.fk_id_unidad_medida)
+        this.getMovimientos(this.partida.id_partida)
         this.ldng = false;
       },err => console.log(err)
     );
@@ -60,6 +66,12 @@ export class PartidasComponent implements OnInit {
   getUnidad(id:number){
     this.cs.unidad(id).subscribe(
       res => this.unidad = res
+    );
+  }
+
+  getMovimientos(id:number){
+    this.ms.getMovimientosPorPartida(id).subscribe(
+      res => this.movimientos = res
     );
   }
 

@@ -57,4 +57,12 @@ export class ContratoComponent implements OnInit {
       err=>console.log(err)
     )
   }
+
+  updateContrato(){
+    this.contrato.estatus = !this.contrato.estatus; 
+    this.cs.updateContrato(this.contrato).subscribe(
+      res => this.ngOnInit(),
+      err => console.log(err)
+    );
+  }
 }

@@ -25,7 +25,8 @@ export class InventarioComponent implements OnInit {
   guardando:boolean = false;
   showData:boolean = false;
   partidas:any[] = [];
-
+  searchString:string = ""; 
+  
   constructor(
     private ar:ActivatedRoute,
     private is:InventariosService,
@@ -110,6 +111,15 @@ export class InventarioComponent implements OnInit {
 
   gotoPartida(id:number){
     this.rt.navigateByUrl(`inventario/partidas/${id}`);
+  }
+
+  search(){
+    if(this.searchString){
+      let regex = new RegExp(this.searchString.toLowerCase());
+      this.partidas = this.partidas.filter( p => p.descripcion.toLowerCase().match(regex))
+    }else{
+      this.getPartidas(this.inventario!.id_inventario)
+    }
   }
 
 }

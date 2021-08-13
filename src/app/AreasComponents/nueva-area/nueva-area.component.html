@@ -1,0 +1,72 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Agregar área</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="formArea" (ngSubmit)="trySave()">
+            <div class="row">
+                <div class="col"> 
+                    <mat-form-field class="w-100">
+                        <mat-label>Número pedido</mat-label>
+                        <input matInput placeholder="Número de pedido" formControlName="numero_pedido" type="number">
+                        <mat-error *ngIf="formArea.get('numero_pedido')!.hasError('required')">Campo requerido</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field class="w-100">
+                        <mat-label>Solicitante</mat-label>
+                        <input matInput placeholder="Solicitante" formControlName="solicitante">
+                        <mat-error *ngIf="formArea.get('solicitante')!.hasError('required')">Campo requerido</mat-error>
+                        <mat-error *ngIf="formArea.get('solicitante')!.hasError('maxlength')">Máximo 50 carácteres</mat-error>
+                        <mat-error *ngIf="formArea.get('solicitante')!.hasError('pattern')">Inválido</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field class="w-100">
+                        <mat-label>Usuarios</mat-label>
+                        <input matInput placeholder="Usuarios" formControlName="usuarios">
+                        <mat-error *ngIf="formArea.get('usuarios')!.hasError('required')">Campo requerido</mat-error>
+                        <mat-error *ngIf="formArea.get('usuarios')!.hasError('maxlength')">Máximo 100 carácteres</mat-error>
+                        <mat-error *ngIf="formArea.get('usuarios')!.hasError('pattern')">Inválido</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col"> 
+                    <mat-form-field class="w-100">
+                        <mat-label>Coordinador</mat-label>
+                        <input matInput placeholder="Coordinador" formControlName="coordinador">
+                        <mat-error *ngIf="formArea.get('coordinador')!.hasError('required')">Campo requerido</mat-error>
+                        <mat-error *ngIf="formArea.get('coordinador')!.hasError('maxlength')">Máximo 50 carácteres</mat-error>
+                        <mat-error *ngIf="formArea.get('coordinador')!.hasError('pattern')">Inválido</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field class="w-100">
+                        <mat-label>Área</mat-label>
+                        <input matInput placeholder="Área" formControlName="area">
+                        <mat-error *ngIf="formArea.get('area')!.hasError('required')">Campo requerido</mat-error>
+                        <mat-error *ngIf="formArea.get('area')!.hasError('maxlength')">Máximo 100 carácteres</mat-error>
+                        <mat-error *ngIf="formArea.get('area')!.hasError('pattern')">Inválido</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field class="w-100">
+                        <mat-label>Descripción</mat-label>
+                        <input matInput placeholder="" formControlName="descripcion">
+                        <mat-error *ngIf="formArea.get('descripcion')!.hasError('required')">Campo requerido</mat-error>
+                        <mat-error *ngIf="formArea.get('descripcion')!.hasError('maxlength')">Máximo 150 carácteres</mat-error>
+                        <mat-error *ngIf="formArea.get('descripcion')!.hasError('pattern')">Inválido</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <button type="submit" class="w-100" mat-flat-button color="primary" [disabled]="formArea.invalid" *ngIf="!saving">Guardar</button>
+                    <mat-progress-bar mode="indeterminate" *ngIf="saving"></mat-progress-bar>
+                </div>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

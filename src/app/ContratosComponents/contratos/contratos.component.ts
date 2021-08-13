@@ -9,7 +9,7 @@ import { contrato } from 'src/app/Interfaces/contratos.interface';
 })
 export class ContratosComponent implements OnInit {
 
-  hoy:string =  new Date().toISOString();
+  hoy =  new Date().toISOString();
   cargando:boolean = true;
   contratos:contrato[] = [];
   activos:number = 0;
@@ -27,7 +27,7 @@ export class ContratosComponent implements OnInit {
     this.cs.getContratos().subscribe(
       res => {
         this.contratos = res;
-        this.activos = this.contratos.filter( o => o.estatus = true).length;
+        this.activos = this.contratos.filter( o => o.estatus == true).length;
         this.vencidos = this.contratos.length - this.activos;
         this.cargando = false;
       },

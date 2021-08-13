@@ -25,7 +25,17 @@ import {MatListModule} from '@angular/material/list';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 //Imports Angular Material
+
+//Charts
+//import { ChartsModule } from 'ng2-charts';
+//Charts
+
+//Pipe Personalizado
+import { FolioPipe } from "./Pipes/folio.pipe";
+import { PosPipe } from "./Pipes/pos.pipe";
+//Pipe Personalizado
 
 //Componentes de la app
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -37,11 +47,13 @@ import { InventarioComponent } from './InventariosComponents/inventario/inventar
 import { MicuentaComponent } from './micuenta/micuenta.component';
 import { PartidasComponent } from './PartidasComponents/partidas/partidas.component';
 import { AgregarPartidaComponent } from './PartidasComponents/agregar-partida/agregar-partida.component';
-import { CrearInventarioComponent } from './InventariosComponents/crear-inventario/crear-inventario.component';
 import { ReportesmaterialComponent } from './ReportesMaterialComponents/reportesmaterial/reportesmaterial.component';
 import { NuevoReportematerialComponent } from './ReportesMaterialComponents/nuevo-reportematerial/nuevo-reportematerial.component';
 import { ReportematerialComponent } from './ReportesMaterialComponents/reportematerial/reportematerial.component';
 import { InventariokpiComponent } from './inventariokpi/inventariokpi.component';
+import { AreasContratoComponent } from './AreasComponents/areas-contrato/areas-contrato.component';
+import { AreaComponent } from './AreasComponents/area/area.component';
+import { NuevaAreaComponent } from './AreasComponents/nueva-area/nueva-area.component';
 //Componentes de la app
 @NgModule({
   declarations: [
@@ -55,11 +67,15 @@ import { InventariokpiComponent } from './inventariokpi/inventariokpi.component'
     MicuentaComponent,
     PartidasComponent,
     AgregarPartidaComponent,
-    CrearInventarioComponent,
     ReportesmaterialComponent,
     NuevoReportematerialComponent,
     ReportematerialComponent,
-    InventariokpiComponent
+    InventariokpiComponent,
+    AreasContratoComponent,
+    AreaComponent,
+    NuevaAreaComponent,
+    FolioPipe,
+    PosPipe
   ],
   imports: [
     BrowserModule,
@@ -80,7 +96,9 @@ import { InventariokpiComponent } from './inventariokpi/inventariokpi.component'
     HttpClientModule,
     MatProgressBarModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCheckboxModule,
+    //ChartsModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es-MX' },

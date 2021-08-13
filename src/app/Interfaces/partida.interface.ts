@@ -10,5 +10,14 @@ export interface partida {
     fk_id_marca : number,
     fk_id_unidad_medida : number,
     id_partida : number,
-    fecha_registro : string
+    fecha_registro : string,
+    unidades: string | undefined
+}
+
+export interface partida_reporte{
+    POS: number,
+    cantidad: number,
+    descripcion: string,
+    fk_id_partida: number,
+    id_reporte_partida: number
 }
