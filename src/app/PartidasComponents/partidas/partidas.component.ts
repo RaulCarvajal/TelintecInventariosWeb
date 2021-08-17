@@ -1,78 +1,58 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { CatalogosService } from 'src/app/HttpServices/catalogos.service';
-import { MovimientosService } from 'src/app/HttpServices/movimientos.service';
+import { AfterViewInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { PartidasService } from 'src/app/HttpServices/partidas.service';
-import { marca, proveedor, um } from 'src/app/Interfaces/catalogos.interface';
-import { movimiento_partida } from 'src/app/Interfaces/movimientos.interface';
-import { partida } from 'src/app/Interfaces/partida.interface';
+import { partida_datatable } from 'src/app/Interfaces/partida.interface';
 
 @Component({
   selector: 'app-partidas',
   templateUrl: './partidas.component.html',
   styleUrls: ['./partidas.component.css']
 })
-export class PartidasComponent implements OnInit {
+export class PartidasComponent implements AfterViewInit   {
 
-  id:number|undefined;
-  partida!:partida;
-  ldng:boolean = true;
+  partidas:partida_datatable[] = [];
+  cargando:boolean = true;
 
-  marca:marca|undefined;
-  proveedor:proveedor|undefined;
-  unidad:um|undefined;
-  
-  movimientos:movimiento_partida[] = [];
+  displayedColumns: string[] = ['POS', 'nombre', 'descripcion', 'numero_parte', 'marca','cantidad'];
+  dataSource!: MatTableDataSource<partida_datatable>;
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   constructor(
-    private ar:ActivatedRoute,
     private ps:PartidasService,
-    private cs:CatalogosService,
-    private ms:MovimientosService
-  ) { 
-    this.id = +this.ar.snapshot.paramMap.get("id")!;
+    private rt:Router
+  ){}
+
+  async getPartidas(){
+    let res = await this.ps.getPartidas();
+    this.partidas = <partida_datatable[]>res;
+    this.dataSource = new MatTableDataSource(this.partidas);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
-  ngOnInit(): void {
-    this.getPartida(this.id!);
+  ngAfterViewInit():void {
+    this.getPartidas();
+    this.paginator._intl.itemsPerPageLabel = "Partidas por página"
+    this.paginator._intl.nextPageLabel = "Siguiente";
+    this.paginator._intl.previousPageLabel = "Anterior";
   }
 
-  getPartida(id:number){
-    this.ldng = true;
-    this.ps.getPartida(id).subscribe(
-      res=> {
-        this.partida = res;
-        this.getMarca(this.partida.fk_id_marca)
-        this.getProveedor(this.partida.fk_id_proveedor)
-        this.getUnidad(this.partida.fk_id_unidad_medida)
-        this.getMovimientos(this.partida.id_partida)
-        this.ldng = false;
-      },err => console.log(err)
-    );
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
-  getMarca(id:number){
-    this.cs.marca(id).subscribe(
-      res => this.marca = res
-    );
-  }
-
-  getProveedor(id:number){
-    this.cs.proveedor(id).subscribe(
-      res => this.proveedor = res
-    );
-  }
-
-  getUnidad(id:number){
-    this.cs.unidad(id).subscribe(
-      res => this.unidad = res
-    );
-  }
-
-  getMovimientos(id:number){
-    this.ms.getMovimientosPorPartida(id).subscribe(
-      res => this.movimientos = res
-    );
+  gotoPartida(row:any){
+    this.rt.navigateByUrl(`/inventario/partida/${row}`);
   }
 
 }

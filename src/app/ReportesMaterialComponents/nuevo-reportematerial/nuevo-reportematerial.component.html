@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="mat-elevation-z8">
     <mat-card-header>
         <mat-card-title>
             Agregar nuevo Reporte de material/Pedido
@@ -130,23 +130,36 @@
                     <p class="mt-2">Partidas/Conceptos</p>
                 </div>
             </div>
-
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="w-100">
+                        <mat-select formControlName="partida_seleccionada" placeholder="Busqueda de partidas"  (selectionChange)="addPartida()" #singleSelect>
+                            <mat-option>
+                            <ngx-mat-select-search [formControl]="partidaFiltro"></ngx-mat-select-search>
+                            </mat-option>
+                    
+                            <mat-option *ngFor="let partida of partidasFiltradas | async" [value]="partida.id_partida">
+                                {{partida.POS | pos}} - {{partida.descripcion}} - {{partida.unidad_medida}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
             <div formArrayName="partidas">
                 <div class="row" *ngFor="let item of partidasForm.controls; let pind = index" [formGroupName]="pind">
                     <div class="col-10">
                         <mat-form-field class="w-100">
                             <mat-label>Partida</mat-label>
-                            <input matInput placeholder="Centro de costos Ternium" [value]="'POS: '+partidas[pind].POS+' - '+partidas[pind].descripcion" disabled>
+                            <input matInput placeholder="" formControlName="partida">
                         </mat-form-field>
                     </div>
                     <div class="col-2">
                         <mat-form-field class="w-100">
-                            <mat-label>Cantidad  en {{partidas[pind].unidades}}</mat-label>
-                            <input matInput placeholder="Centro de costos Ternium" formControlName="cantidad" type="number">
+                            <mat-label>Cantidad</mat-label>
+                            <input matInput placeholder="" formControlName="cantidad" type="number">
                         </mat-form-field>
                     </div>
                 </div>
-        
             </div>
 
             <br>

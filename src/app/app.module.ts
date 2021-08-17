@@ -26,6 +26,10 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 //Imports Angular Material
 
 //Charts
@@ -43,7 +47,6 @@ import { ContratosComponent } from './ContratosComponents/contratos/contratos.co
 import { NuevoContratoComponent } from './ContratosComponents/nuevo-contrato/nuevo-contrato.component';
 import { ContratoComponent } from './ContratosComponents/contrato/contrato.component';
 import { InventariosComponent } from './InventariosComponents/inventarios/inventarios.component';
-import { InventarioComponent } from './InventariosComponents/inventario/inventario.component';
 import { MicuentaComponent } from './micuenta/micuenta.component';
 import { PartidasComponent } from './PartidasComponents/partidas/partidas.component';
 import { AgregarPartidaComponent } from './PartidasComponents/agregar-partida/agregar-partida.component';
@@ -54,6 +57,7 @@ import { InventariokpiComponent } from './inventariokpi/inventariokpi.component'
 import { AreasContratoComponent } from './AreasComponents/areas-contrato/areas-contrato.component';
 import { AreaComponent } from './AreasComponents/area/area.component';
 import { NuevaAreaComponent } from './AreasComponents/nueva-area/nueva-area.component';
+import { PartidaComponent } from './PartidasComponents/partida/partida.component';
 //Componentes de la app
 @NgModule({
   declarations: [
@@ -63,7 +67,6 @@ import { NuevaAreaComponent } from './AreasComponents/nueva-area/nueva-area.comp
     NuevoContratoComponent,
     ContratoComponent,
     InventariosComponent,
-    InventarioComponent,
     MicuentaComponent,
     PartidasComponent,
     AgregarPartidaComponent,
@@ -75,7 +78,8 @@ import { NuevaAreaComponent } from './AreasComponents/nueva-area/nueva-area.comp
     AreaComponent,
     NuevaAreaComponent,
     FolioPipe,
-    PosPipe
+    PosPipe,
+    PartidaComponent
   ],
   imports: [
     BrowserModule,
@@ -98,13 +102,17 @@ import { NuevaAreaComponent } from './AreasComponents/nueva-area/nueva-area.comp
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatCheckboxModule,
+    NgxMatSelectSearchModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
     //ChartsModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es-MX' },
     MatNativeDateModule,
-    MatDatepickerModule
-
+    MatDatepickerModule,
+    PosPipe
   ],
   bootstrap: [AppComponent]
 })

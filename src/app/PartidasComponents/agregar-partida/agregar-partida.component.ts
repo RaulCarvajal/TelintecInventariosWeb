@@ -14,8 +14,6 @@ import { rgx } from 'src/app/Validators/regex.validator';
 })
 export class AgregarPartidaComponent implements OnInit {
 
-  id_inventario:number;
-
   marcas:marca[]=[];
   proveedores:proveedor[]=[];
   unidades:um[]=[];
@@ -30,7 +28,6 @@ export class AgregarPartidaComponent implements OnInit {
     private ar:ActivatedRoute,
     private ps:PartidasService
   ) {
-    this.id_inventario = +this.ar.snapshot.paramMap.get("id")!;
   }
 
   ngOnInit(): void {
@@ -47,8 +44,8 @@ export class AgregarPartidaComponent implements OnInit {
       descripcion : ['',[Validators.required,Validators.maxLength(150),Validators.pattern(rgx.white_space)]],
       numero_parte : ['',[Validators.required,Validators.maxLength(10),Validators.pattern(rgx.white_space)]],
       precio_unitario : ['',[Validators.required]],
+      precio_unitario_compra : ['',[Validators.required]],
       cantidad : ['',[Validators.required]],
-      fk_id_inventario : [this.id_inventario,[Validators.required]],
       fk_id_proveedor : ['',[Validators.required]],
       fk_id_marca : ['',[Validators.required]],
       fk_id_unidad_medida : ['',[Validators.required]]
@@ -62,7 +59,6 @@ export class AgregarPartidaComponent implements OnInit {
         this.partidas.push(this.formPartida.value)
         this.saving = false;
         this.formPartida.reset();
-        this.formPartida.patchValue({fk_id_inventario : this.id_inventario});
       },err => console.log(err)
     );
   }

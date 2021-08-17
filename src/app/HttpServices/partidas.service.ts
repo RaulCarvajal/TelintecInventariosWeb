@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { partida, partida_reporte } from '../Interfaces/partida.interface';
+import { partida, partida_datatable, partida_reporte } from '../Interfaces/partida.interface';
 import { api } from './config.consts';
 
 @Injectable({
@@ -12,20 +12,16 @@ export class PartidasService {
     private http:HttpClient
   ) { }
 
-  getPartidasPorIdInventario(id:number){
-    return this.http.get<partida[]>(`${api.url}partidas_por_inventario/${id}`)
-  }
-
-  getPartidasPorContrato(id:number){
-    return this.http.get<partida[]>(`${api.url}partidas_por_contrato/${id}`)
-  }
-
   guardar(partida:partida|any){
     return this.http.post<any>(`${api.url}partidas`,partida);
   }
 
   getPartida(id:number){
     return this.http.get<partida>(`${api.url}partidas/${id}`)
+  }
+
+  async getPartidas(){
+    return await this.http.get(`${api.url}partidas`).toPromise();
   }
 
   getPartidasPorIdReporte(id_partida:number){

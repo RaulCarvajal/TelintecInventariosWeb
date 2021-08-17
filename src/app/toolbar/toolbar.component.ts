@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
 
-  title = 'Inventarios';
+  title = 'Sistema para gestión de activos';
 
   constructor() { }
 

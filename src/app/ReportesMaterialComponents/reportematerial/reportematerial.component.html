@@ -1,4 +1,4 @@
-<mat-card *ngIf="reporte">
+<mat-card class="mat-elevation-z8" *ngIf="reporte">
     <mat-card-header>
         <mat-card-title>Reporte de Material de {{reporte.contrato}}</mat-card-title>
         <mat-card-subtitle>Folio {{reporte.folio | folio}} - {{reporte.fecha | date}}</mat-card-subtitle>
@@ -133,7 +133,7 @@
         </div>
     </mat-card-content>
 </mat-card>
-<mat-card *ngIf="!reporte">
+<mat-card class="mat-elevation-z8" *ngIf="!reporte">
     <div class="row">
         <div class="col">
             <mat-progress-bar mode="indeterminate"></mat-progress-bar>

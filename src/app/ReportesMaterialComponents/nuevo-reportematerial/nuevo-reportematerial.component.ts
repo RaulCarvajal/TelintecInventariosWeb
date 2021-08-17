@@ -1,35 +1,44 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSelect } from '@angular/material/select';
 import { ActivatedRoute } from '@angular/router';
+import { ReplaySubject, Subject } from 'rxjs';
 import { AreasService } from 'src/app/HttpServices/areas.service';
 import { ContratoplantaService } from 'src/app/HttpServices/contratoplanta.service';
 import { ContratosService } from 'src/app/HttpServices/contratos.service';
-import { InventariosService } from 'src/app/HttpServices/inventarios.service';
 import { PartidasService } from 'src/app/HttpServices/partidas.service';
 import { ReportesService } from 'src/app/HttpServices/reportes.service';
 import { area } from 'src/app/Interfaces/area.interface';
 import { contrato } from 'src/app/Interfaces/contratos.interface';
 import { contrato_planta_text } from 'src/app/Interfaces/contrato_planta.interface';
-import { partida } from 'src/app/Interfaces/partida.interface';
+import { partida, partida_datatable } from 'src/app/Interfaces/partida.interface';
 import { reporte_partida } from 'src/app/Interfaces/reporte_partida.interface';
 import { rgx } from 'src/app/Validators/regex.validator';
+import { takeUntil, take } from 'rxjs/operators';
+import { PosPipe } from 'src/app/Pipes/pos.pipe';
 
 @Component({
   selector: 'app-nuevo-reportematerial',
   templateUrl: './nuevo-reportematerial.component.html',
   styleUrls: ['./nuevo-reportematerial.component.css']
 })
-export class NuevoReportematerialComponent implements OnInit {
+export class NuevoReportematerialComponent implements OnInit, AfterViewInit, OnDestroy {
 
   idc!:number;
   formPedido!:FormGroup;
   contratos:contrato[]|undefined;
   areas:area[]=[];
   contrato_plantas:contrato_planta_text[]=[];
-  partidas:partida[]=[];
+  partidas:partida_datatable[]=[];
   iterabl:any[]=[0];
   guardando:boolean = false;
+  selpid:number | undefined;
 
+  /** Subject that emits when the component has been destroyed. */
+  protected _onDestroy = new Subject<void>();
+  public partidaFiltro: FormControl = new FormControl();
+  public partidasFiltradas: ReplaySubject<partida_datatable[]> = new ReplaySubject<partida_datatable[]>(1);
+  @ViewChild('singleSelect', { static: true }) singleSelect!: MatSelect;
   constructor(
     private fb:FormBuilder,
     private ar:ActivatedRoute,
@@ -37,7 +46,8 @@ export class NuevoReportematerialComponent implements OnInit {
     private as:AreasService,
     private cps:ContratoplantaService,
     private ps:PartidasService,
-    private rs:ReportesService
+    private rs:ReportesService,
+    private ppp:PosPipe
   ) { 
     this.idc = +this.ar.snapshot.paramMap.get("id")!;
   }
@@ -46,8 +56,18 @@ export class NuevoReportematerialComponent implements OnInit {
     this.getContratos();
     this.getAreasPorContrato(this.idc);
     this.getContratoPlantas(this.idc);
-    this.getPartidas(this.idc)
+    this.getPartidas();
     this.initForm();
+    this.getUltimoFolioPedido(this.idc);
+  }
+
+  ngAfterViewInit() {
+    this.setInitialValue();
+  }
+
+  ngOnDestroy() {
+    this._onDestroy.next();
+    this._onDestroy.complete();
   }
 
   initForm(){
@@ -69,18 +89,21 @@ export class NuevoReportematerialComponent implements OnInit {
       fecha_inicio : ['',[Validators.required]],
       fecha_fin : ['',[Validators.required]],
       comentarios : ['',[Validators.pattern(rgx.white_space),Validators.maxLength(250)]],
-      partidas : this.fb.array([])
+      partidas : this.fb.array([]),
+      partida_seleccionada : ['',[]]
     });
     this.formPedido.controls['fk_id_contrato'].disable();
   }
 
   trySave(){
-    this.guardando = true;
+    //this.guardando = true;
     this.formPedido.value.fecha = this.formPedido.value.fecha.toISOString();
     let rp:reporte_partida[] = <reporte_partida[]>this.formPedido.value.partidas;
     this.formPedido.value.partidas = rp.filter( p => p.cantidad! > 0);
     this.formPedido.value.fk_id_contrato = this.idc;
-    this.rs.guardar(this.formPedido.value).subscribe(
+
+    console.log(this.formPedido.value)
+    /*this.rs.guardar(this.formPedido.value).subscribe(
       res => {
         this.guardando = false;
         if(!res.error){
@@ -92,7 +115,7 @@ export class NuevoReportematerialComponent implements OnInit {
       err => {
         console.log(err)
       }
-    );
+    );*/
   }
 
   getContratos(){
@@ -116,23 +139,26 @@ export class NuevoReportematerialComponent implements OnInit {
     )
   }
 
-  getPartidas(idc:number){
-      this.ps.getPartidasPorContrato(idc).subscribe(
-        res => {
-          this.partidas = res;
-          this.partidas.forEach( p => {
-            this.addPartida(p.id_partida)
-          });
-        },
-        err => console.log(err)
-      );
+  async getPartidas(){
+    let res = await this.ps.getPartidas();
+    this.partidas = <partida_datatable[]>res;
+    this.partidas = this.partidas;
+    //this.formPedido.controls().setValue(this.partidas[10]);
+    this.partidasFiltradas.next(this.partidas.slice());
+    this.partidaFiltro.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(
+      () => {
+        this.filterPartidas();
+      }
+    );
   }
 
-  private addPartida(id_partida:number){
+  addPartida(){
+    let partida:partida_datatable = this.partidas.find(p => p.id_partida === this.formPedido.value.partida_seleccionada)!;
     const cntrs = <FormArray>this.formPedido.controls['partidas'];
     cntrs.push(this.fb.group(
       {
-        fk_id_partida : [id_partida,[Validators.required]],
+        partida:[`${this.ppp.transform(partida.POS)} - ${partida.descripcion} - ${partida.unidad_medida}`,[]],
+        fk_id_partida : [this.formPedido.value.partida_seleccionada,[Validators.required]],
         cantidad : [0,[Validators.required]]
       }
     ));
@@ -142,5 +168,36 @@ export class NuevoReportematerialComponent implements OnInit {
     return this.formPedido.controls['partidas'] as FormArray;
   }
 
+  protected setInitialValue() {
+    this.partidasFiltradas.pipe(take(1), takeUntil(this._onDestroy)).subscribe(
+      () => {
+        this.singleSelect.compareWith = (a: partida_datatable, b: partida_datatable) => a && b && a.id_partida === b.id_partida;
+      }
+    );
+  }
+
+  protected filterPartidas() {
+    if (!this.partidas) {
+      return;
+    }
+    let search = this.partidaFiltro.value;
+    if (!search) {
+      this.partidasFiltradas.next(this.partidas.slice());
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+    this.partidasFiltradas.next(
+      this.partidas.filter(partida => partida.descripcion.toLowerCase().indexOf(search) > -1)
+    );
+  }
+
+  getUltimoFolioPedido(id:number){
+    this.rs.getUltimoFolioPedido(id).subscribe(
+      res => {
+        this.formPedido.patchValue({folio : res[0].folio+1,numero_pedido : res[0].numero_pedido+1})
+      }
+    );
+  }
 }
 

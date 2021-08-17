@@ -3,10 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { ContratosComponent } from './ContratosComponents/contratos/contratos.component';
 import { NuevoContratoComponent } from './ContratosComponents/nuevo-contrato/nuevo-contrato.component';
 import { ContratoComponent } from "./ContratosComponents/contrato/contrato.component";
-import { InventarioComponent } from "./InventariosComponents/inventario/inventario.component";
 import { InventariosComponent } from "./InventariosComponents/inventarios/inventarios.component";
 import { MicuentaComponent } from "./micuenta/micuenta.component";
 import { PartidasComponent } from './PartidasComponents/partidas/partidas.component';
+import { PartidaComponent } from './PartidasComponents/partida/partida.component';
 import { AgregarPartidaComponent } from './PartidasComponents/agregar-partida/agregar-partida.component';
 import { ReportesmaterialComponent } from './ReportesMaterialComponents/reportesmaterial/reportesmaterial.component';
 import { NuevoReportematerialComponent } from './ReportesMaterialComponents/nuevo-reportematerial/nuevo-reportematerial.component';
@@ -28,9 +28,9 @@ const routes: Routes = [
   {path : "contrato/reportematerial/:id", component : ReportematerialComponent},
   {path : "contrato/reportesmaterial/nuevo/:id", component : NuevoReportematerialComponent},
   {path : "inventarios", component : InventariosComponent},
-  {path : "inventario/partidas/:id", component : PartidasComponent},
-  {path : "inventario/:origin/:id", component : InventarioComponent},
-  {path : "inventario/partidas/agregar/:id", component : AgregarPartidaComponent},
+  {path : "inventario/partidas", component : PartidasComponent},
+  {path : "inventario/partida/:id", component : PartidaComponent},
+  {path : "inventario/partidas/agregar", component : AgregarPartidaComponent},
   {path : "micuenta", component : MicuentaComponent}
 ];
 

@@ -1,0 +1,92 @@
+<mat-card class="mat-elevation-z8" *ngIf="!ldng">
+    <mat-card-header>
+        <mat-card-title>Partida POS: {{partida.POS | pos}}</mat-card-title>
+        <mat-card-subtitle>{{partida.descripcion}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-list>
+            <div mat-subheader>Información</div>
+            <mat-list-item>
+                <mat-icon mat-list-icon>folder</mat-icon>
+                <div mat-line>Número de parte</div>
+                <div mat-line> {{partida.numero_parte}} </div>
+            </mat-list-item>
+            <mat-list-item *ngIf="marca">
+                <mat-icon mat-list-icon>villa</mat-icon>
+                <div mat-line>Marca</div>
+                <div mat-line>{{marca.nombre}}</div>
+            </mat-list-item>
+            <mat-list-item *ngIf="proveedor">
+                <mat-icon mat-list-icon>store</mat-icon>
+                <div mat-line>Proveedor</div>
+                <div mat-line>{{proveedor.nombre}}</div>
+            </mat-list-item>
+            <mat-list-item *ngIf="unidad">
+                <mat-icon mat-list-icon>tag</mat-icon>
+                <div mat-line>Cantidad en inventario</div>
+                <div mat-line>{{partida.cantidad}} {{unidad.nombre}}</div>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-icon mat-list-icon>paid</mat-icon>
+                <div mat-line>Precio unitario</div>
+                <div mat-line>{{partida.precio_unitario | currency:'MXN'}}</div>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-icon mat-list-icon>price_check</mat-icon>
+                <div mat-line>Precio total en inventario</div>
+                <div mat-line>{{(partida.precio_unitario*partida.cantidad) | currency:'MXN'}}</div>
+            </mat-list-item>
+            <mat-list-item *ngIf="unidad">
+                <mat-icon mat-list-icon>square_foot</mat-icon>
+                <div mat-line>Unidad</div>
+                <div mat-line>{{unidad.nombre}}</div>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-icon mat-list-icon>calendar_today</mat-icon>
+                <div mat-line>Fecha registro</div>
+                <div mat-line>{{partida.fecha_registro | date}}</div>
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="mt-3 mat-elevation-z8">
+    <mat-card-header>
+        <mat-card-title>
+            Movimientos de la partida
+        </mat-card-title>
+        <mat-card-subtitle>
+            Entradas/Salidas de la patida dentro del inventario
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Fecha Movimiento</th>
+                    <th scope="col">Contrato</th>
+                    <th scope="col">Folio Reporte</th>
+                    <th scope="col">Pedido</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let movimiento of movimientos;let i = index">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{movimiento.cantidad}}</td>
+                    <td>{{movimiento.fecha | date}}</td>
+                    <td>{{movimiento.nombre_contrato}}</td>
+                    <td><a [routerLink]="['/contrato/reportematerial/'+movimiento.fk_id_reporte]">{{movimiento.folio_reporte | folio}}</a></td>
+                    <td>{{movimiento.numero_pedido}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="ldng">
+    <mat-card-content>
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </mat-card-content>
+</mat-card>

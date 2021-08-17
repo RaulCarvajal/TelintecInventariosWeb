@@ -1,29 +1,54 @@
-<mat-card *ngIf="inventarios.length">
-    <mat-card-header>
+<mat-card class="mat-elevation-z8">
+    <mat-card-header class="mt-2">
         <mat-card-title>Inventarios</mat-card-title>
+        <mat-card-subtitle>Activos Telintec.</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Descripción</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let inventario of inventarios; let i = index" (click)="gotoDetail(inventario.id_inventario)">
-                    <th scope="row">1</th>
-                    <td>{{inventario.nombre}}</td>
-                    <td>{{inventario.descripcion_ubicacion}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </mat-card-content>
 </mat-card>
 
-<mat-card class="mt-3" *ngIf="inventarios.length==0">
-    <mat-card-content>
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-    </mat-card-content>
-</mat-card>
+    <div class="row">
+        <div class="mt-3 col-sm-12 col-md-4 col-lg-4">
+            <mat-card class="mat-elevation-z8">
+                <mat-card-header>
+                    <div mat-card-avatar><mat-icon>cable</mat-icon></div>
+                    <mat-card-title>Materiales</mat-card-title>
+                    <mat-card-subtitle>Patch cord, TP, Plugs, etc...</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="assets/contrato.jpg" alt="Contrato imagen">
+                <mat-card-content>
+                </mat-card-content>
+                <mat-card-actions class="text-end">
+                    <a role="button" mat-button [routerLink]="['/inventario/partidas']"><mat-icon>inventory</mat-icon> Inventario</a>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+        <div class="mt-3 col-sm-12 col-md-4 col-lg-4">
+            <mat-card class="mat-elevation-z8">
+                <mat-card-header>
+                    <div mat-card-avatar><mat-icon>construction</mat-icon></div>
+                    <mat-card-title>Herramientas</mat-card-title>
+                    <mat-card-subtitle>Taladros, sierras, cintas, etc...</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="assets/contrato.jpg" alt="Contrato imagen">
+                <mat-card-content>
+                </mat-card-content>
+                <mat-card-actions class="text-end">
+                    <a role="button" mat-button [routerLink]="['']"><mat-icon>inventory</mat-icon> Inventario</a>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+        <div class="mt-3 col-sm-12 col-md-4 col-lg-4">
+            <mat-card class="mat-elevation-z8">
+                <mat-card-header>
+                    <div mat-card-avatar><mat-icon>engineering</mat-icon></div>
+                    <mat-card-title>EPP</mat-card-title>
+                    <mat-card-subtitle>Cascos, polainas, lentes, etc...</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="assets/contrato.jpg" alt="Contrato imagen">
+                <mat-card-content>
+                </mat-card-content>
+                <mat-card-actions class="text-end">
+                    <a role="button" mat-button [routerLink]="['']"><mat-icon>inventory</mat-icon> Inventario</a>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>

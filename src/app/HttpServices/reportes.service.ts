@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { reporte_tabla } from '../Interfaces/reportematerial.interface';
+import { ultimofoliopedido } from '../Interfaces/reporte_partida.interface';
 import { respuesta } from '../Interfaces/respuesta.interface';
 import { api } from './config.consts';
 
@@ -27,5 +28,9 @@ export class ReportesService {
 
   getReporte(idr:number){
     return this.http.get<any>(`${api.url}reporte/${idr}`);
+  }
+
+  getUltimoFolioPedido(id:number){
+    return this.http.get<ultimofoliopedido[]>(`${api.url}ultimofoliopedido/${id}`)
   }
 }

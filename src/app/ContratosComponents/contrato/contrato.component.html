@@ -1,4 +1,4 @@
-<mat-card *ngIf="!cargando">
+<mat-card class="mat-elevation-z8" *ngIf="!cargando">
     <mat-card-header>
         <mat-card-title>Contrato {{contrato.nombre}}</mat-card-title>
         <mat-card-subtitle>{{contrato.descripcion}}</mat-card-subtitle>
@@ -47,14 +47,13 @@
             </div>
         </div>
     </mat-card-content>
-    <mat-card-actions>
+    <mat-card-actions class="text-end">
         <a role="button" mat-button [routerLink]="['/contrato/areas/'+contrato.id_contrato]" *ngIf="contrato.estatus"><mat-icon>location_on</mat-icon> Áreas</a>
-        <a role="button" mat-button [routerLink]="['/inventario/con/'+contrato.id_contrato]" *ngIf="contrato.estatus"><mat-icon>inventory</mat-icon> Inventario</a>
         <a role="button" mat-button [routerLink]="['/contrato/reportesmaterial/'+contrato.id_contrato]" *ngIf="contrato.estatus"><mat-icon>assignment</mat-icon> Reportes de material/Pedidos</a>
         <a role="button" mat-button *ngIf="contrato.estatus"><mat-icon>receipt</mat-icon> Remitos</a>
         <a role="button" mat-button color="warn" (click)="updateContrato()"><mat-icon>power_settings_new</mat-icon> {{contrato.estatus?"Marcar como vencido":"Marcar como activo"}}</a>
     </mat-card-actions>
 </mat-card>
-<mat-card *ngIf="cargando">
+<mat-card class="mat-elevation-z8" *ngIf="cargando">
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </mat-card>
