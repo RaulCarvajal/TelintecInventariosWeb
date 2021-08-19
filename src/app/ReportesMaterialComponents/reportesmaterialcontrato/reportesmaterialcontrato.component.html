@@ -3,7 +3,7 @@
         <mat-card-title>Reportes de material</mat-card-title>
     </mat-card-header>
     <mat-card-content class="text-end">
-        <a role="button" mat-button [routerLink]="['/reportes/nuevo']" color="primary"><mat-icon>add</mat-icon> Nuevo reporte</a>
+        <a role="button" mat-button [routerLink]="['/contrato/reportesmaterial/nuevo/'+idc]" color="primary"><mat-icon>add</mat-icon> Nuevo reporte</a>
     </mat-card-content>
 </mat-card>
 
@@ -49,7 +49,7 @@
         </div>
         <div class="row" *ngIf="reportes.length==0">
             <div class="col text-center">
-                <p class="lead">Sin reportes</p>
+                <p class="lead">Sin reportes en el contrato</p>
             </div>
         </div>
         <div class="row" *ngIf="cargando">

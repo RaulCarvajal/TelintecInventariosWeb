@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { contrato_planta, contrato_planta_text } from '../Interfaces/contrato_planta.interface';
+import { planta } from '../Interfaces/plantas.interface';
 import { api } from "./config.consts";
 
 @Injectable({
@@ -17,7 +18,7 @@ export class ContratoplantaService {
   }
 
   getContratoPlantasByContratoId(id_contrato:number){
-    return this.http.get<contrato_planta_text[]>(`${api.url}con_pla/${id_contrato}`);
+    return this.http.get<planta[]>(`${api.url}con_pla/${id_contrato}`);
   }
 
 }

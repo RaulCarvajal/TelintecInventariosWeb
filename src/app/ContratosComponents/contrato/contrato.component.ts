@@ -53,7 +53,7 @@ export class ContratoComponent implements OnInit {
 
   getContratoPlantas(id:number){
     this.cps.getContratoPlantasByContratoId(id).subscribe(
-      res=> {this.plantas = res.map(function(elem){return elem.planta}).join(", ")},
+      res=> {this.plantas = res.map(function(elem){return elem.nombre}).join(", ")},
       err=>console.log(err)
     )
   }

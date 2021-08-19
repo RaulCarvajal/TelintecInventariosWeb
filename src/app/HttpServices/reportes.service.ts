@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { reporte_tabla } from '../Interfaces/reportematerial.interface';
 import { ultimofoliopedido } from '../Interfaces/reporte_partida.interface';
@@ -18,6 +18,12 @@ export class ReportesService {
     return this.http.post<respuesta>(`${api.url}reporte_material`,data);
   }
 
+  guardarEvidencia(data:any){
+    let headers = new HttpHeaders();
+    headers.append('Accept', 'application/json');
+    return this.http.post<any>(`${api.url}evidencia`,data,{headers : headers});
+  }
+
   getDataTable(){
     return this.http.get<reporte_tabla[]>(`${api.url}reporte_tabla`);
   }
@@ -30,7 +36,9 @@ export class ReportesService {
     return this.http.get<any>(`${api.url}reporte/${idr}`);
   }
 
-  getUltimoFolioPedido(id:number){
-    return this.http.get<ultimofoliopedido[]>(`${api.url}ultimofoliopedido/${id}`)
+  getUltimoFolioPedido(){
+    return this.http.get<ultimofoliopedido[]>(`${api.url}ultimofoliopedido/0`)
   }
+
+
 }

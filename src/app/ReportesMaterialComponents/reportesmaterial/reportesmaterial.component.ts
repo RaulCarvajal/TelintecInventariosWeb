@@ -12,24 +12,22 @@ import { reporte_tabla } from 'src/app/Interfaces/reportematerial.interface';
 })
 export class ReportesmaterialComponent implements OnInit {
 
-  idc:number;
   reportes:reporte_tabla[] = [];
   cargando:boolean = true;
 
   constructor(
     private rt:Router,
-    private ar:ActivatedRoute,
     private rs:ReportesService
   ){
-    this.idc = +this.ar.snapshot.paramMap.get("id")!;
+
   }
 
   ngOnInit(): void {
-    this.getReportes(this.idc);
+    this.getReportes();
   }
 
-  getReportes(id:number){
-    this.rs.getDataTableByContrato(id).subscribe(
+  getReportes(){
+    this.rs.getDataTable().subscribe(
       res => {
         this.reportes = res
         this.cargando = false;

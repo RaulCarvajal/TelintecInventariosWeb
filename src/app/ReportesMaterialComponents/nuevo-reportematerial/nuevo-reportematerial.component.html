@@ -28,17 +28,15 @@
                 <div class="col">
                     <mat-form-field class="w-100">
                         <mat-label>Contrato Marco</mat-label>
-                        <mat-select matNativeControl  formControlName="fk_id_contrato" required>
-                          <mat-option *ngFor="let contrato of contratos" [value]="contrato.id_contrato">{{contrato.numero_contrato}}</mat-option>
+                        <mat-select matNativeControl  formControlName="fk_id_contrato" (selectionChange)="onSelectContrato()" required>
+                          <mat-option *ngFor="let contrato of contratos" [value]="contrato.id_contrato">{{contrato.numero_contrato}} - {{contrato.nombre}}</mat-option>
                         </mat-select>
-                        <mat-error *ngIf="formPedido.get('fk_id_contrato')!.hasError('required')">Campo requerido</mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col">
                     <mat-form-field class="w-100">
                         <mat-label>Número pedido Ternium</mat-label>
-                        <input matInput placeholder="Pedido ternium (1,2,3,..)" formControlName="numero_pedido" type="number" required>
-                        <mat-error *ngIf="formPedido.get('numero_pedido')!.hasError('required')">Campo requerido</mat-error>
+                        <input matInput placeholder="Pedido ternium (1,2,3,..)" formControlName="numero_pedido" type="number">
                     </mat-form-field>
                 </div>
             </div>
@@ -56,18 +54,17 @@
                     <mat-form-field class="w-100">
                         <mat-label>Planta</mat-label>
                         <mat-select matNativeControl formControlName="fk_id_planta" required>
-                            <mat-option *ngFor="let planta of contrato_plantas" [value]="planta.id_contrato_planta">{{planta.planta}}</mat-option>
+                            <mat-option *ngFor="let planta of contrato_plantas" [value]="planta.id_planta">{{planta.nombre}}</mat-option>
                         </mat-select>
                         <mat-error *ngIf="formPedido.get('fk_id_planta')!.hasError('required')">Campo requerido</mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col">
                     <mat-form-field class="w-100">
-                        <mat-label>Area</mat-label>
-                        <mat-select matNativeControl formControlName="fk_id_area" required>
+                        <mat-label>Area/Pedido</mat-label>
+                        <mat-select matNativeControl formControlName="fk_id_area" (selectionChange)="setPedido()">
                           <mat-option *ngFor="let area of areas" [value]="area.id_area">{{area.numero_pedido}} - {{area.area}}</mat-option>
                         </mat-select>
-                        <mat-error *ngIf="formPedido.get('fk_id_area')!.hasError('required')">Campo requerido</mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col">
@@ -190,6 +187,21 @@
                         <mat-error *ngIf="formPedido.get('comentarios')!.hasError('pattern')">Campo requerido</mat-error>
                         <mat-error *ngIf="formPedido.get('comentarios')!.hasError('pattern')">Máximo 250 carácteres</mat-error>
                     </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p class="mt-2">Evidencia</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-center mb-3">
+                    <input type="file" (change)="eventFile($event)" class="w-100" accept=".gif,.jpg,.jpeg,.png">
+                </div>
+            </div>
+            <div class="row" *ngIf="preview">
+                <div *ngFor="let img of preview;let ind = index" class="col-sm-6 col-md-3 col-lg-3">
+                    <img [src]="img.base" class="w-100 mb-3" (click)="removeImg(ind)">
                 </div>
             </div>
             <div class="row" *ngIf="!guardando">

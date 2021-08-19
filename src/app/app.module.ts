@@ -58,6 +58,7 @@ import { AreasContratoComponent } from './AreasComponents/areas-contrato/areas-c
 import { AreaComponent } from './AreasComponents/area/area.component';
 import { NuevaAreaComponent } from './AreasComponents/nueva-area/nueva-area.component';
 import { PartidaComponent } from './PartidasComponents/partida/partida.component';
+import { ReportesmaterialcontratoComponent } from './ReportesMaterialComponents/reportesmaterialcontrato/reportesmaterialcontrato.component';
 //Componentes de la app
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { PartidaComponent } from './PartidasComponents/partida/partida.component
     NuevaAreaComponent,
     FolioPipe,
     PosPipe,
-    PartidaComponent
+    PartidaComponent,
+    ReportesmaterialcontratoComponent
   ],
   imports: [
     BrowserModule,
