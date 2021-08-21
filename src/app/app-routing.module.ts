@@ -16,9 +16,10 @@ import { InventariokpiComponent } from "./inventariokpi/inventariokpi.component"
 import { AreasContratoComponent } from './AreasComponents/areas-contrato/areas-contrato.component';
 import { AreaComponent } from './AreasComponents/area/area.component';
 import { NuevaAreaComponent } from './AreasComponents/nueva-area/nueva-area.component';
-
+import { LoginComponent } from "./login/login.component";
 const routes: Routes = [
   {path : "", component : InventariokpiComponent},
+  {path : "login", component : LoginComponent},
   {path : "contratos", component : ContratosComponent},
   {path : "contratos/nuevo", component : NuevoContratoComponent},
   {path : "contrato/:id", component : ContratoComponent},

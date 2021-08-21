@@ -33,7 +33,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 //Imports Angular Material
 
 //Charts
-//import { ChartsModule } from 'ng2-charts';
+import { ChartsModule } from 'ng2-charts';
 //Charts
 
 //Pipe Personalizado
@@ -59,6 +59,7 @@ import { AreaComponent } from './AreasComponents/area/area.component';
 import { NuevaAreaComponent } from './AreasComponents/nueva-area/nueva-area.component';
 import { PartidaComponent } from './PartidasComponents/partida/partida.component';
 import { ReportesmaterialcontratoComponent } from './ReportesMaterialComponents/reportesmaterialcontrato/reportesmaterialcontrato.component';
+import { LoginComponent } from './login/login.component';
 //Componentes de la app
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { ReportesmaterialcontratoComponent } from './ReportesMaterialComponents/
     FolioPipe,
     PosPipe,
     PartidaComponent,
-    ReportesmaterialcontratoComponent
+    ReportesmaterialcontratoComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -107,8 +109,8 @@ import { ReportesmaterialcontratoComponent } from './ReportesMaterialComponents/
     NgxMatSelectSearchModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
-    //ChartsModule
+    MatSortModule,
+    ChartsModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es-MX' },

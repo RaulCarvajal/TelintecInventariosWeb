@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ChartOptions, ChartType } from 'chart.js';
+import { Label, MultiDataSet } from 'ng2-charts';
 import { CatalogosService } from 'src/app/HttpServices/catalogos.service';
 import { ContratoplantaService } from 'src/app/HttpServices/contratoplanta.service';
 import { ContratosService } from 'src/app/HttpServices/contratos.service';
@@ -18,6 +20,7 @@ export class ContratoComponent implements OnInit {
   contrato!:contrato;
   plantas:string = "";
   divisa:divisa | undefined;
+  avgs:string[]=[];
 
   constructor(
     private ar:ActivatedRoute,
@@ -38,6 +41,7 @@ export class ContratoComponent implements OnInit {
       res => {
         this.contrato = res;
         this.getDivisa(this.contrato.fk_id_divisa)
+        this.ChartData = [[(this.contrato.monto_total-this.contrato.monto_actual), this.contrato.monto_actual]]
         this.cargando = false;
       },
       err => console.log(err)
@@ -65,4 +69,12 @@ export class ContratoComponent implements OnInit {
       err => console.log(err)
     );
   }
+
+    //Charts 
+    public lbls: Label[] = ['Gastado', 'Restante'];
+    public ChartData: MultiDataSet = [
+      [100, 100]
+    ];
+    public dona: ChartType = 'doughnut';
+    public opts: ChartOptions = { defaultColor : ['rgba(255,0,0,.8)','rgba(0,0,255,.8)']}
 }
