@@ -1,0 +1,38 @@
+<mat-card class="mat-elevation-z8">
+    <mat-card-header>
+        <mat-card-title>Usuarios</mat-card-title>
+        <mat-card-subtitle>Todos los usuarios registros</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content >
+    </mat-card-content>
+    <mat-card-actions class="text-end">
+        <button mat-button [routerLink]="['nuevo']" color="primary"><mat-icon>add</mat-icon> Nuevo usuario</button>
+    </mat-card-actions>
+</mat-card>
+
+<mat-card class="mat-elevation-z8 mt-3">
+    <mat-card-content>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombres</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Estatus</th>
+                    <th scope="col">Rol</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario of usuarios; let i = index" [routerLink]="['/usuario/'+usuario.id_usuario]">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{usuario.nombre}}</td>
+                    <td>{{usuario.apellidos}}</td>
+                    <td>{{usuario.email}}</td>
+                    <td>{{usuario.estatus?'Activo':'Bloqueado'}}</td>
+                    <td>{{getRole(usuario.rol)}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-card-content>
+</mat-card>

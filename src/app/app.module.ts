@@ -30,6 +30,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import {MatMenuModule} from '@angular/material/menu';
 //Imports Angular Material
 
 //Charts
@@ -60,6 +61,9 @@ import { NuevaAreaComponent } from './AreasComponents/nueva-area/nueva-area.comp
 import { PartidaComponent } from './PartidasComponents/partida/partida.component';
 import { ReportesmaterialcontratoComponent } from './ReportesMaterialComponents/reportesmaterialcontrato/reportesmaterialcontrato.component';
 import { LoginComponent } from './login/login.component';
+import { UsuariosComponent } from './UsuariosComponent/usuarios/usuarios.component';
+import { NuevoUsuarioComponent } from './UsuariosComponent/nuevo-usuario/nuevo-usuario.component';
+import { UsuarioComponent } from './UsuariosComponent/usuario/usuario.component';
 //Componentes de la app
 @NgModule({
   declarations: [
@@ -83,7 +87,10 @@ import { LoginComponent } from './login/login.component';
     PosPipe,
     PartidaComponent,
     ReportesmaterialcontratoComponent,
-    LoginComponent
+    LoginComponent,
+    UsuariosComponent,
+    NuevoUsuarioComponent,
+    UsuarioComponent
   ],
   imports: [
     BrowserModule,
@@ -110,7 +117,8 @@ import { LoginComponent } from './login/login.component';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    ChartsModule
+    ChartsModule,
+    MatMenuModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es-MX' },

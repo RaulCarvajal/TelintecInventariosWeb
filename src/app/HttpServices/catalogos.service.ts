@@ -40,4 +40,12 @@ export class CatalogosService {
     unidad(id:number){
       return this.http.get<um>(`${api.url}ums/${id}`);
     }
+
+    //Puestos
+    puestos(){
+      return this.http.get<any>(`${api.url}puestos`)
+    }
+    puesto(id:number){
+      return this.http.get<any>(`${api.url}puestos/${id}`)
+    }
 }

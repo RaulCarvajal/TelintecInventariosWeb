@@ -1,4 +1,4 @@
 export const api = {
-    url : "https://localhost:44379/api/",
+    url : "http://localhost:44379/api/",
     port : 44379
 }

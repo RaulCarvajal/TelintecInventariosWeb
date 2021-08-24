@@ -28,7 +28,6 @@ export class InventariokpiComponent implements OnInit {
     this.cs.getContratos().subscribe(
       res => {
         this.contratos = res;
-        console.log(res)
         this.activos = this.contratos.filter( o => o.estatus == true).length;
         this.vencidos = this.contratos.length - this.activos;
         this.cargando = false;

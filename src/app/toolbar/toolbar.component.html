@@ -1,23 +1,35 @@
 <mat-toolbar class="mat-elevation-z8" color="primary">
-    <button mat-icon-button [routerLink]="['/']" class="example-icon" aria-label="Example icon-button with menu icon">
+    <button [disabled]="isntloged" mat-icon-button [routerLink]="['/']" class="example-icon" aria-label="Example icon-button with menu icon">
         <mat-icon>home</mat-icon>
     </button>
     <span>{{title}}</span>
     <span class="toolbar-spacer"></span>
-    <a role="button" [routerLink]="['contratos']" mat-icon-button matTooltip="Contratos">
+    <button [disabled]="isntloged"  *ngIf="admin" [routerLink]="['contratos']" mat-icon-button matTooltip="Contratos">
         <mat-icon>folder</mat-icon>
-    </a>
-    <a role="button" [routerLink]="['reportes']" mat-icon-button matTooltip="Reportes de Material">
+    </button>
+    <button [disabled]="isntloged"  *ngIf="admin" [routerLink]="['reportes']" mat-icon-button matTooltip="Reportes de Material">
         <mat-icon>assignment</mat-icon>
-    </a>
-    <a role="button" [routerLink]="['inventarios']" mat-icon-button matTooltip="Inventarios">
+    </button>
+    <button [disabled]="isntloged"  *ngIf="admin || jefe" [routerLink]="['inventarios']" mat-icon-button matTooltip="Inventarios">
         <mat-icon>inventory</mat-icon>
-    </a>
-    <a role="button" href="" mat-icon-button matTooltip="Catálogos">
+    </button>
+    <button [disabled]="isntloged"  *ngIf="admin" href="" mat-icon-button matTooltip="Catálogos">
         <mat-icon>auto_stories</mat-icon>
-    </a>
-    <a role="button" [routerLink]="['micuenta']" mat-icon-button matTooltip="Mi cuenta">
+    </button>
+    <button [disabled]="isntloged"  *ngIf="admin" [routerLink]="['usuarios']" mat-icon-button matTooltip="Usuarios">
+        <mat-icon>people</mat-icon>
+    </button>
+    <button [disabled]="isntloged"  *ngIf="admin || jefe || lider" [matMenuTriggerFor]="micuentaMenu" mat-icon-button matTooltip="Mi cuenta">
         <mat-icon>person</mat-icon>
-    </a>
-    
+    </button>
+    <mat-menu #micuentaMenu="matMenu">
+        <button mat-menu-item [routerLink]="['micuenta']" #tooltip="matTooltip" matTooltip="Mi cuenta" matTooltipHideDelay="500">
+            <mat-icon>person</mat-icon>
+            <span>Mi cuenta</span>
+        </button>
+        <button mat-menu-item (click)="closeSession()" #tooltip="matTooltip" matTooltip="Cerrar sesión" matTooltipHideDelay="500">
+            <mat-icon>logout</mat-icon>
+            <span>Cerrar sesión</span>
+        </button>
+    </mat-menu>
 </mat-toolbar>

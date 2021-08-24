@@ -1,0 +1,65 @@
+<mat-card class="mat-elevation-z8" *ngIf="usuario && !self">
+    <mat-card-header>
+        <mat-card-title>{{usuario.nombre}} {{usuario.apellidos}}</mat-card-title>
+        <mat-card-subtitle>Registrado el {{usuario.fecha_registro | date}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-list>
+            <div mat-subheader>Información</div>
+            <mat-list-item>
+                <mat-icon mat-list-icon>face</mat-icon>
+                <div mat-line>Nombre/s</div>
+                <div mat-line>{{usuario.nombre}} </div>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-icon mat-list-icon>person</mat-icon>
+                <div mat-line>Apellido/s</div>
+                <div mat-line>{{usuario.apellidos}} </div>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-icon mat-list-icon>alternate_email</mat-icon>
+                <div mat-line>Email</div>
+                <div mat-line>{{usuario.email}} </div>
+            </mat-list-item>
+            <mat-list-item *ngIf="puesto">
+                <mat-icon mat-list-icon>badge</mat-icon>
+                <div mat-line>Puesto</div>
+                <div mat-line>{{puesto}} </div>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-icon mat-list-icon>manage_accounts</mat-icon>
+                <div mat-line>Rol</div>
+                <div mat-line>{{getRole(usuario.rol)}} </div>
+            </mat-list-item>
+            <mat-list-item *ngIf="vp">
+                <mat-icon mat-list-icon>password</mat-icon>
+                <div mat-line>Contraseña</div>
+                <div mat-line>{{usuario.contrasena}} </div>
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+    <mat-card-actions class="text-end">
+        <button mat-button color="warn" (click)="update()"><mat-icon>power_settings_new</mat-icon> {{usuario.estatus?'Desactivar':'Activar'}}</button>
+        <button mat-button color="warn" matTooltip="Sera monitoreada toda acción realizada." (click)="vpToggle()"><mat-icon>{{vp?'visibility_off':'visibility'}}</mat-icon> {{vp?'Ocultar':'Ver'}} contraseña</button>
+    </mat-card-actions>
+</mat-card>
+
+<mat-card class="mat-elevation-z8" *ngIf="self">
+    <mat-card-content>
+        <div class="row">
+            <div class="col text-center">
+                <p class="lead">
+                    Este es tu usuario
+                </p>
+                <br>
+                <small>
+                    Si deseas modificar tu información, dirigete a la seccion de mi cuenta ubicado en la barra de herramientas.
+                </small>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="!usuario">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</mat-card>

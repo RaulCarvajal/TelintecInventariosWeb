@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UsuarioService } from '../HttpServices/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -16,11 +17,13 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb:FormBuilder,
-    private rt:Router
+    private rt:Router,
+    private us:UsuarioService
   ) { }
 
   ngOnInit(): void {
     this.initForm();
+    this.redirect();
   }
 
   initForm(){
@@ -34,8 +37,28 @@ export class LoginComponent implements OnInit {
     this.trying = true;
     this.failed = false;
     let trying = this.logForm.value;
-    trying.date = new Date().toISOString();
-    setTimeout(() => {
+
+    this.us.login(trying).subscribe(
+      res => {
+        this.trying = false;
+        if(res.email){
+          this.rt.navigateByUrl('/');
+          this.us.saveSession(res);
+          window.location.reload();
+        }else{
+          this.trying = false;
+          this.failed = true;
+          this.try++;
+        }
+      },
+      err => {
+        this.trying = false;
+        this.failed = true;
+        this.try++;
+      }
+    );
+
+    /*setTimeout(() => {
       if(this.logForm.value.usr==='raul.crvjl@gmail.com' && this.logForm.value.pwd==='admin'){
         this.trying = false;
         this.rt.navigateByUrl('/');
@@ -44,7 +67,12 @@ export class LoginComponent implements OnInit {
         this.failed = true;
         this.try++;
       }
-    }, 3000);
+    }, 3000);*/
   }
 
+  redirect(){
+    if(this.us.loged()){
+      this.rt.navigateByUrl('/')
+    }
+  }
 }

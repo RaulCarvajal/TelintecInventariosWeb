@@ -17,6 +17,10 @@ import { AreasContratoComponent } from './AreasComponents/areas-contrato/areas-c
 import { AreaComponent } from './AreasComponents/area/area.component';
 import { NuevaAreaComponent } from './AreasComponents/nueva-area/nueva-area.component';
 import { LoginComponent } from "./login/login.component";
+import { UsuariosComponent } from './UsuariosComponent/usuarios/usuarios.component';
+import { NuevoUsuarioComponent } from './UsuariosComponent/nuevo-usuario/nuevo-usuario.component';
+import { UsuarioComponent } from './UsuariosComponent/usuario/usuario.component';
+
 const routes: Routes = [
   {path : "", component : InventariokpiComponent},
   {path : "login", component : LoginComponent},
@@ -35,7 +39,10 @@ const routes: Routes = [
   {path : "inventario/partidas/agregar", component : AgregarPartidaComponent},
   {path : "reportes", component : ReportesmaterialComponent},
   {path : "reportes/nuevo", component : NuevoReportematerialComponent},
-  {path : "micuenta", component : MicuentaComponent}
+  {path : "micuenta", component : MicuentaComponent},
+  {path : "usuarios", component : UsuariosComponent},
+  {path : "usuarios/nuevo", component : NuevoUsuarioComponent},
+  {path : "usuario/:id", component : UsuarioComponent}
 ];
 
 @NgModule({

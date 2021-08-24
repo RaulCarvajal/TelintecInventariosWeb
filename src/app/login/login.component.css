@@ -1,0 +1,9 @@
+.mtc{
+    margin-top: 15%;
+}
+
+.bg-ble{
+    background-color: rgba(0, 0, 255, 0.15);
+    border-radius: 5px;
+    box-shadow: 0 0 5px 10px rgba(0, 0, 255, 0.1);
+}
