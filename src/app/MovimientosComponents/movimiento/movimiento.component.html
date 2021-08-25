@@ -1,0 +1,32 @@
+<h1 mat-dialog-title><strong>Movimiento {{data.id_movimeinto}}</strong></h1>
+<p [ngClass]="{'text-danger': data.cantidad<0,'text-success': data.cantidad>0}">
+   <strong>{{data.cantidad>0?'Entrada':'Salida'}}</strong> 
+</p>
+<div mat-dialog-content>
+    <ul>
+        <li *ngIf="nombre">
+            <p><strong>Usuario que realizo el movimiento:</strong> {{nombre}}</p>
+        </li>
+        <li>
+            <p><strong>Cantidad:</strong> {{data.cantidad}}</p>
+        </li>
+        <li>
+            <p><strong>Fecha movimiento:</strong> {{data.fecha | date : 'medium'}}</p>
+        </li>
+        <li *ngIf="comentario">
+            <p><strong>Comentario:</strong> {{comentario}}</p>
+        </li>
+        <li *ngIf="data.nombre_contrato">
+            <p><strong>Contrato:</strong> {{data.nombre_contrato?data.nombre_contrato:'No aplica'}}</p>
+        </li>
+        <li *ngIf="data.folio_reporte">
+            <p><strong>Folio: </strong> 
+                <span *ngIf="!data.folio_reporte">No aplica</span>
+                <a *ngIf="data.folio_reporte" [routerLink]="['/contrato/reportematerial/'+data.fk_id_reporte]">{{data.folio_reporte | folio}}</a>
+            </p>
+        </li>
+        <li *ngIf="data.numero_pedido">
+            <p><strong>Pedido:</strong> {{data.numero_pedido?data.numero_pedido:'No aplica'}}</p>
+        </li>
+    </ul>
+</div>

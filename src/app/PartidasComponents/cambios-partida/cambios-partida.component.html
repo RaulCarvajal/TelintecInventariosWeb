@@ -1,0 +1,58 @@
+<mat-card class="mat-elevation-z8" *ngIf="partida">
+    <mat-card-header>
+        <mat-card-title>Realizar cambios en la partida {{partida.descripcion}}</mat-card-title>
+        <mat-card-subtitle>
+            Atualmente en inventario se cuentan con <strong>{{partida.cantidad}} <span *ngIf="unidad">{{unidad.nombre=='Desconocido'?'':unidad.nombre}}</span></strong> de esta partida.
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-divider></mat-divider>
+        <br>
+        <form [formGroup]="formMov" (ngSubmit)="trySave()">
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="w-100">
+                        <mat-label>Cantidad</mat-label>
+                        <input type="number" matInput placeholder="Cantidad de las unidades que entraron o salieron de inventario" formControlName="cantidad" required>
+                        <mat-error *ngIf="formMov.get('cantidad')!.hasError('required')">Campo requerido</mat-error>
+                        <mat-error *ngIf="formMov.get('cantidad')!.hasError('required')">Inválido</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col text-center">
+                    <mat-button-toggle-group formControlName="io">
+                        <mat-button-toggle value="1">Entrada de material</mat-button-toggle>
+                        <mat-button-toggle value="-1">Salida de material</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="w-100">
+                        <mat-label>Comentario</mat-label>
+                        <textarea matInput placeholder="Describa por que entraron o salieron de inventario la cantidad antes mencionada" formControlName="comentario" required></textarea>
+                        <mat-error *ngIf="formMov.get('comentario')!.hasError('required')">Campo requerido</mat-error>
+                        <mat-error *ngIf="formMov.get('comentario')!.hasError('maxlength')">Máximo 300 caracteres</mat-error>
+                        <mat-error *ngIf="formMov.get('comentario')!.hasError('pattern')">Campo inválido</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row" *ngIf="!saving">
+                <div class="col">
+                    <button type="submit" mat-button color="primary" class="w-100" [disabled]="formMov.invalid"><mat-icon>save</mat-icon> Guardar</button>
+                </div>
+            </div>
+            <div class="row" *ngIf="saving">
+                <div class="col">
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                </div>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>
+<mat-card class="mat-elevation-z8" *ngIf="!partida">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</mat-card>

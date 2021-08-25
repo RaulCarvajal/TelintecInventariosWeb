@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-inventarios',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InventariosComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private ts:Title
+  ) { }
 
   ngOnInit(): void {
+    this.ts.setTitle('SGAT - Inventarios')
   }
 }

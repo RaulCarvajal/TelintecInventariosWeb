@@ -20,9 +20,18 @@ import { LoginComponent } from "./login/login.component";
 import { UsuariosComponent } from './UsuariosComponent/usuarios/usuarios.component';
 import { NuevoUsuarioComponent } from './UsuariosComponent/nuevo-usuario/nuevo-usuario.component';
 import { UsuarioComponent } from './UsuariosComponent/usuario/usuario.component';
+import { CambiosPartidaComponent } from './PartidasComponents/cambios-partida/cambios-partida.component';
+import { EppComponent } from './EppComponents/epp/epp.component';
+import { EppDetalleComponent } from './EppComponents/epp-detalle/epp-detalle.component';
+import { EppAgregarComponent } from './EppComponents/epp-agregar/epp-agregar.component';
+import { EppSolicitudesComponent } from './EppComponents/epp-solicitudes/epp-solicitudes.component';
+import { EppSolicitudComponent } from './EppComponents/epp-solicitud/epp-solicitud.component';
+import { MovimientoComponent } from "./MovimientosComponents/movimiento/movimiento.component";
+import { NoautorizadoComponent } from './ErrorPagesComponents/noautorizado/noautorizado.component';
 
 const routes: Routes = [
   {path : "", component : InventariokpiComponent},
+  {path : "error403", component : NoautorizadoComponent},
   {path : "login", component : LoginComponent},
   {path : "contratos", component : ContratosComponent},
   {path : "contratos/nuevo", component : NuevoContratoComponent},
@@ -36,9 +45,16 @@ const routes: Routes = [
   {path : "inventarios", component : InventariosComponent},
   {path : "inventario/partidas", component : PartidasComponent},
   {path : "inventario/partida/:id", component : PartidaComponent},
+  {path : "inventario/partida/:id/cambios", component : CambiosPartidaComponent},
+  {path : "inventario/partida/moviento/:id", component : MovimientoComponent},
   {path : "inventario/partidas/agregar", component : AgregarPartidaComponent},
   {path : "reportes", component : ReportesmaterialComponent},
   {path : "reportes/nuevo", component : NuevoReportematerialComponent},
+  {path : "inventario/epp", component : EppComponent},
+  {path : "inventario/epp/:id", component : EppDetalleComponent},
+  {path : "inventario/epp/nuevo", component : EppAgregarComponent},
+  {path : "inventario/epp/solicitudes", component : EppSolicitudesComponent},
+  {path : "inventario/epp/solicitud/:id", component : EppSolicitudComponent},
   {path : "micuenta", component : MicuentaComponent},
   {path : "usuarios", component : UsuariosComponent},
   {path : "usuarios/nuevo", component : NuevoUsuarioComponent},

@@ -10,6 +10,9 @@
     <button [disabled]="isntloged"  *ngIf="admin" [routerLink]="['reportes']" mat-icon-button matTooltip="Reportes de Material">
         <mat-icon>assignment</mat-icon>
     </button>
+    <button [disabled]="isntloged"  *ngIf="admin || jefe" [routerLink]="['']" mat-icon-button matTooltip="Solicitudes">
+        <mat-icon>fact_check</mat-icon>
+    </button>
     <button [disabled]="isntloged"  *ngIf="admin || jefe" [routerLink]="['inventarios']" mat-icon-button matTooltip="Inventarios">
         <mat-icon>inventory</mat-icon>
     </button>

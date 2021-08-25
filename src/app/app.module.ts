@@ -31,6 +31,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatDialogModule} from '@angular/material/dialog';
 //Imports Angular Material
 
 //Charts
@@ -64,6 +66,16 @@ import { LoginComponent } from './login/login.component';
 import { UsuariosComponent } from './UsuariosComponent/usuarios/usuarios.component';
 import { NuevoUsuarioComponent } from './UsuariosComponent/nuevo-usuario/nuevo-usuario.component';
 import { UsuarioComponent } from './UsuariosComponent/usuario/usuario.component';
+import { CambiosPartidaComponent } from './PartidasComponents/cambios-partida/cambios-partida.component';
+import { EppComponent } from './EppComponents/epp/epp.component';
+import { EppDetalleComponent } from './EppComponents/epp-detalle/epp-detalle.component';
+import { EppAgregarComponent } from './EppComponents/epp-agregar/epp-agregar.component';
+import { EppSolicitudesComponent } from './EppComponents/epp-solicitudes/epp-solicitudes.component';
+import { EppSolicitudComponent } from './EppComponents/epp-solicitud/epp-solicitud.component';
+import { MovimientoComponent } from './MovimientosComponents/movimiento/movimiento.component';
+import { NoautorizadoComponent } from './ErrorPagesComponents/noautorizado/noautorizado.component';
+import { SolicitudesmaterialComponent } from './SolicitudesMaterialComponents/solicitudesmaterial/solicitudesmaterial.component';
+import { SolicitudmaterialComponent } from './SolicitudesMaterialComponents/solicitudmaterial/solicitudmaterial.component';
 //Componentes de la app
 @NgModule({
   declarations: [
@@ -90,7 +102,17 @@ import { UsuarioComponent } from './UsuariosComponent/usuario/usuario.component'
     LoginComponent,
     UsuariosComponent,
     NuevoUsuarioComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    CambiosPartidaComponent,
+    EppComponent,
+    EppDetalleComponent,
+    EppAgregarComponent,
+    EppSolicitudesComponent,
+    EppSolicitudComponent,
+    MovimientoComponent,
+    NoautorizadoComponent,
+    SolicitudesmaterialComponent,
+    SolicitudmaterialComponent
   ],
   imports: [
     BrowserModule,
@@ -118,7 +140,9 @@ import { UsuarioComponent } from './UsuariosComponent/usuario/usuario.component'
     MatPaginatorModule,
     MatSortModule,
     ChartsModule,
-    MatMenuModule
+    MatMenuModule,
+    MatButtonToggleModule,
+    MatDialogModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es-MX' },

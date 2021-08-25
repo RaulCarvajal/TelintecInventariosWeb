@@ -9,7 +9,7 @@ import { UsuarioService } from '../HttpServices/usuario.service';
 })
 export class ToolbarComponent implements OnInit {
 
-  title = 'Sistema para gestión de activos';
+  title = 'Sistema de gestión de activos Telintec';
   isntloged:boolean = false;
 
   admin:boolean= false;

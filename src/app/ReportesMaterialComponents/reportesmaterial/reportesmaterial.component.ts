@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 //import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 //import { Label } from 'ng2-charts';
@@ -17,12 +18,14 @@ export class ReportesmaterialComponent implements OnInit {
 
   constructor(
     private rt:Router,
-    private rs:ReportesService
+    private rs:ReportesService,
+    private ts:Title
   ){
 
   }
 
   ngOnInit(): void {
+    this.ts.setTitle('SGAT - Reportes')
     this.getReportes();
   }
 

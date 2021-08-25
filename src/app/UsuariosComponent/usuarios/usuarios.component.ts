@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { RolesService } from 'src/app/HttpServices/roles.service';
 import { UsuariosService } from '../../HttpServices/usuarios.service';
 import { usuario } from '../../Interfaces/usuario.interface';
@@ -14,10 +15,12 @@ export class UsuariosComponent implements OnInit {
 
   constructor(
     private us:UsuariosService,
-    private rs:RolesService
+    private rs:RolesService,
+    private ts:Title
   ) { }
 
   ngOnInit(): void {
+    this.ts.setTitle('SGAT - Usuarios')
     this.get();
   }
 

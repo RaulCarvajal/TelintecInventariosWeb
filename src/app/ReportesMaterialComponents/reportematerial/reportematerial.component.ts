@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { PartidasService } from 'src/app/HttpServices/partidas.service';
 import { ReportesService } from 'src/app/HttpServices/reportes.service';
+import { UsuarioService } from 'src/app/HttpServices/usuario.service';
 import { partida_reporte } from 'src/app/Interfaces/partida.interface';
 import { reporte_text } from 'src/app/Interfaces/reportematerial.interface';
 
@@ -17,12 +19,15 @@ export class ReportematerialComponent implements OnInit {
   constructor(
     private ar : ActivatedRoute,
     private rs: ReportesService,
-    private ps: PartidasService
+    private ps: PartidasService,
+    private us:UsuarioService
   ) { 
     this.idr = +this.ar.snapshot.paramMap.get('id')!;
   }
 
   ngOnInit(): void {
+    
+    this.itsAdmin();
     this.getReporte(this.idr)
   }
 
@@ -39,6 +44,10 @@ export class ReportematerialComponent implements OnInit {
     this.ps.getPartidasPorIdReporte(id_reporte).subscribe(
       res => this.partidas = res
     );
+  }
+
+  itsAdmin(){
+    this.us.itsAdmin();
   }
 
 }

@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { CatalogosService } from 'src/app/HttpServices/catalogos.service';
 import { MovimientosService } from 'src/app/HttpServices/movimientos.service';
 import { PartidasService } from 'src/app/HttpServices/partidas.service';
+import { UsuarioService } from 'src/app/HttpServices/usuario.service';
 import { marca, proveedor, um } from 'src/app/Interfaces/catalogos.interface';
 import { movimiento_partida } from 'src/app/Interfaces/movimientos.interface';
 import { partida } from 'src/app/Interfaces/partida.interface';
-
+import { MovimientoComponent } from "../../MovimientosComponents/movimiento/movimiento.component";
 @Component({
   selector: 'app-partida',
   templateUrl: './partida.component.html',
@@ -18,6 +20,7 @@ export class PartidaComponent implements OnInit {
   id:number|undefined;
   partida!:partida;
   ldng:boolean = true;
+  admin:boolean = false;
 
   marca:marca|undefined;
   proveedor:proveedor|undefined;
@@ -29,13 +32,16 @@ export class PartidaComponent implements OnInit {
     private ar:ActivatedRoute,
     private ps:PartidasService,
     private cs:CatalogosService,
-    private ms:MovimientosService
+    private ms:MovimientosService,
+    public dialog: MatDialog,
+    public us:UsuarioService
   ) { 
     this.id = +this.ar.snapshot.paramMap.get("id")!;
   }
 
   ngOnInit(): void {
     this.getPartida(this.id!);
+    this.getRole();
   }
 
   getPartida(id:number){
@@ -74,6 +80,17 @@ export class PartidaComponent implements OnInit {
     this.ms.getMovimientosPorPartida(id).subscribe(
       res => this.movimientos = res
     );
+  }
+
+  openDialog(id:number): void {
+    const dialogRef = this.dialog.open(MovimientoComponent, {
+      width: '75%',
+      data: this.movimientos[id]
+    });
+  }
+
+  getRole(){
+    this.admin = this.us.getUsuario().rol==1?true:false;
   }
 
 }

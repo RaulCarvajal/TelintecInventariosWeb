@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ChartType } from 'chart.js';
 import { Label, MultiDataSet } from 'ng2-charts';
 import { ContratosService } from '../HttpServices/contratos.service';
@@ -18,10 +19,12 @@ export class InventariokpiComponent implements OnInit {
   vencidos:number = 0;
 
   constructor(
-    private cs:ContratosService
+    private cs:ContratosService,
+    private ts:Title
   ) { }
 
   ngOnInit(): void {
+    this.ts.setTitle('SGAT - Home')
     this.getContratos();
   }
   getContratos(){

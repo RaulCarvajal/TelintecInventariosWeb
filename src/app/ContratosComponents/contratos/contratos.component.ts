@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ContratosService } from 'src/app/HttpServices/contratos.service';
 import { contrato } from 'src/app/Interfaces/contratos.interface';
 
@@ -16,10 +17,12 @@ export class ContratosComponent implements OnInit {
   vencidos:number = 0;
 
   constructor(
-    private cs:ContratosService
+    private cs:ContratosService,
+    private ts:Title
   ) { }
 
   ngOnInit(): void {
+    this.ts.setTitle('SGAT - Contratos')
     this.getContratos();
   }
 
