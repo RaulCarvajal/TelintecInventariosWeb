@@ -11,9 +11,9 @@ export class RolesService {
     if(role == 1){
       return 'Administrador'
     }else if(role == 2){
-      return 'Jefe/Supervisor'
+      return 'Jefe/Supervisor/Almacenista'
     }else{
-      return 'Lider'
+      return 'Lider/Solicitante de material'
     }
   }
 }

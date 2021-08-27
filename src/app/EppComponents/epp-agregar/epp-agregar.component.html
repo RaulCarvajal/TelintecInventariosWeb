@@ -1,1 +1,87 @@
-<p>epp-agregar works!</p>
+<mat-card class="mat-elevation-z8">
+    <mat-card-header>
+        <mat-card-title>Agregar</mat-card-title>
+        <mat-card-subtitle>Nueva solicitud de EPP</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="container">
+        <form [formGroup]="formAdd" (ngSubmit)="trySave()">
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="w-100">
+                        <mat-label>EPP Asignado a</mat-label>
+                        <input matInput placeholder="Nombre de la persona de epp" formControlName="asignado" type="text" required>
+                        <mat-error *ngIf="formAdd.get('asignado')!.hasError('required')">Campo requerido</mat-error>
+                        <mat-error *ngIf="formAdd.get('asignado')!.hasError('maxlength')">Máximo 120 letras</mat-error>
+                        <mat-error *ngIf="formAdd.get('asignado')!.hasError('pattern')">Campo inválido</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="w-100">
+                        <mat-label>Lugar de trabajo</mat-label>
+                        <input matInput placeholder="Describa el lugar donde desempeña el trabajo" formControlName="ubicacion" type="text" required>
+                        <mat-error *ngIf="formAdd.get('ubicacion')!.hasError('required')">Campo requerido</mat-error>
+                        <mat-error *ngIf="formAdd.get('ubicacion')!.hasError('maxlength')">Máximo 200 letras</mat-error>
+                        <mat-error *ngIf="formAdd.get('ubicacion')!.hasError('pattern')">Campo inválido</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="w-100">
+                        <mat-label>Comentario</mat-label>
+                        <textarea matInput placeholder="Información que desea agregar" formControlName="comentarios"></textarea>
+                        <mat-error *ngIf="formAdd.get('comentarios')!.hasError('maxlength')">Máximo 300 letras</mat-error>
+                        <mat-error *ngIf="formAdd.get('comentarios')!.hasError('pattern')">Campo inválido</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p class="mt-2">EPP</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="w-100">
+                        <mat-select formControlName="epp_seleccionado" placeholder="Busqueda de EPP"  (selectionChange)="addEpp()" #singleSelect>
+                            <mat-option>
+                            <ngx-mat-select-search [formControl]="eppFiltro"></ngx-mat-select-search>
+                            </mat-option>
+                            <mat-option *ngFor="let epp of eppsFiltradas | async" [value]="epp.id_epp">
+                                {{epp.nombre}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div formArrayName="epp">
+                <div class="row" *ngFor="let item of eppForm.controls; let pind = index" [formGroupName]="pind">
+                    <div class="col-10">
+                        <mat-form-field class="w-100">
+                            <mat-label>Nombre EPP</mat-label>
+                            <input matInput placeholder="" formControlName="nombre">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-2">
+                        <mat-form-field class="w-100">
+                            <mat-label>Cantidad</mat-label>
+                            <input matInput placeholder="" formControlName="cantidad" type="number">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="!saving">
+                <div class="col">
+                    <button class="w-100" mat-button color="primary" [disabled]="formAdd.invalid"><mat-icon>save</mat-icon> Guardar</button>
+                </div>
+            </div>
+            <div class="row" *ngIf="saving">
+                <div class="col">
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                </div>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

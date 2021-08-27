@@ -33,6 +33,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatBadgeModule} from '@angular/material/badge';
 //Imports Angular Material
 
 //Charts
@@ -142,7 +143,8 @@ import { SolicitudmaterialComponent } from './SolicitudesMaterialComponents/soli
     ChartsModule,
     MatMenuModule,
     MatButtonToggleModule,
-    MatDialogModule
+    MatDialogModule,
+    MatBadgeModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es-MX' },

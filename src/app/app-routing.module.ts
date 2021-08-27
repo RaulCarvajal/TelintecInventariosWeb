@@ -28,6 +28,8 @@ import { EppSolicitudesComponent } from './EppComponents/epp-solicitudes/epp-sol
 import { EppSolicitudComponent } from './EppComponents/epp-solicitud/epp-solicitud.component';
 import { MovimientoComponent } from "./MovimientosComponents/movimiento/movimiento.component";
 import { NoautorizadoComponent } from './ErrorPagesComponents/noautorizado/noautorizado.component';
+import { SolicitudesmaterialComponent } from './SolicitudesMaterialComponents/solicitudesmaterial/solicitudesmaterial.component';
+import { SolicitudmaterialComponent } from './SolicitudesMaterialComponents/solicitudmaterial/solicitudmaterial.component';
 
 const routes: Routes = [
   {path : "", component : InventariokpiComponent},
@@ -51,14 +53,16 @@ const routes: Routes = [
   {path : "reportes", component : ReportesmaterialComponent},
   {path : "reportes/nuevo", component : NuevoReportematerialComponent},
   {path : "inventario/epp", component : EppComponent},
-  {path : "inventario/epp/:id", component : EppDetalleComponent},
-  {path : "inventario/epp/nuevo", component : EppAgregarComponent},
   {path : "inventario/epp/solicitudes", component : EppSolicitudesComponent},
+  {path : "inventario/epp/nuevo", component : EppAgregarComponent},
+  {path : "inventario/epp/:id", component : EppDetalleComponent},
   {path : "inventario/epp/solicitud/:id", component : EppSolicitudComponent},
   {path : "micuenta", component : MicuentaComponent},
   {path : "usuarios", component : UsuariosComponent},
   {path : "usuarios/nuevo", component : NuevoUsuarioComponent},
-  {path : "usuario/:id", component : UsuarioComponent}
+  {path : "usuario/:id", component : UsuarioComponent},
+  {path : "material/solicitudes", component : SolicitudesmaterialComponent},
+  {path : "material/solicitud/:id", component : SolicitudmaterialComponent}
 ];
 
 @NgModule({

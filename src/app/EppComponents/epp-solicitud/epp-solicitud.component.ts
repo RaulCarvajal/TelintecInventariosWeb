@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { EppService } from 'src/app/HttpServices/epp.service';
+import { eppsol, epp_sol } from 'src/app/Interfaces/epp.interface';
 
 @Component({
   selector: 'app-epp-solicitud',
@@ -7,9 +10,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EppSolicitudComponent implements OnInit {
 
-  constructor() { }
+  id:any;
+  solicitud: epp_sol | undefined;
+  eppsol:eppsol[] | undefined;
+  hoy:string = "";
 
-  ngOnInit(): void {
+  constructor(
+    private eps:EppService,
+    private ar:ActivatedRoute
+  ) { 
+    this.id = +this.ar.snapshot.paramMap.get("id")!;
   }
 
+  ngOnInit(): void {
+    this.hoy = new Date().toISOString();
+    this.getSolicitud(this.id);
+    this.getEppAsignado(this.id);
+  }
+
+  getSolicitud(id:number){
+    this.eps.getEppSolicitudAdmin(id).subscribe(
+      res => this.solicitud = res
+    )
+  }
+  getEppAsignado(id:number){
+    this.eps.getEppAsignado(id).subscribe(
+      res => this.eppsol = res
+    )
+  }
 }

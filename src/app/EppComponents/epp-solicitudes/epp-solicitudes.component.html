@@ -1,1 +1,35 @@
-<p>epp-solicitudes works!</p>
+<mat-card class="mat-elevation-z8">
+    <mat-card-header>
+        <mat-card-title>Solicitudes de EPP</mat-card-title>
+        <mat-card-subtitle>
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="text-end">
+            <button mat-button color="primary" [routerLink]="['/inventario/epp/nuevo']"><mat-icon>add</mat-icon> Nueva</button>
+        </div>
+        <mat-divider></mat-divider>
+        <div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Solicitante</th>
+                        <th scope="col">Asignado</th>
+                        <th scope="col">Fecha Solicitud</th>
+                        <th scope="col">Estatus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let sol of solicitudes;let i = index" [routerLink]="['/inventario/epp/solicitud/'+sol.id_solicitudes]">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{sol.solicitante}}</td>
+                        <td>{{sol.asignado}}</td>
+                        <td>{{sol.fecha_solicitud | date}}</td>
+                        <td>{{sol.atendido?'Atendido':'Pendiente'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </mat-card-content>
+</mat-card>

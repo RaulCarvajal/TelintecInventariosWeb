@@ -21,7 +21,10 @@ footer {
     color: white;
 }
 
-
+.mat-toolbar.mat-primary {
+    background:rgba(0,0,255,0.25);
+    color: #fff;
+}
 
 
 /*html, body { height: 100%; }*/

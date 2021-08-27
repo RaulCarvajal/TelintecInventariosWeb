@@ -1,1 +1,46 @@
-<p>solicitudesmaterial works!</p>
+<mat-card class="mat-elevation-z8" *ngIf="!solicitante">
+    <mat-card-header>
+        <mat-card-title>Solicitudes de material</mat-card-title>
+        <mat-card-subtitle>
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="text-end">
+            <button mat-button color="primary" ><mat-icon>add</mat-icon> Nueva</button>
+        </div>
+        <mat-divider></mat-divider>
+        <div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Solicitante</th>
+                        <th scope="col">Contrato</th>
+                        <th scope="col">Pedido</th>
+                        <th scope="col">Fecha Solicitud</th>
+                        <th scope="col">Estatus</th>
+                        <th scope="col">Visto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row"></th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="mat-elevation-z8" *ngIf="solicitante">
+    <mat-card-header>
+        <mat-card-title>Mis solicitudes</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+</mat-card>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { EppService } from 'src/app/HttpServices/epp.service';
+import { epp_sol } from 'src/app/Interfaces/epp.interface';
 
 @Component({
   selector: 'app-epp-solicitudes',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EppSolicitudesComponent implements OnInit {
 
-  constructor() { }
+  solicitudes:epp_sol[]=[];
+  constructor(
+    private eps:EppService
+  ) { }
 
   ngOnInit(): void {
+    this.getSolicitudesEpp();
   }
 
+  getSolicitudesEpp(){
+    this.eps.getEppSolicitudesAdmin().subscribe(
+      res => {
+        this.solicitudes = res;
+      },
+      err => console.log(err)
+    );
+  }
 }
