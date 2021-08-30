@@ -1,6 +1,6 @@
-<mat-card class="mat-elevation-z8" *ngIf="!solicitante">
+<mat-card class="mat-elevation-z8">
     <mat-card-header>
-        <mat-card-title>Solicitudes de material</mat-card-title>
+        <mat-card-title>{{solicitante?'Mis':''}} Solicitudes de material</mat-card-title>
         <mat-card-subtitle>
         </mat-card-subtitle>
     </mat-card-header>
@@ -11,7 +11,7 @@
     </mat-card-content>
 </mat-card>
 
-<mat-card class="mat-elevation-z8 mt-3" *ngIf="!solicitante">
+<mat-card class="mat-elevation-z8 mt-3">
     <mat-card-content>        
         <div>
             <table class="table table-hover">
@@ -20,31 +20,28 @@
                         <th scope="col">#</th>
                         <th scope="col">Solicitante</th>
                         <th scope="col">Contrato</th>
-                        <th scope="col">Pedido</th>
+                        <th scope="col">Pedido/Area</th>
                         <th scope="col">Fecha Solicitud</th>
                         <th scope="col">Estatus</th>
-                        <th scope="col">Visto</th>
+                        <th scope="col">Visto Admin</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row"></th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr 
+                        *ngFor="let sol of solicitudes;let i = index" 
+                        [routerLink]="['/material/solicitud/'+sol.id_solicitud]"
+                        [ngClass]="{'fw-bold': !sol.visto}"
+                    >
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{sol.usuario_solicitante}}</td>
+                        <td>{{sol.contrato}}</td>
+                        <td>{{sol.area}}</td>
+                        <td>{{sol.fecha_solicitud | date}}</td>
+                        <td>{{sol.estatus | estatus}}</td>
+                        <td>{{sol.visto?'Visto':'Pendiente'}}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </mat-card-content>
-</mat-card>
-
-<mat-card class="mat-elevation-z8" *ngIf="solicitante">
-    <mat-card-header>
-        <mat-card-title>Mis solicitudes</mat-card-title>
-        <mat-card-subtitle></mat-card-subtitle>
-    </mat-card-header>
 </mat-card>

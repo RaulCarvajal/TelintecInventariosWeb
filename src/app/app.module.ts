@@ -34,6 +34,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatStepperModule} from '@angular/material/stepper';
 //Imports Angular Material
 
 //Charts
@@ -43,6 +44,8 @@ import { ChartsModule } from 'ng2-charts';
 //Pipe Personalizado
 import { FolioPipe } from "./Pipes/folio.pipe";
 import { PosPipe } from "./Pipes/pos.pipe";
+import { EstatusPipe } from "./Pipes/estatus.pipe";
+import { RolPipe } from "./Pipes/rol.pipe";
 //Pipe Personalizado
 
 //Componentes de la app
@@ -99,6 +102,8 @@ import { NuevaSolicitudmaterialComponent } from './SolicitudesMaterialComponents
     NuevaAreaComponent,
     FolioPipe,
     PosPipe,
+    EstatusPipe,
+    RolPipe,
     PartidaComponent,
     ReportesmaterialcontratoComponent,
     LoginComponent,
@@ -121,6 +126,7 @@ import { NuevaSolicitudmaterialComponent } from './SolicitudesMaterialComponents
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatStepperModule,
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
@@ -146,7 +152,7 @@ import { NuevaSolicitudmaterialComponent } from './SolicitudesMaterialComponents
     MatMenuModule,
     MatButtonToggleModule,
     MatDialogModule,
-    MatBadgeModule
+    MatBadgeModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es-MX' },

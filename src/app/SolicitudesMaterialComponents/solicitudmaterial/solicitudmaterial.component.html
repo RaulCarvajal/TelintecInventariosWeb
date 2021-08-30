@@ -1,1 +1,113 @@
-<p>solicitudmaterial works!</p>
+<mat-card class="mat-elevation-z8" *ngIf="solicitud">
+    <mat-card-header>
+        <mat-card-title>{{itsAdmin?'Solicitud de material':'Mi solicitud de material'}}</mat-card-title>
+        <mat-card-subtitle>Solicitud hecha el {{solicitud.fecha_solicitud | date : 'short'}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="row">
+            <div class="col">
+                <mat-list>
+                    <div mat-subheader>Información de solicitud de material</div>
+                    <mat-list-item>
+                        <mat-icon mat-list-icon>calendar_today</mat-icon>
+                        <div mat-line>Fecha crítica de entrega</div>
+                        <div mat-line>{{solicitud.fecha_critica | date}}</div>
+                    </mat-list-item>
+                    <mat-list-item>
+                      <mat-icon mat-list-icon>person</mat-icon>
+                      <div mat-line>Solicitante</div>
+                      <div mat-line>{{solicitud.usuario_solicitante}}</div>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon mat-list-icon>folder</mat-icon>
+                        <div mat-line>Contrato, pedido/área</div>
+                        <div mat-line>{{solicitud.contrato}}, {{solicitud.area}}</div>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+            <div class="col">
+                <mat-list>
+                    <div mat-subheader></div>
+                    <mat-list-item>
+                        <mat-icon mat-list-icon>location_on</mat-icon>
+                        <div mat-line>Ubicación</div>
+                        <div mat-line>{{solicitud.ubicacion}}</div>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon mat-list-icon>chat_bubble_outline</mat-icon>
+                        <div mat-line>Comentarios</div>
+                        <div mat-line>{{solicitud.comentarios}}</div>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon mat-list-icon>rule_folder</mat-icon>
+                        <div mat-line>Estatus de la solicitud</div>
+                        <div mat-line>{{solicitud.estatus | estatus}}</div>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-horizontal-stepper [linear]="false" #stepper>
+                    <mat-step label="Solicitado">
+                        <p>Material solicitado por un lider de proyecto. <span *ngIf="solicitud.fecha_solicitud">{{solicitud.fecha_solicitud | date : 'medium'}}</span></p>
+                    </mat-step>
+                    <mat-step label="Aceptado">
+                        <p>Solicitud aceptada por el personal administrativo. <span *ngIf="solicitud.fecha_aceptada">{{solicitud.fecha_aceptada | date : 'medium'}}</span></p>
+                    </mat-step>
+                    <mat-step label="Surtido parcial">
+                        <p>La solicitud fue surtida parcialmente por almacén. <span *ngIf="solicitud.fecha_surtido_parcial">{{solicitud.fecha_surtido_parcial | date : 'medium'}}</span></p>
+                    </mat-step>
+                    <mat-step label="Surtido total">
+                        <p>La solicitud fue surtida totalmente por almacén. <span *ngIf="solicitud.fecha_surtido_total">{{solicitud.fecha_surtido_total | date : 'medium'}}</span></p>
+                    </mat-step>
+                    <mat-step label="Reporte/Remisión">
+                        <p>La solicitud ya tiene un reporte generado. <span *ngIf="solicitud.fecha_remision_reporte">{{solicitud.fecha_remision_reporte | date : 'medium'}}</span></p>
+                    </mat-step>
+                    <!-- Icon overrides. -->
+                    <ng-template matStepperIcon="phone">
+                      <mat-icon>call_end</mat-icon>
+                    </ng-template>
+                    <ng-template matStepperIcon="chat">
+                      <mat-icon>forum</mat-icon>
+                    </ng-template>
+                  </mat-horizontal-stepper>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="row">
+            <div class="col">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Partida</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Surtido</th>
+                            <th scope="col">Existencia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let partida of partidas; let i = index">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{partida.partida}}</td>
+                            <td>{{partida.cantidad}}</td>
+                            <td>{{partida.surtido?'Si':'No'}}</td>
+                            <td>{{partida.cantidad_inventario>=partida.cantidad?'Si':'No'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </mat-card-content>
+    <mat-card-actions class="text-end">
+        <button class="mb-a" mat-flat-button color="primary" matTooltip="Autorizar solicitud"><mat-icon>done</mat-icon> Autorizar</button>
+        <button class="mb-a" mat-flat-button color="primary" matTooltip="Generar orden de compra"><mat-icon>shopping_cart</mat-icon> Órden de compra</button>
+        <button class="mb-a" mat-flat-button color="primary" matTooltip="Generar reporte"><mat-icon>assignment</mat-icon> Reporte</button>
+        <button class="mb-a" mat-flat-button color="primary" matTooltip="Generar remito"><mat-icon>receipt</mat-icon> Remito</button>
+    </mat-card-actions>
+</mat-card>
+
+<mat-card *ngIf="!solicitud">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</mat-card>
