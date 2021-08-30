@@ -77,6 +77,7 @@ import { MovimientoComponent } from './MovimientosComponents/movimiento/movimien
 import { NoautorizadoComponent } from './ErrorPagesComponents/noautorizado/noautorizado.component';
 import { SolicitudesmaterialComponent } from './SolicitudesMaterialComponents/solicitudesmaterial/solicitudesmaterial.component';
 import { SolicitudmaterialComponent } from './SolicitudesMaterialComponents/solicitudmaterial/solicitudmaterial.component';
+import { NuevaSolicitudmaterialComponent } from './SolicitudesMaterialComponents/nueva-solicitudmaterial/nueva-solicitudmaterial.component';
 //Componentes de la app
 @NgModule({
   declarations: [
@@ -113,7 +114,8 @@ import { SolicitudmaterialComponent } from './SolicitudesMaterialComponents/soli
     MovimientoComponent,
     NoautorizadoComponent,
     SolicitudesmaterialComponent,
-    SolicitudmaterialComponent
+    SolicitudmaterialComponent,
+    NuevaSolicitudmaterialComponent
   ],
   imports: [
     BrowserModule,

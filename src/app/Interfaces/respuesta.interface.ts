@@ -3,4 +3,6 @@ export interface respuesta {
     message : string,
     data : string | undefined
     id_reporte : number | undefined
+    id : number | undefined,
+    msg : string
 }

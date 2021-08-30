@@ -14,6 +14,7 @@ export class EppSolicitudComponent implements OnInit {
   solicitud: epp_sol | undefined;
   eppsol:eppsol[] | undefined;
   hoy:string = "";
+  viewPrint: boolean = false;
 
   constructor(
     private eps:EppService,
@@ -37,5 +38,13 @@ export class EppSolicitudComponent implements OnInit {
     this.eps.getEppAsignado(id).subscribe(
       res => this.eppsol = res
     )
+  }
+
+  print(){
+    this.viewPrint=true;
+    setTimeout(() => {
+      window.print();
+      window.history.back();
+    }, 500);
   }
 }

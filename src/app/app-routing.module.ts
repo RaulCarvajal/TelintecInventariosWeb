@@ -30,6 +30,7 @@ import { MovimientoComponent } from "./MovimientosComponents/movimiento/movimien
 import { NoautorizadoComponent } from './ErrorPagesComponents/noautorizado/noautorizado.component';
 import { SolicitudesmaterialComponent } from './SolicitudesMaterialComponents/solicitudesmaterial/solicitudesmaterial.component';
 import { SolicitudmaterialComponent } from './SolicitudesMaterialComponents/solicitudmaterial/solicitudmaterial.component';
+import { NuevaSolicitudmaterialComponent } from './SolicitudesMaterialComponents/nueva-solicitudmaterial/nueva-solicitudmaterial.component';
 
 const routes: Routes = [
   {path : "", component : InventariokpiComponent},
@@ -62,6 +63,7 @@ const routes: Routes = [
   {path : "usuarios/nuevo", component : NuevoUsuarioComponent},
   {path : "usuario/:id", component : UsuarioComponent},
   {path : "material/solicitudes", component : SolicitudesmaterialComponent},
+  {path : "material/solicitud/nueva", component : NuevaSolicitudmaterialComponent},
   {path : "material/solicitud/:id", component : SolicitudmaterialComponent}
 ];
 

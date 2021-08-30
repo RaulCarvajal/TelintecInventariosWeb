@@ -1,9 +1,9 @@
-<mat-card class="mat-elevation-z8 hide_on_print" *ngIf="solicitud">
+<mat-card class="mat-elevation-z8 hide_on_print" *ngIf="!viewPrint">
     <mat-card-header>
         <mat-card-title>Entrega de EPP</mat-card-title>
         <mat-card-subtitle>Fecha {{hoy | date}}</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content *ngIf="solicitud">
         <mat-list>
             <div mat-subheader>Información</div>
             <mat-list-item>
@@ -53,14 +53,17 @@
             </div>
         </div>
     </mat-card-content>
+    <mat-card-actions class="text-end">
+        <button mat-button color="primary" (click)="print()"><mat-icon>print</mat-icon> Imprimir</button>
+    </mat-card-actions>
 </mat-card>
 
-<mat-card class="mat-elevation-z8 section-to-print" *ngIf="solicitud">
+<mat-card class="mat-elevation-z8 section-to-print" *ngIf="viewPrint">
     <mat-card-header>
         <mat-card-title>Acta de entrega EPP</mat-card-title>
         <mat-card-subtitle>Fecha {{hoy | date}}</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content class="container">
+    <mat-card-content class="container" *ngIf="solicitud">
         <div class="row">
             <div class="col">
                 <p>Con el presente documento, se registra y controla a los/las trabajadores/as de los equipos de protección personal (EPP) necesarios para su trabajo.</p>
