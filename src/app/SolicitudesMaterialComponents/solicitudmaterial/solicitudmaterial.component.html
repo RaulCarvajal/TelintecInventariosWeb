@@ -101,10 +101,10 @@
         </div>
     </mat-card-content>
     <mat-card-actions class="text-end">
-        <button class="mb-a" mat-flat-button color="primary" matTooltip="Autorizar solicitud"><mat-icon>done</mat-icon> Autorizar</button>
-        <button class="mb-a" mat-flat-button color="primary" matTooltip="Generar orden de compra"><mat-icon>shopping_cart</mat-icon> Órden de compra</button>
-        <button class="mb-a" mat-flat-button color="primary" matTooltip="Generar reporte"><mat-icon>assignment</mat-icon> Reporte</button>
-        <button class="mb-a" mat-flat-button color="primary" matTooltip="Generar remito"><mat-icon>receipt</mat-icon> Remito</button>
+        <button class="mb-a" mat-flat-button color="primary" matTooltip="Autorizar solicitud" *ngIf="itsAdmin" [disabled]="solicitud.estatus>1" (click)="setAceptado(solicitud.id_solicitud)"><mat-icon>done</mat-icon> Autorizar</button>
+        <button class="mb-a" mat-flat-button color="primary" matTooltip="Generar orden de compra" *ngIf="itsAdmin"><mat-icon>shopping_cart</mat-icon> Órden de compra</button>
+        <button class="mb-a" mat-flat-button color="primary" matTooltip="Generar reporte" *ngIf="itsAdmin"><mat-icon>assignment</mat-icon> Reporte</button>
+        <button class="mb-a" mat-flat-button color="primary" matTooltip="Generar remito" *ngIf="itsAdmin"><mat-icon>receipt</mat-icon> Remito</button>
     </mat-card-actions>
 </mat-card>
 

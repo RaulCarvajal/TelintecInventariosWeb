@@ -4,6 +4,7 @@ import { SolicitudesMaterialService } from 'src/app/HttpServices/solicitudes-mat
 import { UsuarioService } from 'src/app/HttpServices/usuario.service';
 import { partida_solicitud, solicitud_material } from 'src/app/Interfaces/solicitud_material.interface';
 import { MatStepper } from '@angular/material/stepper';
+import { SnackbarService } from 'src/app/HttpServices/snackbar.service';
 
 @Component({
   selector: 'app-solicitudmaterial',
@@ -21,7 +22,8 @@ export class SolicitudmaterialComponent implements OnInit {
   constructor(
     private ar:ActivatedRoute,
     private us:UsuarioService,
-    private sms:SolicitudesMaterialService
+    private sms:SolicitudesMaterialService,
+    private sbs:SnackbarService
   ) { 
     this.id = +this.ar.snapshot.paramMap.get("id")!;
     this.getRole();
@@ -66,7 +68,19 @@ export class SolicitudmaterialComponent implements OnInit {
     }
   }
 
-  setVisto(id:number){
-    this
+  setAceptado(id:number){
+    this.sms.setAutorizado(id).subscribe(
+      res => {
+        if(res.error){
+          this.sbs.alert('')
+        }else{
+          this.getSolicitud(id);
+          this.getPartidas(id)
+          this.sbs.alert(res.msg,3);
+        }
+        
+      },
+      err => console.log(err)
+    );
   }
 }

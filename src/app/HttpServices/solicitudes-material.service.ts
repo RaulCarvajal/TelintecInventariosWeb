@@ -29,4 +29,7 @@ export class SolicitudesMaterialService {
   public setVisto(id:number){
     return this.http.put<respuesta>(`${api.url}visto_solicitud/${id}`,{});
   }
+  public setAutorizado(id:number){
+    return this.http.put<respuesta>(`${api.url}autorizar_solicitud/${id}`,{});
+  }
 }
