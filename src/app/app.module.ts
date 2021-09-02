@@ -81,6 +81,8 @@ import { NoautorizadoComponent } from './ErrorPagesComponents/noautorizado/noaut
 import { SolicitudesmaterialComponent } from './SolicitudesMaterialComponents/solicitudesmaterial/solicitudesmaterial.component';
 import { SolicitudmaterialComponent } from './SolicitudesMaterialComponents/solicitudmaterial/solicitudmaterial.component';
 import { NuevaSolicitudmaterialComponent } from './SolicitudesMaterialComponents/nueva-solicitudmaterial/nueva-solicitudmaterial.component';
+import { DialogAceptarsolicitudComponent } from './DialogComponents/dialog-aceptarsolicitud/dialog-aceptarsolicitud.component';
+import { DialogSurtirsolicitudComponent } from './DialogComponents/dialog-surtirsolicitud/dialog-surtirsolicitud.component';
 //Componentes de la app
 @NgModule({
   declarations: [
@@ -120,7 +122,9 @@ import { NuevaSolicitudmaterialComponent } from './SolicitudesMaterialComponents
     NoautorizadoComponent,
     SolicitudesmaterialComponent,
     SolicitudmaterialComponent,
-    NuevaSolicitudmaterialComponent
+    NuevaSolicitudmaterialComponent,
+    DialogAceptarsolicitudComponent,
+    DialogSurtirsolicitudComponent
   ],
   imports: [
     BrowserModule,

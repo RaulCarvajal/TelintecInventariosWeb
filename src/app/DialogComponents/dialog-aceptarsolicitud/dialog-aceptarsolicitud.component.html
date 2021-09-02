@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Autorizar solicitud</h1>
+<div mat-dialog-content>
+  <p>{{data.msg}}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No</button>
+  <button mat-button (click)="setAceptar(data.id)" cdkFocusInitial>Si</button>
+</div>

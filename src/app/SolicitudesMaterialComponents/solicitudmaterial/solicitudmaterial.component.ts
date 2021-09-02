@@ -5,7 +5,9 @@ import { UsuarioService } from 'src/app/HttpServices/usuario.service';
 import { partida_solicitud, solicitud_material } from 'src/app/Interfaces/solicitud_material.interface';
 import { MatStepper } from '@angular/material/stepper';
 import { SnackbarService } from 'src/app/HttpServices/snackbar.service';
-
+import { MatDialog } from '@angular/material/dialog';
+import { DialogAceptarsolicitudComponent } from "../../DialogComponents/dialog-aceptarsolicitud/dialog-aceptarsolicitud.component";
+import { DialogSurtirsolicitudComponent } from "../../DialogComponents/dialog-surtirsolicitud/dialog-surtirsolicitud.component";
 @Component({
   selector: 'app-solicitudmaterial',
   templateUrl: './solicitudmaterial.component.html',
@@ -15,6 +17,7 @@ export class SolicitudmaterialComponent implements OnInit {
 
   id:any;
   itsAdmin:boolean = false;
+  itsAlmac:boolean = false;
   solicitud:solicitud_material | undefined;
   partidas:partida_solicitud[]=[];
 
@@ -23,7 +26,8 @@ export class SolicitudmaterialComponent implements OnInit {
     private ar:ActivatedRoute,
     private us:UsuarioService,
     private sms:SolicitudesMaterialService,
-    private sbs:SnackbarService
+    private sbs:SnackbarService,
+    private dg: MatDialog
   ) { 
     this.id = +this.ar.snapshot.paramMap.get("id")!;
     this.getRole();
@@ -36,6 +40,7 @@ export class SolicitudmaterialComponent implements OnInit {
 
   getRole(){
     this.itsAdmin = this.us.getUsuario().rol==1?true:false;
+    this.itsAlmac = this.us.getUsuario().rol==2?true:false;
   }
 
   getSolicitud(id:number){
@@ -68,19 +73,34 @@ export class SolicitudmaterialComponent implements OnInit {
     }
   }
 
-  setAceptado(id:number){
-    this.sms.setAutorizado(id).subscribe(
-      res => {
-        if(res.error){
-          this.sbs.alert('')
-        }else{
-          this.getSolicitud(id);
-          this.getPartidas(id)
-          this.sbs.alert(res.msg,3);
-        }
-        
-      },
-      err => console.log(err)
-    );
+  dialogAceptado(id:number){
+    let msg = this.partidas.filter(p => p.cantidad_inventario<p.cantidad).length?' aunque no se cumplen con las existencias del material':' ';
+    const dr = this.dg.open(DialogAceptarsolicitudComponent, {
+      data: {
+        msg: `¿Desea autorizar esta solicitud${msg}?`, 
+        id: id
+      }
+    });
+
+    dr.afterClosed().subscribe(result => {
+      this.getSolicitud(this.id);
+      this.getPartidas(this.id);
+    });
   }
+
+  dialogSurtir(){
+    const dr = this.dg.open(DialogSurtirsolicitudComponent, {
+      data: {
+        partidas : this.partidas.filter( P => P.surtido==false && P.cantidad_inventario>P.cantidad), 
+        partidas_totales : this.partidas.length
+      }
+    });
+
+    dr.afterClosed().subscribe(result => {
+      this.getSolicitud(this.id);
+      this.getPartidas(this.id);
+    });
+  }
+
+
 }
