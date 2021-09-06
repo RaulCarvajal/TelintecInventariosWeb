@@ -50,10 +50,20 @@
             <div class="col">
                 <mat-horizontal-stepper [linear]="false" #stepper>
                     <mat-step label="Solicitado">
-                        <p>Material solicitado por un lider de proyecto. <span *ngIf="solicitud.fecha_solicitud">{{solicitud.fecha_solicitud | date : 'medium'}}</span></p>
+                        <p>
+                            Material solicitado por un lider de proyecto. 
+                            <span *ngIf="solicitud.fecha_solicitud">{{solicitud.fecha_solicitud | date : 'medium'}}. </span>
+                            {{itsAlmac?' En espera de aprobación de la solucitud por el personal administrativo.':''}}
+                            {{itsSolic?' En espera de aprobación de la solucitud por el personal administrativo.':''}}
+                        </p>
                     </mat-step>
                     <mat-step label="Aceptado">
-                        <p>Solicitud aceptada por el personal administrativo. <span *ngIf="solicitud.fecha_aceptada">{{solicitud.fecha_aceptada | date : 'medium'}}</span></p>
+                        <p>
+                            Solicitud aceptada por el personal administrativo. 
+                            <span *ngIf="solicitud.fecha_aceptada">{{solicitud.fecha_aceptada | date : 'medium'}}.</span>
+                            {{itsAlmac?' El solicitante puede pasar a almacén.':''}}
+                            {{itsSolic?' El solicitante puede pasar a almacén.':''}}
+                        </p>
                     </mat-step>
                     <mat-step label="Surtido parcial">
                         <p>La solicitud fue surtida parcialmente por almacén. <span *ngIf="solicitud.fecha_surtido_parcial">{{solicitud.fecha_surtido_parcial | date : 'medium'}}</span></p>
@@ -83,6 +93,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Partida</th>
                             <th scope="col">Cantidad</th>
+                            <th scope="col">UM</th>
                             <th scope="col">Surtido</th>
                             <th scope="col">Existencia</th>
                         </tr>
@@ -92,6 +103,7 @@
                             <th scope="row">{{i+1}}</th>
                             <td>{{partida.partida}}</td>
                             <td>{{partida.cantidad}}</td>
+                            <td>{{partida.unidad_medida}}</td>
                             <td>{{partida.surtido?'Si':'No'}}</td>
                             <td>{{partida.cantidad_inventario>=partida.cantidad?'Si':'No'}}</td>
                         </tr>

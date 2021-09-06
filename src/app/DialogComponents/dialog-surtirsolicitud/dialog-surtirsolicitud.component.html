@@ -7,6 +7,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Partida</th>
                 <th scope="col">Cantidad</th>
+                <th scope="col">UM</th>
                 <th scope="col">Surtido</th>
                 <th scope="col">Existencia</th>
             </tr>
@@ -16,15 +17,20 @@
                 <th scope="row">{{i+1}}</th>
                 <td>{{partida.partida}}</td>
                 <td>{{partida.cantidad}}</td>
+                <td>{{partida.unidad_medida}}</td>
                 <td>{{partida.surtido?'Si':'No'}}</td>
                 <td>{{partida.cantidad_inventario>=partida.cantidad?'Si':'No'}}</td>
             </tr>
         </tbody>
     </table>
 
-    
+    <div class="row text-center" *ngIf="cargando">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        <p>Surtiendo pedido y Generando PDF</p>
+        <p><small>No cierre esta ventana.</small></p>
+    </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-button (click)="surtir()" cdkFocusInitial>Surtir</button>
+  <button mat-button (click)="surtir()" cdkFocusInitial [disabled]="data.partidas.length==0">Surtir</button>
 </div>

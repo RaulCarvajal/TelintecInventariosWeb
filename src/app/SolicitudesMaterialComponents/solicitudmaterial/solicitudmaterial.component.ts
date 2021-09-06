@@ -18,6 +18,7 @@ export class SolicitudmaterialComponent implements OnInit {
   id:any;
   itsAdmin:boolean = false;
   itsAlmac:boolean = false;
+  itsSolic:boolean = false;
   solicitud:solicitud_material | undefined;
   partidas:partida_solicitud[]=[];
 
@@ -41,6 +42,7 @@ export class SolicitudmaterialComponent implements OnInit {
   getRole(){
     this.itsAdmin = this.us.getUsuario().rol==1?true:false;
     this.itsAlmac = this.us.getUsuario().rol==2?true:false;
+    this.itsSolic = this.us.getUsuario().rol==3?true:false;
   }
 
   getSolicitud(id:number){
@@ -92,11 +94,13 @@ export class SolicitudmaterialComponent implements OnInit {
     const dr = this.dg.open(DialogSurtirsolicitudComponent, {
       data: {
         partidas : this.partidas.filter( P => P.surtido==false && P.cantidad_inventario>P.cantidad), 
-        partidas_totales : this.partidas.length
+        partidas_totales : this.partidas.length,
+        solicitud : this.solicitud
       }
     });
 
     dr.afterClosed().subscribe(result => {
+      this.stp.reset();
       this.getSolicitud(this.id);
       this.getPartidas(this.id);
     });

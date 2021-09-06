@@ -46,6 +46,7 @@ import { FolioPipe } from "./Pipes/folio.pipe";
 import { PosPipe } from "./Pipes/pos.pipe";
 import { EstatusPipe } from "./Pipes/estatus.pipe";
 import { RolPipe } from "./Pipes/rol.pipe";
+import { DatePipe } from '@angular/common';
 //Pipe Personalizado
 
 //Componentes de la app
@@ -162,7 +163,11 @@ import { DialogSurtirsolicitudComponent } from './DialogComponents/dialog-surtir
     { provide: LOCALE_ID, useValue: 'es-MX' },
     MatNativeDateModule,
     MatDatepickerModule,
-    PosPipe
+    FolioPipe,
+    PosPipe,
+    EstatusPipe,
+    RolPipe,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

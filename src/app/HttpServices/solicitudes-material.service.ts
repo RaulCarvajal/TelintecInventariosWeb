@@ -4,6 +4,7 @@ import { respuesta } from '../Interfaces/respuesta.interface';
 import { partida_solicitud, solicitud_material } from '../Interfaces/solicitud_material.interface';
 import { rgx } from '../Validators/regex.validator';
 import { api } from './config.consts';
+import { saveAs } from 'file-saver';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +32,25 @@ export class SolicitudesMaterialService {
   }
   public setAutorizado(id:number){
     return this.http.put<respuesta>(`${api.url}autorizar_solicitud/${id}`,{});
+  }
+  public setSurtir(data:any,id:number){
+    return this.http.put<respuesta>(`${api.url}surtir_solicitud/${id}`,data);
+  }
+  public getEntregaMaterialPdf(data:any){
+    let dataToPdf = {
+      template: { "shortid" : api.id_entrega_material },
+      data : data,
+      options : { 'timeout': 60000 }
+    }
+    console.log(dataToPdf)
+    var mediaType = 'application/pdf';
+    this.http.post(`${api.reporter}`, dataToPdf, {'responseType' : 'blob'}).subscribe(
+        (response) => {
+            var blob = new Blob( [ <any>response ], { type: mediaType });
+            saveAs(blob, `EntregaMaterial_${data.codigo}.pdf`);
+            console.log(response);
+        },
+        e => { console.error(e) }
+    );
   }
 }
