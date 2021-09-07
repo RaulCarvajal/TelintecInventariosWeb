@@ -113,13 +113,19 @@
         </div>
     </mat-card-content>
     <mat-card-actions class="text-end">
+        <!--Administrador-->
         <button class="mb-a" mat-flat-button color="primary" matTooltip="Autorizar solicitud" *ngIf="itsAdmin" [disabled]="solicitud.estatus>1" (click)="dialogAceptado(solicitud.id_solicitud)"><mat-icon>done</mat-icon> Autorizar</button>
         <button class="mb-a" mat-flat-button color="primary" matTooltip="Generar orden de compra" *ngIf="itsAdmin" [disabled]="solicitud.estatus>2"><mat-icon>shopping_cart</mat-icon> Orden de compra</button>
-        <button class="mb-a" mat-flat-button color="primary" matTooltip="Generar reporte" *ngIf="itsAdmin" [disabled]="solicitud.estatus>2"><mat-icon>assignment</mat-icon> Reporte</button>
-        <button class="mb-a" mat-flat-button color="primary" matTooltip="Generar remito" *ngIf="itsAdmin" [disabled]="solicitud.estatus>2"><mat-icon>receipt</mat-icon> Remito</button>
-
+        <button class="mb-a" mat-flat-button color="primary" matTooltip="Generar reporte" *ngIf="itsAdmin" [disabled]="solicitud.estatus!=4" [routerLink]="['/material/solicitud/reporte/'+solicitud.id_solicitud]"><mat-icon>assignment</mat-icon> Reporte</button>
+        <button class="mb-a" mat-flat-button color="primary" matTooltip="Generar remito" *ngIf="itsAdmin" [disabled]="solicitud.estatus!=5"><mat-icon>receipt</mat-icon> Remito</button>
+        
+        <!--Almacenista-->
         <button class="mb-a" mat-flat-button color="primary" matTooltip="Surtir solicitud" *ngIf="itsAlmac" [disabled]="solicitud.estatus!=2 && solicitud.estatus!=3" (click)="dialogSurtir()"><mat-icon>summarize</mat-icon> Surtir</button>
+        
+        <!--Lider de proyecto-->
+        <button class="mb-a" mat-flat-button color="primary" matTooltip="Generar reporte" *ngIf="itsSolic" [disabled]="solicitud.estatus!=4"><mat-icon>assignment</mat-icon> Crear/Descargar Reporte</button>
 
+        <!--Administrador-->
         <button class="mb-a" mat-flat-button color="primary" matTooltip="Adjuntar evidencia"><mat-icon>attachment</mat-icon> Adjuntar</button>
     </mat-card-actions>
 </mat-card>

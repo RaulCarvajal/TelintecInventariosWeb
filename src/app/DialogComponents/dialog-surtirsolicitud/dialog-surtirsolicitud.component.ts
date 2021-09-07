@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SnackbarService } from 'src/app/HttpServices/snackbar.service';
 import { SolicitudesMaterialService } from 'src/app/HttpServices/solicitudes-material.service';
 import { partida_solicitud, solicitud_material } from 'src/app/Interfaces/solicitud_material.interface';
 import { FolioPipe } from "../../Pipes/folio.pipe";
@@ -19,7 +20,8 @@ export class DialogSurtirsolicitudComponent implements OnInit {
     private fp:FolioPipe,
     private dt:DatePipe,
     private pp:PosPipe,
-    private sms:SolicitudesMaterialService
+    private sms:SolicitudesMaterialService,
+    private sbs:SnackbarService
   ) { }
 
   total:boolean = true;
@@ -46,8 +48,28 @@ export class DialogSurtirsolicitudComponent implements OnInit {
       codigo : this.fp.transform(this.data.solicitud.id_solicitud),
       partidas : this.data.partidas
     }
-
-    //this.sms.getEntregaMaterialPdf(pdfData);
+    let req = {
+      total : this.total,
+      partidas : this.data.partidas.map( p => p.fk_id_partida)
+    }
+    this.sms.setSurtir(req,this.data.solicitud.id_solicitud).subscribe(
+      res => {
+        if(res.error){
+          this.sbs.alert("Ocurrio un error!. Intentelo más tarde. "+res.msg)
+        }else{
+          this.sbs.alert(res.msg+" Descargando PDF")
+          this.sms.getEntregaMaterialPdf(pdfData);
+        }
+        this.cargando = false;
+        this.onNoClick();
+      },
+      err =>{ 
+        console.log(err)
+        this.cargando = false;
+        this.sbs.alert("Ocurrio un error!. Intentelo más tarde.")
+        this.onNoClick();
+      }
+    );
   }
 
 }

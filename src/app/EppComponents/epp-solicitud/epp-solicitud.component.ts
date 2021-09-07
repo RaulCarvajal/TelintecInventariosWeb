@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EppService } from 'src/app/HttpServices/epp.service';
@@ -14,11 +15,11 @@ export class EppSolicitudComponent implements OnInit {
   solicitud: epp_sol | undefined;
   eppsol:eppsol[] | undefined;
   hoy:string = "";
-  viewPrint: boolean = false;
 
   constructor(
     private eps:EppService,
-    private ar:ActivatedRoute
+    private ar:ActivatedRoute,
+    private dp:DatePipe
   ) { 
     this.id = +this.ar.snapshot.paramMap.get("id")!;
   }
@@ -40,11 +41,12 @@ export class EppSolicitudComponent implements OnInit {
     )
   }
 
-  print(){
-    this.viewPrint=true;
-    setTimeout(() => {
-      window.print();
-      window.history.back();
-    }, 500);
+  donwloadPdf(){
+    let dataPdf = {
+      hoy : this.dp.transform(this.hoy),
+      asignado : this.solicitud?.asignado,
+      eppsol : this.eppsol
+    }
+    this.eps.getActaEpp(dataPdf);
   }
 }

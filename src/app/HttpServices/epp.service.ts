@@ -32,4 +32,22 @@ export class EppService {
     return this.http.get<eppsol[]>(`${api.url}eppporsolicitud/${id}`);
   }
 
+  getActaEpp(data:any){
+    let dataToPdf = {
+      template: { "shortid" : api.id_entrega_epp },
+      data : data,
+      options : { 'timeout': 60000 }
+    }
+    console.log(dataToPdf)
+    var mediaType = 'application/pdf';
+    this.http.post(`${api.reporter}`, dataToPdf, {'responseType' : 'blob'}).subscribe(
+        (response) => {
+            var blob = new Blob( [ <any>response ], { type: mediaType });
+            saveAs(blob, `EntregaEpp_${data.asignado}.pdf`);
+            console.log(response);
+        },
+        e => { console.error(e) }
+    );
+  }
+
 }

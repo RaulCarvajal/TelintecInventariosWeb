@@ -1,4 +1,4 @@
-<mat-card class="mat-elevation-z8 hide_on_print" *ngIf="!viewPrint">
+<mat-card class="mat-elevation-z8 hide_on_print">
     <mat-card-header>
         <mat-card-title>Entrega de EPP</mat-card-title>
         <mat-card-subtitle>Fecha {{hoy | date}}</mat-card-subtitle>
@@ -54,64 +54,8 @@
         </div>
     </mat-card-content>
     <mat-card-actions class="text-end">
-        <button mat-button color="primary" (click)="print()"><mat-icon>print</mat-icon> Imprimir</button>
+        <button mat-button color="primary" (click)="donwloadPdf()"><mat-icon>picture_as_pdf</mat-icon> Descargar Acta</button>
     </mat-card-actions>
-</mat-card>
-
-<mat-card class="mat-elevation-z8 section-to-print" *ngIf="viewPrint">
-    <mat-card-header>
-        <mat-card-title>Acta de entrega EPP</mat-card-title>
-        <mat-card-subtitle>Fecha {{hoy | date}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content class="container" *ngIf="solicitud">
-        <div class="row">
-            <div class="col">
-                <p>Con el presente documento, se registra y controla a los/las trabajadores/as de los equipos de protección personal (EPP) necesarios para su trabajo.</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <table class="table table-hover" *ngIf="eppsol">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Elemento de protección personal</th>
-                            <th scope="col">Cantidad</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let es of eppsol;let i = index">
-                            <th scope="row">{{i+1}}</th>
-                            <td>{{es.nombre}}</td>
-                            <td>{{es.cantidad}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <p>El trabajador <span><strong>{{solicitud.asignado}}</strong></span> se compromete a hacer buen uso de los EPP entregados a su vez es responsable por la pérdida y daños ocacionados por el mal uso o descuido.</p>
-                <p>El trabajador deberá:</p>
-                <ol>
-                    <li>Utilizar el cuidar correctamente los equipos de protección presonal.</li>
-                    <li>Colocar el equipo de protección personal después de su utilización en el lugar indicado para ello.</li>
-                    <li>Informar de inmedianto cualquier defecto, anomalia o daño apreciado en el equipo, a su juicio, pueda entrañar una pérdida de su eficacia protectora.</li>
-                </ol>
-            </div>
-        </div>
-        <br><br><br>
-        <div class="row">
-            <div class="col text-center">
-                <p>__________________________________</p>
-                <p>Firma, nombre y cargo<br>de quien entrega</p>
-            </div>
-            <div class="col text-center">
-                <p>__________________________________</p>
-                <p>Firma, nombre y cargo<br>de recibe entrega</p>
-            </div>
-        </div>
-    </mat-card-content>
 </mat-card>
 
 <mat-card class="mat-elevation-z8" *ngIf="!solicitud">

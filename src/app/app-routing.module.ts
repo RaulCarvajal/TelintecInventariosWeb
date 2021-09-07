@@ -31,6 +31,7 @@ import { NoautorizadoComponent } from './ErrorPagesComponents/noautorizado/noaut
 import { SolicitudesmaterialComponent } from './SolicitudesMaterialComponents/solicitudesmaterial/solicitudesmaterial.component';
 import { SolicitudmaterialComponent } from './SolicitudesMaterialComponents/solicitudmaterial/solicitudmaterial.component';
 import { NuevaSolicitudmaterialComponent } from './SolicitudesMaterialComponents/nueva-solicitudmaterial/nueva-solicitudmaterial.component';
+import { NuevoReportesolicitudComponent } from './ReportesMaterialComponents/nuevo-reportesolicitud/nuevo-reportesolicitud.component';
 
 const routes: Routes = [
   {path : "", component : InventariokpiComponent},
@@ -64,7 +65,8 @@ const routes: Routes = [
   {path : "usuario/:id", component : UsuarioComponent},
   {path : "material/solicitudes", component : SolicitudesmaterialComponent},
   {path : "material/solicitud/nueva", component : NuevaSolicitudmaterialComponent},
-  {path : "material/solicitud/:id", component : SolicitudmaterialComponent}
+  {path : "material/solicitud/:id", component : SolicitudmaterialComponent},
+  {path : "material/solicitud/reporte/:id", component : NuevoReportesolicitudComponent}
 ];
 
 @NgModule({

@@ -23,7 +23,7 @@
             </tr>
         </tbody>
     </table>
-
+    <p *ngIf="data.partidas.length==0">No hay partidas por surtir</p>
     <div class="row text-center" *ngIf="cargando">
         <mat-progress-bar mode="indeterminate"></mat-progress-bar>
         <p>Surtiendo pedido y Generando PDF</p>

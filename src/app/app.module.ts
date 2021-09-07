@@ -84,6 +84,7 @@ import { SolicitudmaterialComponent } from './SolicitudesMaterialComponents/soli
 import { NuevaSolicitudmaterialComponent } from './SolicitudesMaterialComponents/nueva-solicitudmaterial/nueva-solicitudmaterial.component';
 import { DialogAceptarsolicitudComponent } from './DialogComponents/dialog-aceptarsolicitud/dialog-aceptarsolicitud.component';
 import { DialogSurtirsolicitudComponent } from './DialogComponents/dialog-surtirsolicitud/dialog-surtirsolicitud.component';
+import { NuevoReportesolicitudComponent } from './ReportesMaterialComponents/nuevo-reportesolicitud/nuevo-reportesolicitud.component';
 //Componentes de la app
 @NgModule({
   declarations: [
@@ -125,7 +126,8 @@ import { DialogSurtirsolicitudComponent } from './DialogComponents/dialog-surtir
     SolicitudmaterialComponent,
     NuevaSolicitudmaterialComponent,
     DialogAceptarsolicitudComponent,
-    DialogSurtirsolicitudComponent
+    DialogSurtirsolicitudComponent,
+    NuevoReportesolicitudComponent
   ],
   imports: [
     BrowserModule,
