@@ -1,22 +1,19 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, ReplaySubject } from 'rxjs';
-import { takeUntil, take } from 'rxjs/operators';
 import { AreasService } from 'src/app/HttpServices/areas.service';
 import { ContratoplantaService } from 'src/app/HttpServices/contratoplanta.service';
 import { ContratosService } from 'src/app/HttpServices/contratos.service';
-import { PartidasService } from 'src/app/HttpServices/partidas.service';
 import { PlantasService } from 'src/app/HttpServices/plantas.service';
 import { ReportesService } from 'src/app/HttpServices/reportes.service';
+import { SnackbarService } from 'src/app/HttpServices/snackbar.service';
 import { SolicitudesMaterialService } from 'src/app/HttpServices/solicitudes-material.service';
 import { area } from 'src/app/Interfaces/area.interface';
 import { contrato } from 'src/app/Interfaces/contratos.interface';
 import { partida_datatable } from 'src/app/Interfaces/partida.interface';
 import { planta } from 'src/app/Interfaces/plantas.interface';
-import { reporte_partida } from 'src/app/Interfaces/reporte_partida.interface';
 import { partida_solicitud, solicitud_material } from 'src/app/Interfaces/solicitud_material.interface';
 import { PosPipe } from 'src/app/Pipes/pos.pipe';
 import { rgx } from 'src/app/Validators/regex.validator';
@@ -51,12 +48,11 @@ export class NuevoReportesolicitudComponent implements OnInit, OnDestroy {
     private cs:ContratosService,
     private as:AreasService,
     private cps:ContratoplantaService,
-    private ps:PartidasService,
     private rs:ReportesService,
     private ppp:PosPipe,
-    private st:DomSanitizer,
     private pls:PlantasService,
     private sms:SolicitudesMaterialService,
+    private sbs:SnackbarService
   ) { 
     this.ids = +this.ar.snapshot.paramMap.get("id")!;
   }
@@ -89,27 +85,45 @@ export class NuevoReportesolicitudComponent implements OnInit, OnDestroy {
       fecha_inicio : ['',[Validators.required]],
       fecha_fin : ['',[Validators.required]],
       comentarios : ['',[Validators.pattern(rgx.white_space),Validators.maxLength(250)]],
-      partidas : this.fb.array([])
+      partidas : this.fb.array([]),
+      fk_id_solicitud : [this.ids]
     });
     this.getSolicitud(this.ids);
     this.getPartidasSol(this.ids);
+    
+    setTimeout(() => {
+      this.formPedido.controls['fk_id_contrato'].disable()
+      this.formPedido.controls['fk_id_area'].disable()
+      this.formPedido.controls['numero_pedido'].disable()
+      this.formPedido.controls['ubicacion'].disable()
+      this.formPedido.controls['empresa'].disable()
+      this.formPedido.controls['partidas'].disable()
+    }, 1000);
+    
   }
   trySave(){
     //this.guardando = true;
-    console.log(this.formPedido.value)
-    /*this.rs.guardar(this.formPedido.value).subscribe(
+    this.formPedido.value.fecha = <Date>this.formPedido.value.fecha.toISOString();
+    this.formPedido.value.fk_id_contrato = this.solicitud?.fk_id_contrato;
+    this.formPedido.value.fk_id_area = this.solicitud?.fk_id_area;
+    this.formPedido.value.numero_pedido = this.areas.find( a => a.id_area == this.solicitud?.fk_id_area)?.numero_pedido;
+    this.formPedido.value.ubicacion = this.solicitud?.ubicacion;
+    this.formPedido.value.empresa = 'Ternium México';
+    this.formPedido.value.partidas = this.partidas
+    this.rs.guardarReporteSolicitud(this.formPedido.value).subscribe(
       res => {
         this.guardando = false;
         if(!res.error){
+          this.sbs.alert(res.message)
           window.history.back();
         }else{
-          this.formPedido.reset();
+          this.sbs.alert(res.message)
+          window.history.back();
         }
-        console.log(res)
       },
       err => {
         console.log(err)
-    })*/
+    })
   }
 
   getSolicitud(ids:number){
@@ -182,11 +196,11 @@ export class NuevoReportesolicitudComponent implements OnInit, OnDestroy {
     );
   }
   setPedido(){
-    let np = this.areas.find(area => area.id_area == this.formPedido.value.fk_id_area)?.numero_pedido;
+    let np = this.areas.find(area => area.id_area == this.solicitud?.fk_id_area)?.numero_pedido;
     this.formPedido.patchValue({numero_pedido : np})
   }
   onSelectContrato(){
-    let cont = this.formPedido.value.fk_id_contrato;
+    let cont = this.solicitud!.fk_id_contrato;
     this.getAreasPorContrato(cont);
     this.getContratoPlantas(cont); 
   }

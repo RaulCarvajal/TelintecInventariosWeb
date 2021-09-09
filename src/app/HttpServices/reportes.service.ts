@@ -18,6 +18,11 @@ export class ReportesService {
     return this.http.post<respuesta>(`${api.url}reporte_material`,data);
   }
 
+  guardarReporteSolicitud(data:any){
+    return this.http.post<respuesta>(`${api.url}reporte_solicitud`,data);
+  }
+
+
   guardarEvidencia(data:any){
     let headers = new HttpHeaders();
     headers.append('Accept', 'application/json');

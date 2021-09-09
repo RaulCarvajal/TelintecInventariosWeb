@@ -8,6 +8,8 @@ import { SnackbarService } from 'src/app/HttpServices/snackbar.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAceptarsolicitudComponent } from "../../DialogComponents/dialog-aceptarsolicitud/dialog-aceptarsolicitud.component";
 import { DialogSurtirsolicitudComponent } from "../../DialogComponents/dialog-surtirsolicitud/dialog-surtirsolicitud.component";
+import { DialogOrdencompraComponent } from "../../DialogComponents/dialog-ordencompra/dialog-ordencompra.component";
+
 @Component({
   selector: 'app-solicitudmaterial',
   templateUrl: './solicitudmaterial.component.html',
@@ -106,5 +108,18 @@ export class SolicitudmaterialComponent implements OnInit {
     });
   }
 
+  dialogOrdenCompra(){
+    const dr = this.dg.open(DialogOrdencompraComponent, {
+      data: {
+        partidas : this.partidas.filter( P => P.surtido==false && P.cantidad_inventario<P.cantidad).map( p => p.fk_id_partida), 
+        partidas_totales : this.partidas.length,
+        solicitud : this.solicitud
+      }
+    });
+
+    dr.afterClosed().subscribe(result => {
+      this.stp.reset();
+    });
+  }
 
 }
