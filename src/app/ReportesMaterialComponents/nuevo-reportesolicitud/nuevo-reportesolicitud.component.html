@@ -124,7 +124,7 @@
             <br>
             <div class="row">
                 <div class="col">
-                    <p class="mt-2">Partidas/Conceptos</p>
+                    <p class="mt-2">Material utilizado</p>
                 </div>
             </div>
             <div formArrayName="partidas">
@@ -133,6 +133,45 @@
                         <mat-form-field class="w-100">
                             <mat-label>Partida</mat-label>
                             <input matInput placeholder="" formControlName="partida">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-2">
+                        <mat-form-field class="w-100">
+                            <mat-label>Cantidad</mat-label>
+                            <input matInput placeholder="" formControlName="cantidad" type="number">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <p class="mt-2">Servicios hechos</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="w-100">
+                        <mat-select formControlName="servicio_seleccionado" placeholder="Busqueda de servicios" (selectionChange)="addServicios()" #singleSelect>
+                            <mat-option>
+                            <ngx-mat-select-search [formControl]="servicioFiltro"></ngx-mat-select-search>
+                            </mat-option>
+                    
+                            <mat-option *ngFor="let servicio of serviciosFiltradas | async" [value]="servicio.id_servicios">
+                                {{servicio.POS | pos}} - {{servicio.descripcion}} - {{servicio.unidad_medida}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div formArrayName="servicios">
+                <div class="row" *ngFor="let item of serviciosForm.controls; let pind = index" [formGroupName]="pind">
+                    <div class="col-10">
+                        <mat-form-field class="w-100">
+                            <mat-label>Servicio</mat-label>
+                            <input matInput placeholder="" formControlName="servicio">
                         </mat-form-field>
                     </div>
                     <div class="col-2">

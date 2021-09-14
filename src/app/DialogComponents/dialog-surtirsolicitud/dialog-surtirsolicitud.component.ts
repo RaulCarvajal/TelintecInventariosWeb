@@ -28,7 +28,11 @@ export class DialogSurtirsolicitudComponent implements OnInit {
   cargando:boolean = false;
 
   ngOnInit(): void {
-    this.total=this.data.partidas.length==this.data.partidas_totales?true:false;
+    if((this.data.partidas.length+this.data.partidas_surtidas) == this.data.partidas_totales){
+      this.total = true;
+    }else{
+      this.total=this.data.partidas.length==this.data.partidas_totales?true:false;
+    }
   }
 
   onNoClick(): void {
@@ -77,5 +81,6 @@ export class DialogSurtirsolicitudComponent implements OnInit {
 interface data{
   partidas : partida_solicitud[],
   partidas_totales : number,
+  partidas_surtidas : number,
   solicitud : solicitud_material
 }

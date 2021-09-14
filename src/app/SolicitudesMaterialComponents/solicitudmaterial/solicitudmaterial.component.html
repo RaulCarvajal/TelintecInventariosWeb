@@ -72,7 +72,7 @@
                         <p>La solicitud fue surtida totalmente por almacén. <span *ngIf="solicitud.fecha_surtido_total">{{solicitud.fecha_surtido_total | date : 'medium'}}</span></p>
                     </mat-step>
                     <mat-step label="Reporte/Remisión">
-                        <p>La solicitud ya tiene un reporte generado. <span *ngIf="solicitud.fecha_remision_reporte">{{solicitud.fecha_remision_reporte | date : 'medium'}}</span></p>
+                        <p>La solicitud ya tiene un reporte generado<span *ngIf="itsAdmin">, puedes consultarlo <a [routerLink]="['/contrato/reportematerial/'+reporte_id]">aqui</a></span>. <span *ngIf="solicitud.fecha_remision_reporte">{{solicitud.fecha_remision_reporte | date : 'medium'}}</span></p>
                     </mat-step>
                     <!-- Icon overrides. -->
                     <ng-template matStepperIcon="phone">
@@ -87,10 +87,15 @@
         <mat-divider></mat-divider>
         <div class="row">
             <div class="col">
+                <p><strong>Material solicitado</strong></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">POS</th>
                             <th scope="col">Partida</th>
                             <th scope="col">Cantidad</th>
                             <th scope="col">UM</th>
@@ -100,12 +105,40 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let partida of partidas; let i = index">
-                            <th scope="row">{{i+1}}</th>
+                            <th scope="row">{{partida.POS | pos}}</th>
                             <td>{{partida.partida}}</td>
                             <td>{{partida.cantidad}}</td>
                             <td>{{partida.unidad_medida}}</td>
                             <td>{{partida.surtido?'Si':'No'}}</td>
                             <td>{{partida.cantidad_inventario>=partida.cantidad?'Si':'No'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="servicios">
+            <div class="col">
+                <p><strong>Servicios hechos</strong></p>
+            </div>
+        </div>
+        <div class="row" *ngIf="servicios">
+            <div class="col">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">POS</th>
+                            <th scope="col">Partida</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">UM</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let servicio of servicios">
+                            <th scope="row">{{servicio.POS | pos}}</th>
+                            <td>{{servicio.descripcion}}</td>
+                            <td>{{servicio.cantidad}}</td>
+                            <td>{{servicio.unidad_medida}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -117,13 +150,13 @@
         <button class="mb-a" mat-flat-button color="primary" matTooltip="Autorizar solicitud" *ngIf="itsAdmin" [disabled]="solicitud.estatus>1" (click)="dialogAceptado(solicitud.id_solicitud)"><mat-icon>done</mat-icon> Autorizar</button>
         <button class="mb-a" mat-flat-button color="primary" matTooltip="Generar orden de compra" *ngIf="itsAdmin" [disabled]="solicitud.estatus>2" (click)="dialogOrdenCompra()"><mat-icon>shopping_cart</mat-icon> Orden de compra</button>
         <button class="mb-a" mat-flat-button color="primary" matTooltip="Generar reporte" *ngIf="itsAdmin" [disabled]="solicitud.estatus!=4" [routerLink]="['/material/solicitud/reporte/'+solicitud.id_solicitud]"><mat-icon>assignment</mat-icon> Reporte</button>
-        <button class="mb-a" mat-flat-button color="primary" matTooltip="Generar remito" *ngIf="itsAdmin" [disabled]="solicitud.estatus!=5"><mat-icon>receipt</mat-icon> Remito</button>
+        <button class="mb-a" mat-flat-button color="primary" matTooltip="Generar remito" *ngIf="itsAdmin" [disabled]="solicitud.estatus!=5" (click)="dialogRemito()"><mat-icon>receipt</mat-icon> Remito</button>
         
         <!--Almacenista-->
         <button class="mb-a" mat-flat-button color="primary" matTooltip="Surtir solicitud" *ngIf="itsAlmac" [disabled]="solicitud.estatus!=2 && solicitud.estatus!=3" (click)="dialogSurtir()"><mat-icon>summarize</mat-icon> Surtir</button>
         
         <!--Lider de proyecto-->
-        <button class="mb-a" mat-flat-button color="primary" matTooltip="Generar reporte" *ngIf="itsSolic" [disabled]="solicitud.estatus!=4"><mat-icon>assignment</mat-icon> Crear/Descargar Reporte</button>
+        <button class="mb-a" mat-flat-button color="primary" matTooltip="Generar reporte" *ngIf="itsSolic" [disabled]="solicitud.estatus!=4" [routerLink]="['/material/solicitud/reporte/'+solicitud.id_solicitud]"><mat-icon>assignment</mat-icon> Crear Remisión</button>
 
         <!--Administrador-->
         <button class="mb-a" mat-flat-button color="primary" matTooltip="Adjuntar evidencia"><mat-icon>attachment</mat-icon> Adjuntar</button>

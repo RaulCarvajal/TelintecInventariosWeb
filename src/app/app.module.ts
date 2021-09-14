@@ -46,7 +46,7 @@ import { FolioPipe } from "./Pipes/folio.pipe";
 import { PosPipe } from "./Pipes/pos.pipe";
 import { EstatusPipe } from "./Pipes/estatus.pipe";
 import { RolPipe } from "./Pipes/rol.pipe";
-import { DatePipe } from '@angular/common';
+import { DatePipe, CurrencyPipe } from '@angular/common';
 //Pipe Personalizado
 
 //Componentes de la app
@@ -86,6 +86,7 @@ import { DialogAceptarsolicitudComponent } from './DialogComponents/dialog-acept
 import { DialogSurtirsolicitudComponent } from './DialogComponents/dialog-surtirsolicitud/dialog-surtirsolicitud.component';
 import { NuevoReportesolicitudComponent } from './ReportesMaterialComponents/nuevo-reportesolicitud/nuevo-reportesolicitud.component';
 import { DialogOrdencompraComponent } from './DialogComponents/dialog-ordencompra/dialog-ordencompra.component';
+import { DialogRemitosolicitudComponent } from './DialogComponents/dialog-remitosolicitud/dialog-remitosolicitud.component';
 //Componentes de la app
 @NgModule({
   declarations: [
@@ -129,7 +130,8 @@ import { DialogOrdencompraComponent } from './DialogComponents/dialog-ordencompr
     DialogAceptarsolicitudComponent,
     DialogSurtirsolicitudComponent,
     NuevoReportesolicitudComponent,
-    DialogOrdencompraComponent
+    DialogOrdencompraComponent,
+    DialogRemitosolicitudComponent
   ],
   imports: [
     BrowserModule,
@@ -171,7 +173,8 @@ import { DialogOrdencompraComponent } from './DialogComponents/dialog-ordencompr
     PosPipe,
     EstatusPipe,
     RolPipe,
-    DatePipe
+    DatePipe,
+    CurrencyPipe
   ],
   bootstrap: [AppComponent]
 })

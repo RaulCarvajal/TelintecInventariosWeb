@@ -45,5 +45,8 @@ export class ReportesService {
     return this.http.get<ultimofoliopedido[]>(`${api.url}ultimofoliopedido/0`)
   }
 
+  getReporteIdByIdSolicitud(ids:number){
+    return this.http.get<number>(`${api.url}reporte_ids/${ids}`)
+  }
 
 }

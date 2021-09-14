@@ -1,0 +1,83 @@
+<h1 mat-dialog-title>Generar remisión</h1>
+<div mat-dialog-content>
+    <div class="row">
+        <div class="col">
+            <p><strong>Complete los siguientes campos necesarios para generar la remision</strong></p>
+        </div>
+    </div>
+    <form [formGroup]="formRemito">
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="w-100">
+                    <mat-label>Remisión</mat-label>
+                    <input matInput placeholder="Ej. TL-LACA-000" formControlName="remision">
+                    <mat-error *ngIf="formRemito.get('remision')!.hasError('required')">Campo requerido</mat-error>
+                    <mat-error *ngIf="formRemito.get('remision')!.hasError('required')">Campo inválido</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field class="w-100">
+                    <mat-label>Remito</mat-label>
+                    <input matInput placeholder="Ej. REM00" formControlName="remito">
+                    <mat-error *ngIf="formRemito.get('remito')!.hasError('required')">Campo requerido</mat-error>
+                    <mat-error *ngIf="formRemito.get('remito')!.hasError('required')">Campo inválido</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field class="w-100">
+                    <mat-label>Número de pedido</mat-label>
+                    <input matInput placeholder="Ej. 1, 2, 3, ..., n" formControlName="numero_pedido" type="number">
+                    <mat-error *ngIf="formRemito.get('numero_pedido')!.hasError('required')">Campo requerido</mat-error>
+                    <mat-error *ngIf="formRemito.get('numero_pedido')!.hasError('required')">Campo inválido</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col text-end">
+            <p><small>Divisa: {{divisa}}</small></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col"><small>POS</small></th>
+                        <th scope="col"><small>Descripción</small></th>
+                        <th scope="col"><small>Cantidad</small></th>
+                        <th scope="col"><small>UM</small></th>
+                        <th scope="col"><small>Precio Unit.</small></th>
+                        <th scope="col"><small>Total</small></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let partida of partidas">
+                        <th scope="row"><small>{{partida.POS}}</small></th>
+                        <td><small>{{partida.descripcion}}</small></td>
+                        <td><small>{{partida.cantidad}}</small></td>
+                        <td><small>{{partida.UM}}</small></td>
+                        <td><small>{{partida.PU}}</small></td>
+                        <td><small>{{partida.total}}</small></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-end">
+            <p><small>Subtotal: {{subtotal | currency : divisa}}</small></p>
+            <p><small>IVA: {{iva | currency : divisa}}</small></p>
+            <p><small>Total: {{subtotal+iva | currency : divisa}}</small></p>
+        </div>
+    </div>
+    <div class="row" *ngIf="guardando"> 
+        <div class="col">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button (click)="save()" [disabled]="formRemito.invalid" *ngIf="!guardando">Generar remisión</button>
+</div>

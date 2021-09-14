@@ -85,23 +85,52 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">POS</th>
                             <th scope="col">Descripción</th>
+                            <th scope="col">UM</th>
                             <th scope="col">Cantidad</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let partida of partidas; let pind = index">
-                            <th scope="row">{{pind}}</th>
-                            <td>{{partida.POS | pos}}</td>
+                            <th scope="row">{{partida.POS | pos}}</th>
                             <td>{{partida.descripcion}}</td>
+                            <td>{{partida.unidad_medida}}</td>
                             <td>{{partida.cantidad}}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+
+        <div class="row" *ngIf="servicios">
+            <div class="col">
+                <p><strong>Servicios hechos</strong></p>
+            </div>
+        </div>
+        <div class="row" *ngIf="servicios">
+            <div class="col">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">POS</th>
+                            <th scope="col">Partida</th>
+                            <th scope="col">UM</th>
+                            <th scope="col">Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let servicio of servicios">
+                            <th scope="row">{{servicio.POS | pos}}</th>
+                            <td>{{servicio.descripcion}}</td>
+                            <td>{{servicio.unidad_medida}}</td>
+                            <td>{{servicio.cantidad}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
         <br>
         <mat-divider></mat-divider>
         <br>

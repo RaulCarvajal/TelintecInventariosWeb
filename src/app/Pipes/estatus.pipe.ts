@@ -13,7 +13,7 @@ export class EstatusPipe implements PipeTransform{
             case 4:
                 return 'Surtido total'
             case 5:
-                return 'Remisión/Reporte'
+                return 'Finalizado'
             default: 'No reconocido'
         }
         return '';

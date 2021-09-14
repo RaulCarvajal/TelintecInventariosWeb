@@ -9,6 +9,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogAceptarsolicitudComponent } from "../../DialogComponents/dialog-aceptarsolicitud/dialog-aceptarsolicitud.component";
 import { DialogSurtirsolicitudComponent } from "../../DialogComponents/dialog-surtirsolicitud/dialog-surtirsolicitud.component";
 import { DialogOrdencompraComponent } from "../../DialogComponents/dialog-ordencompra/dialog-ordencompra.component";
+import { DialogRemitosolicitudComponent } from "../../DialogComponents/dialog-remitosolicitud/dialog-remitosolicitud.component";
+import { ServiciosService } from 'src/app/HttpServices/servicios.service';
+import { servicio_datatable } from 'src/app/Interfaces/servicios.interface';
+import { ReportesService } from 'src/app/HttpServices/reportes.service';
+import { RemitosService } from 'src/app/HttpServices/remitos.service';
 
 @Component({
   selector: 'app-solicitudmaterial',
@@ -23,6 +28,9 @@ export class SolicitudmaterialComponent implements OnInit {
   itsSolic:boolean = false;
   solicitud:solicitud_material | undefined;
   partidas:partida_solicitud[]=[];
+  servicios:servicio_datatable[]|undefined;
+  reporte_id:number|undefined;
+  remito_id:number|undefined;
 
   @ViewChild('stepper') stp!:MatStepper;
   constructor(
@@ -30,7 +38,10 @@ export class SolicitudmaterialComponent implements OnInit {
     private us:UsuarioService,
     private sms:SolicitudesMaterialService,
     private sbs:SnackbarService,
-    private dg: MatDialog
+    private dg: MatDialog,
+    private ss: ServiciosService,
+    private rs:ReportesService,
+    private rms:RemitosService
   ) { 
     this.id = +this.ar.snapshot.paramMap.get("id")!;
     this.getRole();
@@ -59,6 +70,11 @@ export class SolicitudmaterialComponent implements OnInit {
             res => res
           );
         }
+        if(this.solicitud.estatus==5){
+          this.getServicios(this.solicitud.id_solicitud)
+          this.getContratoId(this.solicitud.id_solicitud)
+          this.getRemitoId(this.solicitud.id_solicitud)
+        }
       },
       err => console.log(err)
     );
@@ -66,8 +82,26 @@ export class SolicitudmaterialComponent implements OnInit {
 
   getPartidas(id:number){
     this.sms.getPartidasSolicitud(id).subscribe(
-      res => this.partidas = res,
+      res =>{ this.partidas = res},
       err => console.log(err)
+    );
+  }
+
+  getServicios(ids:number){
+    this.ss.getServiciosPorIdSolicitud(ids).subscribe(
+      res => this.servicios = res
+    );
+  }
+
+  getContratoId(ids:number){
+    this.rs.getReporteIdByIdSolicitud(ids).subscribe(
+      res => this.reporte_id = res
+    );
+  }
+
+  getRemitoId(ids:number){
+    this.rms.getRemitoIdByIdSolicitud(ids).subscribe(
+      res => this.remito_id = res
     );
   }
 
@@ -95,8 +129,9 @@ export class SolicitudmaterialComponent implements OnInit {
   dialogSurtir(){
     const dr = this.dg.open(DialogSurtirsolicitudComponent, {
       data: {
-        partidas : this.partidas.filter( P => P.surtido==false && P.cantidad_inventario>P.cantidad), 
+        partidas : this.partidas.filter( P => P.surtido==false && P.cantidad_inventario>=P.cantidad), 
         partidas_totales : this.partidas.length,
+        partidas_surtidas : this.partidas.filter( P => P.surtido==true).length,
         solicitud : this.solicitud
       }
     });
@@ -120,6 +155,24 @@ export class SolicitudmaterialComponent implements OnInit {
     dr.afterClosed().subscribe(result => {
       this.stp.reset();
     });
+  }
+
+  dialogRemito(){
+    if(this.remito_id){
+      console.log(this.remito_id);
+    }else{
+      const dr = this.dg.open(DialogRemitosolicitudComponent, {
+        data: {
+          partidas : this.partidas.map( p => p.id_solicitud),
+          servicios : this.servicios!.map( p => p.id_solicitud),
+          fk_id_contrato : this.solicitud?.fk_id_contrato,
+          fk_id_solicitud : this.solicitud?.id_solicitud,
+        }
+      });
+      dr.afterClosed().subscribe(result => {
+        this.stp.reset();
+      });
+    }
   }
 
 }
