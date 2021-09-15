@@ -26,6 +26,10 @@ footer {
     color: #fff;
 }
 
+p::before{
+    content: ⭐;
+}
+
 
 /*html, body { height: 100%; }*/
 /*body { font-family: Roboto, "Helvetica Neue", sans-serif; }*/

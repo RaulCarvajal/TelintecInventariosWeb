@@ -1,0 +1,46 @@
+<mat-card class="mat-elevation-z8">
+    <mat-card-header>
+        <mat-card-title>Remitos del contrato</mat-card-title>
+    </mat-card-header>
+</mat-card>
+
+<mat-card class="mt-2 mat-elevation-z8">
+    <mat-card-content>
+        <div class="row" *ngIf="!cargando">
+            <div class="col">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Remisión</th>
+                            <th scope="col">Remito</th>
+                            <th scope="col">Proyecto</th>
+                            <th scope="col">Número contrato</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let remito of remitos" (click)="gotoDetail(remito.id_remito)">
+                            <th scope="row">{{remito.remision}}</th>
+                            <td>{{remito.remito}}</td>
+                            <td>{{remito.proyecto}}</td>
+                            <td>{{remito.numero_contrato}}</td>
+                            <td>{{remito.fecha | date}}</td>
+                            <td>{{remito.total | currency : remito.divisa}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row" *ngIf="remitos.length==0">
+            <div class="col text-center">
+                <p class="lead">Sin remitos en el contrato</p>
+            </div>
+        </div>
+        <div class="row" *ngIf="cargando">
+            <div class="col">
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

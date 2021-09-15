@@ -87,6 +87,9 @@ import { DialogSurtirsolicitudComponent } from './DialogComponents/dialog-surtir
 import { NuevoReportesolicitudComponent } from './ReportesMaterialComponents/nuevo-reportesolicitud/nuevo-reportesolicitud.component';
 import { DialogOrdencompraComponent } from './DialogComponents/dialog-ordencompra/dialog-ordencompra.component';
 import { DialogRemitosolicitudComponent } from './DialogComponents/dialog-remitosolicitud/dialog-remitosolicitud.component';
+import { RemitoComponent } from './RemitosComponents/remito/remito.component';
+import { RemitosComponent } from './RemitosComponents/remitos/remitos.component';
+import { RemitoscontratoComponent } from './RemitosComponents/remitoscontrato/remitoscontrato.component';
 //Componentes de la app
 @NgModule({
   declarations: [
@@ -131,7 +134,10 @@ import { DialogRemitosolicitudComponent } from './DialogComponents/dialog-remito
     DialogSurtirsolicitudComponent,
     NuevoReportesolicitudComponent,
     DialogOrdencompraComponent,
-    DialogRemitosolicitudComponent
+    DialogRemitosolicitudComponent,
+    RemitoComponent,
+    RemitosComponent,
+    RemitoscontratoComponent
   ],
   imports: [
     BrowserModule,

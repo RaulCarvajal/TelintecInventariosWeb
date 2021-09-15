@@ -10,8 +10,11 @@
     <button [disabled]="isntloged" *ngIf="admin || jefe || lider" [routerLink]="['material/solicitudes']" mat-icon-button matTooltip="Solicitudes">
         <mat-icon>fact_check</mat-icon>
     </button>
-    <button [disabled]="isntloged"  *ngIf="admin" [routerLink]="['reportes']" mat-icon-button matTooltip="Reportes de Material">
+    <button [disabled]="isntloged"  *ngIf="admin" [routerLink]="['reportes']" mat-icon-button matTooltip="Reportes">
         <mat-icon>assignment</mat-icon>
+    </button>
+    <button [disabled]="isntloged"  *ngIf="admin" [routerLink]="['remitos']" mat-icon-button matTooltip="Remitos">
+        <mat-icon>receipt</mat-icon>
     </button>
     <button [disabled]="isntloged"  *ngIf="admin || jefe" [routerLink]="['inventarios']" mat-icon-button matTooltip="Inventarios">
         <mat-icon>inventory</mat-icon>

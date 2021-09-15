@@ -32,6 +32,10 @@ import { SolicitudesmaterialComponent } from './SolicitudesMaterialComponents/so
 import { SolicitudmaterialComponent } from './SolicitudesMaterialComponents/solicitudmaterial/solicitudmaterial.component';
 import { NuevaSolicitudmaterialComponent } from './SolicitudesMaterialComponents/nueva-solicitudmaterial/nueva-solicitudmaterial.component';
 import { NuevoReportesolicitudComponent } from './ReportesMaterialComponents/nuevo-reportesolicitud/nuevo-reportesolicitud.component';
+import { RemitoComponent } from './RemitosComponents/remito/remito.component';
+import { RemitosComponent } from './RemitosComponents/remitos/remitos.component';
+import { RemitoscontratoComponent } from './RemitosComponents/remitoscontrato/remitoscontrato.component';
+
 
 const routes: Routes = [
   {path : "", component : InventariokpiComponent},
@@ -45,6 +49,8 @@ const routes: Routes = [
   {path : "contrato/areas/nueva/:id", component : NuevaAreaComponent},
   {path : "contrato/reportesmaterial/:id", component : ReportesmaterialcontratoComponent},
   {path : "contrato/reportematerial/:id", component : ReportematerialComponent},
+  {path : "contrato/remito/:id", component : RemitoComponent},
+  {path : "contrato/remitos/:id", component : RemitoscontratoComponent},
   {path : "contrato/reportesmaterial/nuevo/:id", component : NuevoReportematerialComponent},
   {path : "inventarios", component : InventariosComponent},
   {path : "inventario/partidas", component : PartidasComponent},
@@ -53,6 +59,7 @@ const routes: Routes = [
   {path : "inventario/partida/moviento/:id", component : MovimientoComponent},
   {path : "inventario/partidas/agregar", component : AgregarPartidaComponent},
   {path : "reportes", component : ReportesmaterialComponent},
+  {path : "remitos", component : RemitosComponent},
   {path : "reportes/nuevo", component : NuevoReportematerialComponent},
   {path : "inventario/epp", component : EppComponent},
   {path : "inventario/epp/solicitudes", component : EppSolicitudesComponent},

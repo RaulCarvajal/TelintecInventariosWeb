@@ -1,5 +1,42 @@
+<div class="row">
+    <div class="col">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Bienvenido {{nombre_usuario}}!</mat-card-title>
+                <mat-card-subtitle>Sistema para gestion de activos Telintec&copy;</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="container">
+                <div class="row">
+                    <div class="col">
+                        <p>Tu rol dentro del sistema es <strong>{{rol_name}}</strong>. Las funciones que te corresponden en el sistema son las siguientes:</p>
+                        <ul *ngIf="admin">
+                            <li>Control y administración de contratos.</li>
+                            <li>Realizar el seguimiento a las solicitudes de material.</li>
+                            <li>Consulta de reportes de material asociados a un contrato o solicitud.</li>
+                            <li>Consulta de remitos generados a partir de solicitudes de material.</li>
+                            <li>Administración de inventarios, lo cual incluye materiales, herramientas y EPP.</li>
+                            <li>Administración de catálogos necesarios para el funcionamiento de la plataforma.</li>
+                            <li>Administración de usuarios del sistema</li>
+                        </ul>
+                        <ul *ngIf="jefe">
+                            <li>Realizar el seguimiento a las solicitudes de material.</li>
+                            <li>Consulta de reportes de material asociados a un contrato o solicitud.</li>
+                            <li>Administración de inventarios, lo cual incluye materiales, herramientas y EPP.</li>
+                        </ul>
+                        <ul *ngIf="lider">
+                            <li>Crear y hacer el seguimiento a tus solicitudes de material.</li>
+                            <li>Consulta de reportes de material asociados a tus solicitadas.</li>
+                        </ul>
+                        <p>Toda accion dentro de la aplicación es monitoreada y bitacoreada.</p>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
 
-<div class="row" *ngIf="!cargando">
+
+<div class="row" *ngIf="!cargando&&admin">
     <div class="col-sm-12 col-md-4 col-lg-4  mt-3" *ngFor="let contrato of contratos; let i = index">
         <mat-card>
             <mat-card-header>
@@ -31,42 +68,3 @@
         </div>
     </div>
 </mat-card>
-
-<div class="row">
-    <div class="col-lg-3 col-md-3 col-sm-6">
-        <mat-card class="w-100 mt-3 text-center">
-            <mat-card-content>
-                <button mat-fab>
-                    <mat-icon>people</mat-icon>
-                </button>
-            </mat-card-content>
-        </mat-card>
-    </div>
-    <div class="col-lg-3 col-md-3 col-sm-6">
-        <mat-card class="w-100 mt-3 text-center">
-            <mat-card-content>
-                <button mat-fab>
-                    <mat-icon>person</mat-icon>
-                </button>
-            </mat-card-content>
-        </mat-card>
-    </div>
-    <div class="col-lg-3 col-md-3 col-sm-6">
-        <mat-card class="w-100 mt-3 text-center">
-            <mat-card-content>
-                <button mat-fab>
-                    <mat-icon>favorite</mat-icon>
-                </button>
-            </mat-card-content>
-        </mat-card>
-    </div>
-    <div class="col-lg-3 col-md-3 col-sm-6">
-        <mat-card class="w-100 mt-3 text-center">
-            <mat-card-content>
-                <button mat-fab>
-                    <mat-icon>open_in_new</mat-icon>
-                </button>
-            </mat-card-content>
-        </mat-card>
-    </div>
-</div>

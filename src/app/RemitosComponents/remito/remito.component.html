@@ -1,0 +1,65 @@
+<mat-card class="mat-elevation-z8" *ngIf="remito">
+    <mat-card-header>
+        <mat-card-title>Remito</mat-card-title>
+        <mat-card-subtitle>{{remito.remito}} - {{remito.fecha | date}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="container">
+        <div class="row">
+            <div class="col">
+                <p><strong>Remisión Telintec:</strong> {{remito.remision}}</p>
+                <p><strong>Proyecto:</strong> {{remito.proyecto}}</p>
+                <p>{{remito.descripcion}}</p>
+                <p><strong>Número contrato:</strong> {{remito.numero_contrato}}</p>
+                <p><strong>No. pedido:</strong> {{remito.numero_pedido}}</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col text-end">
+                <p><strong>Tipo de moneda:</strong> {{remito.divisa}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">POS</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">UM</th>
+                            <th scope="col">Precio Unit.</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let partida of partidas">
+                            <th scope="row">{{partida.POS}}</th>
+                            <td>{{partida.descripcion}}</td>
+                            <td>{{partida.cantidad}}</td>
+                            <td>{{partida.UM}}</td>
+                            <td>{{partida.PU}}</td>
+                            <td>{{partida.total}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-end">
+                <p><strong>Subtotal:</strong> {{remito.subtotal | currency : remito.divisa}}</p>
+                <p><strong>IVA:</strong> {{remito.iva | currency : remito.divisa}}</p>
+                <p><strong>Total:</strong> {{remito.total | currency : remito.divisa}}</p>
+            </div>
+        </div>
+
+
+    </mat-card-content>
+</mat-card>
+<mat-card class="mat-elevation-z8" *ngIf="!remito">
+    <div class="row">
+        <div class="col">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+    </div>
+</mat-card>

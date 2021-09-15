@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { epp, eppsol, epps_res, epp_sol } from '../Interfaces/epp.interface';
-import { api } from './config.consts';
+import { api, reporter } from './config.consts';
 
 @Injectable({
   providedIn: 'root'
@@ -34,13 +34,17 @@ export class EppService {
 
   getActaEpp(data:any){
     let dataToPdf = {
-      template: { "shortid" : api.id_entrega_epp },
+      template: { "shortid" : reporter.id_entrega_epp },
       data : data,
-      options : { 'timeout': 60000 }
+      options : { 'timeout': 60000 },
+      auth: {
+        username: 'gestion.activos@telintec.com.mx',
+        password: 'Sgat.2021'
+      },
     }
     console.log(dataToPdf)
     var mediaType = 'application/pdf';
-    this.http.post(`${api.reporter}`, dataToPdf, {'responseType' : 'blob'}).subscribe(
+    this.http.post(`${reporter.url}`, dataToPdf, {'responseType' : 'blob','headers': { 'Authorization': 'Basic Z2VzdGlvbi5hY3Rpdm9zQHRlbGludGVjLmNvbS5teDpTZ2F0LjIwMjE=' }}).subscribe(
         (response) => {
             var blob = new Blob( [ <any>response ], { type: mediaType });
             saveAs(blob, `EntregaEpp_${data.asignado}.pdf`);

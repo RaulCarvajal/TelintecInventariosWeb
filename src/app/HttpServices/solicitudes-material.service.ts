@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { respuesta } from '../Interfaces/respuesta.interface';
 import { partida_solicitud, solicitud_material } from '../Interfaces/solicitud_material.interface';
 import { rgx } from '../Validators/regex.validator';
-import { api } from './config.consts';
+import { api, reporter } from './config.consts';
 import { saveAs } from 'file-saver';
 
 @Injectable({
@@ -38,16 +38,16 @@ export class SolicitudesMaterialService {
   }
   public getEntregaMaterialPdf(data:any){
     let dataToPdf = {
-      template: { "shortid" : api.id_entrega_material },
+      template: { "shortid" : reporter.id_entrega_material },
       data : data,
       options : { 'timeout': 60000 }
     }
     console.log(dataToPdf)
     var mediaType = 'application/pdf';
-    this.http.post(`${api.reporter}`, dataToPdf, {'responseType' : 'blob'}).subscribe(
+    this.http.post(`${reporter.url}`, dataToPdf,  {'responseType' : 'blob','headers': { 'Authorization': 'Basic Z2VzdGlvbi5hY3Rpdm9zQHRlbGludGVjLmNvbS5teDpTZ2F0LjIwMjE=' }}).subscribe(
         (response) => {
             var blob = new Blob( [ <any>response ], { type: mediaType });
-            saveAs(blob, `EntregaMaterial_${data.codigo}.pdf`);
+            saveAs(blob, `EntregaMaterial(${data.tipo})_${data.codigo}.pdf`);
             console.log(response);
         },
         e => { console.error(e) }

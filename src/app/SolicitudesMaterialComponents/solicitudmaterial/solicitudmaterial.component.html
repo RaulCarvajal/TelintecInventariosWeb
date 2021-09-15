@@ -71,7 +71,7 @@
                     <mat-step label="Surtido total">
                         <p>La solicitud fue surtida totalmente por almacén. <span *ngIf="solicitud.fecha_surtido_total">{{solicitud.fecha_surtido_total | date : 'medium'}}</span></p>
                     </mat-step>
-                    <mat-step label="Reporte/Remisión">
+                    <mat-step label="Finalizado">
                         <p>La solicitud ya tiene un reporte generado<span *ngIf="itsAdmin">, puedes consultarlo <a [routerLink]="['/contrato/reportematerial/'+reporte_id]">aqui</a></span>. <span *ngIf="solicitud.fecha_remision_reporte">{{solicitud.fecha_remision_reporte | date : 'medium'}}</span></p>
                     </mat-step>
                     <!-- Icon overrides. -->

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SolicitudesMaterialService } from 'src/app/HttpServices/solicitudes-material.service';
 import { UsuarioService } from 'src/app/HttpServices/usuario.service';
 import { partida_solicitud, solicitud_material } from 'src/app/Interfaces/solicitud_material.interface';
@@ -37,7 +37,7 @@ export class SolicitudmaterialComponent implements OnInit {
     private ar:ActivatedRoute,
     private us:UsuarioService,
     private sms:SolicitudesMaterialService,
-    private sbs:SnackbarService,
+    private rt:Router,
     private dg: MatDialog,
     private ss: ServiciosService,
     private rs:ReportesService,
@@ -159,7 +159,7 @@ export class SolicitudmaterialComponent implements OnInit {
 
   dialogRemito(){
     if(this.remito_id){
-      console.log(this.remito_id);
+        this.rt.navigateByUrl(`/contrato/remito/${this.remito_id}`)
     }else{
       const dr = this.dg.open(DialogRemitosolicitudComponent, {
         data: {
@@ -171,6 +171,8 @@ export class SolicitudmaterialComponent implements OnInit {
       });
       dr.afterClosed().subscribe(result => {
         this.stp.reset();
+        this.getSolicitud(this.id);
+        this.getPartidas(this.id);
       });
     }
   }
