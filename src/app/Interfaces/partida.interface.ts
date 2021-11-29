@@ -1,5 +1,6 @@
 export interface partida {
     POS : number,
+    pos : number,
     nombre : string,
     descripcion : string,
     numero_parte : string,
@@ -25,6 +26,7 @@ export interface partida_reporte{
 
 export interface partida_datatable{
     POS : number,
+    pos : number,
     nombre : string,
     descripcion : string,
     numero_parte : string,
@@ -36,7 +38,8 @@ export interface partida_datatable{
     unidad_medida : number,
     id_partida : number,
     fecha_registro : string,
-    unidades: string | undefined
+    unidades: string | undefined,
+    id_pos_partida : number
 }
 
 export interface partida_remito{

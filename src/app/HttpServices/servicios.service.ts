@@ -25,4 +25,12 @@ export class ServiciosService {
     return this.http.get<servicio_datatable[]>(`${api.url}servicios_byreporte/${idr}`)
   }
 
+  getServiciosTabla(idc:number){
+    return this.http.get<servicio[]>(`${api.url}servicios/${idc}`);
+  }
+
+  saveServicio(data:any){
+    return this.http.post<any>(`${api.url}servicios`,data);
+  }
+
 }

@@ -35,6 +35,9 @@ import { NuevoReportesolicitudComponent } from './ReportesMaterialComponents/nue
 import { RemitoComponent } from './RemitosComponents/remito/remito.component';
 import { RemitosComponent } from './RemitosComponents/remitos/remitos.component';
 import { RemitoscontratoComponent } from './RemitosComponents/remitoscontrato/remitoscontrato.component';
+import { ContratoPartidasComponent } from './PartidasComponents/contrato-partidas/contrato-partidas.component';
+import { AddPartidasContratoComponent } from './PartidasComponents/add-partidas-contrato/add-partidas-contrato.component';
+import { ServiciosContratoComponent } from './ServiciosComponents/servicios-contrato/servicios-contrato.component';
 
 
 const routes: Routes = [
@@ -49,6 +52,9 @@ const routes: Routes = [
   {path : "contrato/areas/nueva/:id", component : NuevaAreaComponent},
   {path : "contrato/reportesmaterial/:id", component : ReportesmaterialcontratoComponent},
   {path : "contrato/reportematerial/:id", component : ReportematerialComponent},
+  {path : "contrato/partidas/:id", component : ContratoPartidasComponent},
+  {path : "contrato/partidas/agregar/:id", component : AddPartidasContratoComponent},
+  {path : "contrato/servicios/:id", component : ServiciosContratoComponent},
   {path : "contrato/remito/:id", component : RemitoComponent},
   {path : "contrato/remitos/:id", component : RemitoscontratoComponent},
   {path : "contrato/reportesmaterial/nuevo/:id", component : NuevoReportematerialComponent},

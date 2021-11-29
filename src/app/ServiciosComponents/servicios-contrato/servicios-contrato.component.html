@@ -1,0 +1,32 @@
+<mat-card class="mat-elevation-z8" *ngIf="!cargando">
+    <mat-card-header>
+        <mat-card-title>Servicios aplicables al contrato</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="row">
+            <div class="col text-end">
+                <button mat-button color="primary" (click)="openDialog()"><mat-icon>add</mat-icon> Agregar</button>
+            </div>
+        </div>
+        <table class="table table-hover mt-3">
+            <thead>
+                <tr>
+                    <th scope="col">POS</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Precio Venta</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let s of servicios">
+                    <th scope="row">{{s.POS}}</th>
+                    <td>{{s.descripcion}}</td>
+                    <td>{{s.precio_venta | currency : 'MXN'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-card-content>
+</mat-card>
+<mat-card class="mat-elevation-z8" *ngIf="cargando">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</mat-card>

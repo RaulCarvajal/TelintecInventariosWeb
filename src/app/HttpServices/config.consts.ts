@@ -1,5 +1,6 @@
 export const api = {
     url : "http://localhost:44379/api/",
+    //url : "http://telintec-001-site4.itempurl.com/api/",
     port : 44379
 }
 

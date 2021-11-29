@@ -10,6 +10,7 @@ import { DialogAceptarsolicitudComponent } from "../../DialogComponents/dialog-a
 import { DialogSurtirsolicitudComponent } from "../../DialogComponents/dialog-surtirsolicitud/dialog-surtirsolicitud.component";
 import { DialogOrdencompraComponent } from "../../DialogComponents/dialog-ordencompra/dialog-ordencompra.component";
 import { DialogRemitosolicitudComponent } from "../../DialogComponents/dialog-remitosolicitud/dialog-remitosolicitud.component";
+import { DialogDevolucionmaterialComponent } from "../../DialogComponents/dialog-devolucionmaterial/dialog-devolucionmaterial.component";
 import { ServiciosService } from 'src/app/HttpServices/servicios.service';
 import { servicio_datatable } from 'src/app/Interfaces/servicios.interface';
 import { ReportesService } from 'src/app/HttpServices/reportes.service';
@@ -175,6 +176,20 @@ export class SolicitudmaterialComponent implements OnInit {
         this.getPartidas(this.id);
       });
     }
+  }
+
+  dialogDevolucion(){
+    const dr = this.dg.open(DialogDevolucionmaterialComponent, {
+      data: {
+        id_solicitud : this.id
+      }
+    });
+
+    dr.afterClosed().subscribe(result => {
+      this.stp.reset();
+      this.getSolicitud(this.id);
+      this.getPartidas(this.id);
+    });
   }
 
 }

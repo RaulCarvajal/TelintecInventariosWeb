@@ -1,0 +1,42 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Agregar servicio</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="row">
+            <div class="col">
+                <form [formGroup]="formServicio" (ngSubmit)="trySave()">
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="w-100">
+                                <mat-label>POS</mat-label>
+                                <input matInput type="number" placeholder="POS" formControlName="POS">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="w-100">
+                                <mat-label>Descripción</mat-label>
+                                <input matInput type="text" placeholder="Descripción" formControlName="descripcion">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="w-100">
+                                <mat-label>Precio venta</mat-label>
+                                <input matInput type="text" placeholder="Precio de venta del servicio" formControlName="precio_venta">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button class="w-100" mat-flat-button color="primary" [disabled]="formServicio.invalid">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

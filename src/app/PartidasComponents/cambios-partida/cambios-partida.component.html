@@ -1,8 +1,8 @@
 <mat-card class="mat-elevation-z8" *ngIf="partida">
     <mat-card-header>
-        <mat-card-title>Realizar cambios en la partida {{partida.descripcion}}</mat-card-title>
+        <mat-card-title>Realizar cambios al material {{partida.descripcion}}</mat-card-title>
         <mat-card-subtitle>
-            Atualmente en inventario se cuentan con <strong>{{partida.cantidad}} <span *ngIf="unidad">{{unidad.nombre=='Desconocido'?'':unidad.nombre}}</span></strong> de esta partida.
+            Atualmente en inventario se cuentan con <strong>{{partida.cantidad}} <span *ngIf="unidad">{{unidad.nombre=='Desconocido'?'':unidad.nombre}}</span></strong> de este material.
         </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>

@@ -1,0 +1,6 @@
+
+id_contrato,nombre,nompre_proyecto,numero_contrato,descripcion,fecha_inicio,fecha_final,estatus,fk_id_planta,fk_id_usuario,fecha_registro,monto_total,monto_actual,fk_id_divisa
+4,LACA-AUTO,GC-0094,1234567890,Contrato bi-anual de servicios de suministro de instalación de redes de datos para el área de automatización, en planta pesquería y guerrero.,2021-01-01,2021-06-30,True,,,2021-08-05 01:34:22.227000000,1000000,10000,1
+5,CCTV ANALOGO,GC-0095,987654321,Servicios de suministros e instalación de tendido de redes de datos y videos para CCTV.,2021-01-01,2021-12-31,True,,,2021-08-05 14:41:40.663000000,505000,80000,3
+6,RT-2021,GC-0096,123456789,Renovación tecnológica de equipos de computo en planta guerrero, pc's de escritorio y laptops.,2021-08-01,2021-08-31,True,,,2021-08-08 19:14:48.870000000,15000,15000,2
+7,xyz,gc-0000,21331321315,xyz,2021-08-01,2021-08-31,True,,,2021-08-09 18:15:38.643000000,1000000,1000000,2

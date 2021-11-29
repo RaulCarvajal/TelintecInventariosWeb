@@ -1,0 +1,40 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Agregar material a contrato</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="row">
+            <div class="col">
+                <form [formGroup]="formPartidaPos" (ngSubmit)="trySave()">
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="w-100">
+                                <mat-select formControlName="fk_id_partida" placeholder="Busqueda de material" #singleSelect>
+                                    <mat-option>
+                                    <ngx-mat-select-search [formControl]="partidaFiltro"></ngx-mat-select-search>
+                                    </mat-option>
+                                    <mat-option *ngFor="let partida of partidasFiltradas | async" [value]="partida.id_partida">
+                                        {{partida.descripcion}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="w-100">
+                                <mat-label>POS</mat-label>
+                                <input matInput type="number" placeholder="POS asignado a esta partida" formControlName="pos">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button class="w-100" mat-flat-button color="primary" [disabled]="formPartidaPos.invalid">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

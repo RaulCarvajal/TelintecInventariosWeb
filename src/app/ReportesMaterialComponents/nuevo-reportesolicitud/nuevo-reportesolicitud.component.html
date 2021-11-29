@@ -59,12 +59,18 @@
                         <mat-error *ngIf="formPedido.get('fk_id_planta')!.hasError('required')">Campo requerido</mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col">
+                <!--<div class="col">
                     <mat-form-field class="w-100">
                         <mat-label>Area/Pedido</mat-label>
                         <mat-select matNativeControl formControlName="fk_id_area" (selectionChange)="setPedido()">
                           <mat-option *ngFor="let area of areas" [value]="area.id_area">{{area.numero_pedido}} - {{area.area}}</mat-option>
                         </mat-select>
+                    </mat-form-field>
+                </div>-->
+                <div class="col">
+                    <mat-form-field class="w-100">
+                        <mat-label>Area/Pedido</mat-label>
+                        <input matInput placeholder="Área" formControlName="area" required>
                     </mat-form-field>
                 </div>
                 <div class="col">

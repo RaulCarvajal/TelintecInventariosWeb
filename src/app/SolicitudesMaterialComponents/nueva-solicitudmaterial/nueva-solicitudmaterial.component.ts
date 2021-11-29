@@ -54,7 +54,7 @@ export class NuevaSolicitudmaterialComponent implements OnInit, AfterViewInit, O
   }
   ngAfterViewInit() {
     this.setInitialValue();
-    this.getPartidas();
+    //this.getPartidas();
   }
   ngOnDestroy() {
     this._onDestroy.next();
@@ -72,7 +72,8 @@ export class NuevaSolicitudmaterialComponent implements OnInit, AfterViewInit, O
       fecha_solicitud : [new Date().toISOString()],
       fecha_critica : [null,[Validators.required]],
       partidas : this.fb.array([]),
-      partida_seleccionada : []
+      partida_seleccionada : [],
+      area : []
     });
   }
   trySave(){
@@ -86,7 +87,7 @@ export class NuevaSolicitudmaterialComponent implements OnInit, AfterViewInit, O
         if(!res.error){
           this.sbs.alert(res.msg)
           setTimeout(() => {
-            this.rt.navigateByUrl('material/solicitud/'+res.id)            
+            this.rt.navigateByUrl('material/solicitud/'+res.id)
           }, 500);
         }else{
           this.sbs.alert("Error, intenta más tarde. "+res.msg)
@@ -110,10 +111,11 @@ export class NuevaSolicitudmaterialComponent implements OnInit, AfterViewInit, O
   }
   onSelectContrato(){
     let cont = this.formNrp.value.fk_id_contrato;
-    this.getAreasPorContrato(cont);
+    //this.getAreasPorContrato(cont);
+    this.getPartidasPorContrato(cont);
   }
-  async getPartidas(){
-    let res = await this.ps.getPartidas();
+  async getPartidasPorContrato(idc:number){
+    let res = await this.ps.getPartidasPorContratoDT(idc);
     this.partidas = <partida_datatable[]>res;
     this.partidas = this.partidas;
     //this.formNrp.controls().setValue(this.partidas[10]);
@@ -125,12 +127,12 @@ export class NuevaSolicitudmaterialComponent implements OnInit, AfterViewInit, O
     );
   }
   addPartida(){
-    let partida:partida_datatable = this.partidas.find(p => p.id_partida === this.formNrp.value.partida_seleccionada)!;
+    let partida:partida_datatable = this.partidas.find(p => p.id_pos_partida === this.formNrp.value.partida_seleccionada)!;
     const cntrs = <FormArray>this.formNrp.controls['partidas'];
     cntrs.push(this.fb.group(
       {
-        partida:[`${this.ppp.transform(partida.POS)} - ${partida.descripcion} - ${partida.unidad_medida}`,[]],
-        fk_id_partida : [this.formNrp.value.partida_seleccionada,[Validators.required]],
+        partida:[`${this.ppp.transform(partida.pos)} - ${partida.descripcion} - ${partida.unidad_medida}`,[]],
+        fk_id_partida_pos : [this.formNrp.value.partida_seleccionada,[Validators.required]],
         cantidad : [0,[Validators.required,Validators.pattern(rgx.integersp)]],
         surtido : [false]
       }

@@ -39,7 +39,7 @@ export class AgregarPartidaComponent implements OnInit {
 
   initForm(){
     this.formPartida = this.fb.group({
-      POS : ['',[Validators.required]],
+      POS : [''],
       nombre : ['',[Validators.required,Validators.maxLength(100),Validators.pattern(rgx.white_space)]],
       descripcion : ['',[Validators.required,Validators.maxLength(150),Validators.pattern(rgx.white_space)]],
       numero_parte : ['',[Validators.required,Validators.maxLength(10),Validators.pattern(rgx.white_space)]],

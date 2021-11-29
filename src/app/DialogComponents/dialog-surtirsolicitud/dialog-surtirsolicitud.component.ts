@@ -54,7 +54,7 @@ export class DialogSurtirsolicitudComponent implements OnInit {
     }
     let req = {
       total : this.total,
-      partidas : this.data.partidas.map( p => p.fk_id_partida)
+      pos_partidas : this.data.partidas.map( p => p.fk_id_partida_pos)
     }
     this.sms.setSurtir(req,this.data.solicitud.id_solicitud).subscribe(
       res => {

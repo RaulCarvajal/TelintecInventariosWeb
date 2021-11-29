@@ -14,7 +14,6 @@ import { SnackbarService } from 'src/app/HttpServices/snackbar.service';
 import { SolicitudesMaterialService } from 'src/app/HttpServices/solicitudes-material.service';
 import { area } from 'src/app/Interfaces/area.interface';
 import { contrato } from 'src/app/Interfaces/contratos.interface';
-import { partida_datatable } from 'src/app/Interfaces/partida.interface';
 import { planta } from 'src/app/Interfaces/plantas.interface';
 import { servicio } from 'src/app/Interfaces/servicios.interface';
 import { partida_solicitud, solicitud_material } from 'src/app/Interfaces/solicitud_material.interface';
@@ -98,7 +97,8 @@ export class NuevoReportesolicitudComponent implements OnInit, AfterViewInit, On
       partidas : this.fb.array([]),
       fk_id_solicitud : [this.ids],
       servicios : this.fb.array([]),
-      servicio_seleccionado : []
+      servicio_seleccionado : [],
+      area : ["",[]]
     });
     this.getSolicitud(this.ids);
     this.getPartidasSol(this.ids);
@@ -106,7 +106,7 @@ export class NuevoReportesolicitudComponent implements OnInit, AfterViewInit, On
     setTimeout(() => {
       this.formPedido.controls['fk_id_contrato'].disable()
       this.formPedido.controls['fk_id_area'].disable()
-      this.formPedido.controls['numero_pedido'].disable()
+      //this.formPedido.controls['numero_pedido'].disable()
       this.formPedido.controls['ubicacion'].disable()
       this.formPedido.controls['empresa'].disable()
       this.formPedido.controls['partidas'].disable()
@@ -194,10 +194,12 @@ export class NuevoReportesolicitudComponent implements OnInit, AfterViewInit, On
         this.solicitud = res;
         this.formPedido.patchValue({
           fk_id_contrato : this.solicitud.fk_id_contrato,
-          ubicacion : this.solicitud.ubicacion
+          ubicacion : this.solicitud.ubicacion,
+          area : this.solicitud.area
         })
         this.getServicios(this.solicitud.fk_id_contrato);
         this.onSelectContrato();
+        console.log(res)
       },
       err => console.log(err)
     );
@@ -255,7 +257,8 @@ export class NuevoReportesolicitudComponent implements OnInit, AfterViewInit, On
   getUltimoFolioPedido(){
     this.rs.getUltimoFolioPedido().subscribe(
       res => {
-        this.formPedido.patchValue({folio : res[0].folio+1})
+        //this.formPedido.patchValue({folio : res[0].folio+1})
+        console.log(res)
       }
     );
   }

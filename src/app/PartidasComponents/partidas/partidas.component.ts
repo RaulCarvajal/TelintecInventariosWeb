@@ -17,7 +17,7 @@ export class PartidasComponent implements AfterViewInit   {
   partidas:partida_datatable[] = [];
   cargando:boolean = true;
 
-  displayedColumns: string[] = ['POS', 'nombre', 'descripcion', 'numero_parte', 'marca','cantidad'];
+  displayedColumns: string[] = [ 'nombre', 'descripcion', 'numero_parte', 'marca','cantidad'];
   dataSource!: MatTableDataSource<partida_datatable>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

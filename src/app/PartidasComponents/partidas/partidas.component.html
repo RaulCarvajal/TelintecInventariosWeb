@@ -1,7 +1,7 @@
 <mat-card class="mat-elevation-z8 ">
     <mat-card-header>
-        <mat-card-title>Partidas</mat-card-title>
-        <mat-card-subtitle>Partidas/Materiales</mat-card-subtitle>
+        <mat-card-title>Materiales</mat-card-title>
+        <mat-card-subtitle>Materiales en almacén</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
         <div class="row">
@@ -13,40 +13,41 @@
             <mat-label>Filtrar</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
         </mat-form-field>
+        <div class="text-end">
+          <p class="small text-danger">*¡Atención! - Pocas existencias de Material</p>
+        </div>
     </mat-card-content>
 </mat-card>
 
 <div class="mat-elevation-z8 mt-3">
     <table mat-table [dataSource]="dataSource" matSort class="w-100">
   
-      <ng-container matColumnDef="POS">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header><strong>POS</strong></th>
-        <td mat-cell *matCellDef="let row"><strong>{{row.POS | pos}}</strong></td>
-      </ng-container>
-  
       <ng-container matColumnDef="nombre">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-        <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
+        <td mat-cell *matCellDef="let row" [ngClass]="{'text-danger': row.cantidad<10}"> {{row.nombre}}</td>
       </ng-container>
 
       <ng-container matColumnDef="descripcion">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
-        <td mat-cell *matCellDef="let row"> {{row.descripcion}} </td>
+        <td mat-cell *matCellDef="let row" [ngClass]="{'text-danger': row.cantidad<10}"> {{row.descripcion}} </td>
       </ng-container>
   
       <ng-container matColumnDef="numero_parte">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Número de parte </th>
-        <td mat-cell *matCellDef="let row"> {{row.numero_parte}} </td>
+        <td mat-cell *matCellDef="let row" [ngClass]="{'text-danger': row.cantidad<10}"> {{row.numero_parte}} </td>
       </ng-container>
 
       <ng-container matColumnDef="marca">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Marca </th>
-        <td mat-cell *matCellDef="let row"> {{row.marca}} </td>
+        <td mat-cell *matCellDef="let row" [ngClass]="{'text-danger': row.cantidad<10}"> {{row.marca}} </td>
       </ng-container>
   
       <ng-container matColumnDef="cantidad">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-end"> Cantidad </th>
-        <td mat-cell *matCellDef="let row" class="text-end"> {{row.cantidad}} </td>
+        <td mat-cell *matCellDef="let row" [ngClass]="{'text-danger': row.cantidad<10}" class="text-end">
+          <p *ngIf="row.cantidad>9">{{row.cantidad}}</p>
+          <p *ngIf="row.cantidad<10"><span matTooltip="¡¡Pocas Existencias!!" matTooltipClass="bg-danger" matBadge="*" matBadgeOverlap="false" matBadgeColor="warn">{{row.cantidad}}</span></p>
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

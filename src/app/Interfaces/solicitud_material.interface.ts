@@ -19,6 +19,7 @@ export interface solicitud_material{
 } 
 
 export interface partida_solicitud{
+    fk_id_partida_pos: number,
     POS:number | string,
     cantidad: number,
     cantidad_inventario: number,

@@ -28,7 +28,9 @@ export class InventariokpiComponent implements OnInit {
     private cs:ContratosService,
     private ts:Title,
     private us:UsuarioService
-  ) { }
+  ) {
+    
+   }
 
   ngOnInit(): void {
     this.ts.setTitle('SGAT - Home')

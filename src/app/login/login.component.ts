@@ -42,9 +42,8 @@ export class LoginComponent implements OnInit {
       res => {
         this.trying = false;
         if(res.email){
-          this.rt.navigateByUrl('/');
           this.us.saveSession(res);
-          window.location.reload();
+          this.rt.navigateByUrl('');
         }else{
           this.trying = false;
           this.failed = true;

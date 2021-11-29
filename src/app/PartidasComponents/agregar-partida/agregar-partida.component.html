@@ -1,19 +1,12 @@
 <mat-card class="mat-elevation-z8">
     <mat-card-header>
-        <mat-card-title>Agregar partida</mat-card-title>
+        <mat-card-title>Agregar material</mat-card-title>
     </mat-card-header>
     <mat-card-content>
         <div class="row">
             <div class="col">
                 <form [formGroup]="formPartida" (ngSubmit)="trySave()">
                     <div class="row">
-                        <div class="col">
-                            <mat-form-field class="w-100">
-                                <mat-label>POS</mat-label>
-                                <input matInput placeholder="Ej. 101, 525, etc." formControlName="POS" type="number">
-                                <mat-error *ngIf="formPartida.get('POS')!.hasError('required')">Campo requerido</mat-error>
-                            </mat-form-field>
-                        </div>
                         <div class="col">
                             <mat-form-field class="w-100">
                                 <mat-label>Nombre</mat-label>
@@ -23,8 +16,6 @@
                                 <mat-error *ngIf="formPartida.get('nombre')!.hasError('pattern')">Inválido</mat-error>
                             </mat-form-field>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col">
                             <mat-form-field class="w-100">
                                 <mat-label>Descripción</mat-label>
@@ -116,7 +107,7 @@
 
 <mat-card class="mt-3 mat-elevation-z8" *ngIf="partidas.length">
     <mat-card-header>
-        <mat-card-title>Partidas agregadas en este lote</mat-card-title>
+        <mat-card-title>Materiales agregados en este lote</mat-card-title>
     </mat-card-header>
     <mat-card-content>
         <table class="table table-hover">

@@ -24,6 +24,10 @@ export class PartidasService {
     return await this.http.get(`${api.url}partidas`).toPromise();
   }
 
+  async getPartidasPorContratoDT(idc:number){
+    return await this.http.get(`${api.url}partidas_contratoDT/${idc}`).toPromise();
+  }
+
   getPartidasPorIdReporte(id_partida:number){
     return this.http.get<partida_reporte[]>(`${api.url}partidas_reporte/${id_partida}`);
   }
@@ -35,4 +39,23 @@ export class PartidasService {
     return await this.http.get<partida_remito>(`${api.url}servicio_remito/${ids}`).toPromise();
   }
 
+  getPartidasPorContrato(idc:number){
+    return this.http.get<any>(`${api.url}partidas_contrato/${idc}`);
+  }
+
+  savePartidaPorContrato(data:any){
+    return this.http.post<any>(`${api.url}partidas_contrato`,data);
+  }
+
+  getPartidasSolicitudDevolucion(id:number){
+    return this.http.get<any>(`${api.url}material_devolucion/${id}`);
+  }
+
+  async getEliminarSolicitudDevolucion(id:number){
+    return await this.http.delete<any>(`${api.url}material_devolucion/${id}`).toPromise();
+  }
+
+  async getUpdateSolicitudDevolucion(id:number,data:any){
+    return await this.http.put<any>(`${api.url}material_devolucion/${id}`,data).toPromise();
+  }
 }

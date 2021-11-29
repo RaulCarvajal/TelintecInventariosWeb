@@ -90,6 +90,11 @@ import { DialogRemitosolicitudComponent } from './DialogComponents/dialog-remito
 import { RemitoComponent } from './RemitosComponents/remito/remito.component';
 import { RemitosComponent } from './RemitosComponents/remitos/remitos.component';
 import { RemitoscontratoComponent } from './RemitosComponents/remitoscontrato/remitoscontrato.component';
+import { ContratoPartidasComponent } from './PartidasComponents/contrato-partidas/contrato-partidas.component';
+import { AddPartidasContratoComponent } from './PartidasComponents/add-partidas-contrato/add-partidas-contrato.component';
+import { ServiciosContratoComponent } from './ServiciosComponents/servicios-contrato/servicios-contrato.component';
+import { NuevoServicioComponent } from './ServiciosComponents/nuevo-servicio/nuevo-servicio.component';
+import { DialogDevolucionmaterialComponent } from './DialogComponents/dialog-devolucionmaterial/dialog-devolucionmaterial.component';
 //Componentes de la app
 @NgModule({
   declarations: [
@@ -137,7 +142,12 @@ import { RemitoscontratoComponent } from './RemitosComponents/remitoscontrato/re
     DialogRemitosolicitudComponent,
     RemitoComponent,
     RemitosComponent,
-    RemitoscontratoComponent
+    RemitoscontratoComponent,
+    ContratoPartidasComponent,
+    AddPartidasContratoComponent,
+    ServiciosContratoComponent,
+    NuevoServicioComponent,
+    DialogDevolucionmaterialComponent
   ],
   imports: [
     BrowserModule,

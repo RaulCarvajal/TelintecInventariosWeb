@@ -78,7 +78,10 @@ export class PartidaComponent implements OnInit {
 
   getMovimientos(id:number){
     this.ms.getMovimientosPorPartida(id).subscribe(
-      res => this.movimientos = res
+      res => {
+        this.movimientos = res
+        this.getStats(this.movimientos);
+      }
     );
   }
 
@@ -91,6 +94,17 @@ export class PartidaComponent implements OnInit {
 
   getRole(){
     this.admin = this.us.getUsuario().rol==1?true:false;
+  }
+
+  temp_o:movimiento_partida[]=[];
+  temp_i:movimiento_partida[]=[];
+  total_o:number=0;
+  total_i:number=0;
+  getStats(movs:movimiento_partida[]){
+    this.temp_o = movs.filter(m => m.cantidad<0);
+    this.temp_i = movs.filter(m => m.cantidad>0);
+    this.total_i=this.temp_i.map(m => m.cantidad).reduce((a,b)=>a+b);
+    this.total_o=this.temp_o.map(m => m.cantidad).reduce((a,b)=>a+b);
   }
 
 }
