@@ -59,7 +59,7 @@
         <!--<a role="button" mat-button [routerLink]="['/contrato/areas/'+contrato.id_contrato]" *ngIf="contrato.estatus"><mat-icon>location_on</mat-icon> Áreas</a>-->
         <a role="button" mat-button [routerLink]="['/contrato/partidas/'+contrato.id_contrato]"><mat-icon>inventory</mat-icon> Partidas</a>
         <a role="button" mat-button [routerLink]="['/contrato/servicios/'+contrato.id_contrato]"><mat-icon>inventory</mat-icon> Servicios</a>
-        <a role="button" mat-button [routerLink]="['']"><mat-icon>fact_check</mat-icon> Solicitudes</a>
+        <a role="button" mat-button [routerLink]="['/contrato/solicitudes/'+contrato.id_contrato]"><mat-icon>fact_check</mat-icon> Solicitudes</a>
         <a role="button" mat-button [routerLink]="['/contrato/reportesmaterial/'+contrato.id_contrato]"><mat-icon>assignment</mat-icon> Reportes de material</a>
         <a role="button" mat-button [routerLink]="['/contrato/remitos/'+contrato.id_contrato]"><mat-icon>receipt</mat-icon> Remitos</a>
         <a role="button" mat-button color="warn" (click)="updateContrato()"><mat-icon>power_settings_new</mat-icon> {{contrato.estatus?"Marcar como vencido":"Marcar como activo"}}</a>

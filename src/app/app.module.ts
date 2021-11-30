@@ -95,6 +95,7 @@ import { AddPartidasContratoComponent } from './PartidasComponents/add-partidas-
 import { ServiciosContratoComponent } from './ServiciosComponents/servicios-contrato/servicios-contrato.component';
 import { NuevoServicioComponent } from './ServiciosComponents/nuevo-servicio/nuevo-servicio.component';
 import { DialogDevolucionmaterialComponent } from './DialogComponents/dialog-devolucionmaterial/dialog-devolucionmaterial.component';
+import { SolicitudesContratoComponent } from './SolicitudesMaterialComponents/solicitudes-contrato/solicitudes-contrato.component';
 //Componentes de la app
 @NgModule({
   declarations: [
@@ -147,7 +148,8 @@ import { DialogDevolucionmaterialComponent } from './DialogComponents/dialog-dev
     AddPartidasContratoComponent,
     ServiciosContratoComponent,
     NuevoServicioComponent,
-    DialogDevolucionmaterialComponent
+    DialogDevolucionmaterialComponent,
+    SolicitudesContratoComponent
   ],
   imports: [
     BrowserModule,

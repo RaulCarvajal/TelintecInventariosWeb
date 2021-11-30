@@ -30,8 +30,6 @@
                         <tr>
                             <th scope="col">Folio</th>
                             <th scope="col">Fecha</th>
-                            <th scope="col">Número pedido</th>
-                            <th scope="col">Área</th>
                             <th scope="col">Contrato</th>
                         </tr>
                     </thead>
@@ -39,8 +37,6 @@
                         <tr *ngFor="let reporte of reportes" (click)="gotoDetail(reporte.id_reporte)">
                             <th scope="row">{{reporte.folio | folio}}</th>
                             <td>{{reporte.fecha | date}}</td>
-                            <td>{{reporte.numero_pedido}}</td>
-                            <td>{{reporte.area}}</td>
                             <td>{{reporte.contrato}}</td>
                         </tr>
                     </tbody>

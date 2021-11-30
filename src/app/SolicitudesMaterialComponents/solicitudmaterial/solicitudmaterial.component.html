@@ -156,7 +156,7 @@
         <button class="mb-a" mat-flat-button color="primary" matTooltip="Surtir solicitud" *ngIf="itsAlmac" [disabled]="solicitud.estatus!=2 && solicitud.estatus!=3" (click)="dialogSurtir()"><mat-icon>summarize</mat-icon> Surtir</button>
         <button class="mb-a" mat-flat-button color="primary" matTooltip="Generar remito" *ngIf="itsAlmac" [disabled]="solicitud.estatus!=4" (click)="dialogDevolucion()"><mat-icon>assignment_return</mat-icon> Devolución</button>
         <!--Lider de proyecto-->
-        <button class="mb-a" mat-flat-button color="primary" matTooltip="Generar reporte" *ngIf="itsSolic" [disabled]="solicitud.estatus!=4" [routerLink]="['/material/solicitud/reporte/'+solicitud.id_solicitud]"><mat-icon>assignment</mat-icon> Crear Remisión</button>
+        <button class="mb-a" mat-flat-button color="primary" matTooltip="Generar reporte" *ngIf="itsSolic" [disabled]="solicitud.estatus!=4" [routerLink]="['/material/solicitud/reporte/'+solicitud.id_solicitud]"><mat-icon>assignment</mat-icon> Crear Reporte</button>
 
         <!--Administrador-->
         <button class="mb-a" mat-flat-button color="primary" matTooltip="Adjuntar evidencia"><mat-icon>attachment</mat-icon> Adjuntar</button>
